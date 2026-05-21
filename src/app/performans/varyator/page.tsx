@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ChevronLeft,
   ArrowUpRight,
@@ -16,7 +17,11 @@ import {
   Info,
   Check,
   AlertTriangle,
-  Award
+  Award,
+  Sparkles,
+  Eye,
+  BookOpen,
+  HelpCircle
 } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { cn } from "@/lib/cn";
@@ -24,6 +29,7 @@ import { cn } from "@/lib/cn";
 // Types
 type ModelType = "300cc" | "250cc" | "400cc";
 
+// Constants & Data Sets
 const CLUTCHES = [
   {
     type: "Ayarlanabilir Debriyaj",
@@ -46,7 +52,7 @@ const CLUTCHES = [
     brand: "Dr. Pulley HiT (High Thrust)",
     code: "HiT261301M1",
     compatibility: "XMAX 300",
-    details: "Çift yaylı kilit mekanizması (debriyaj yayları + kilit yayları). Kavrama anında gövdedeki özel kam ve itici miller yardımıyla pabuçları çana mekanik olarak kilitler.",
+    details: "Çift yaylı kilit mekanizması (debriyaj yayları + kilit yayları). Kavrama anında gövdeki özel kam ve itici miller yardımıyla pabuçları çana mekanik olarak kilitler.",
     benefit: "Debriyajın yüksek tork altında çan içinde kaymasını (slipping) tamamen önler, sürtünme kaynaklı ısıyı ve balata camlaşmasını engeller. Güç iletimini %35 artırır."
   },
   {
@@ -64,50 +70,60 @@ const SETUPS = [
     id: 1,
     name: "Günlük Şehir İçi Canlılık (Stop-and-Go)",
     model: "XMAX 250 Blue Core",
+    difficulty: "Orta (Atölye Yardımı)",
+    mechanicMust: "Torna ve Şim Ayarı Gerekir",
     front: "Orijinal yanaklar torna ile 13.8° açısına çekilir, baga kanalları pürüzsüzleştirilir (hafif kerok).",
     roller: "6 adet 13 gram yuvarlak NCY veya Dr. Pulley 13 gram sliding baga.",
     shim: "Sürücü burcu arkasına 0.5 mm çelik kasnak şimi eklenir.",
     rear: "Malossi Maxi Fly Clutch debriyaj veya orijinal balatalara karbon-kevlar çakılması. Soğutma kanallı orijinal çan.",
     springs: "Orijinal kontrast yayı korunur, debriyaj küçük yayları Malossi Beyaz yay setiyle değiştirilir (Kavrama: 3500 → 4200 RPM).",
-    behavior: "Yoğun şehir trafiğinde motorun erken vites büyütüp yığılmasını engeller, debriyaj silkelemesini tamamen keser."
+    behavior: "Yoğun şehir trafiğinde motorun erken vites büyütüp yığılmasını engeller, kalkıştaki o gıcık silkeleme ve titremeyi tamamen keser. 50 yaş üstü sürücüler için en konforlu moddur."
   },
   {
     id: 2,
     name: "Otoban ve Uzun Yol Hız Kurulumu",
     model: "XMAX 250 Blue Core",
+    difficulty: "Orta",
+    mechanicMust: "Temiz Montaj / Tork Anahtarı",
     front: "TDR Performance Pulley V.23 ön varyatör kiti.",
     roller: "Dr. Pulley 15 gram Sliding baga (Geniş vites oranı ve düşük seyir devri için).",
     shim: "Uygulanmaz (Maksimum son hız odaklı).",
     rear: "Malossi Maxi Fly System debriyaj ve çan seti.",
     springs: "Faito R90 veya TDR %10 sert tork yayı (Kontrast yayı).",
-    behavior: "Yüksek süratlerde titreşimsiz seyir ve uzun yolda yakıt ekonomisi sunar. Son hızda +5 km/h artış sağlar."
+    behavior: "Yüksek süratlerde titreşimsiz seyir ve uzun yolda yakıt ekonomisi sunar. Son hızda +5 km/h net artış sağlar."
   },
   {
     id: 3,
     name: "Otoyol Sürüşü ve Konfor (Commuter/Touring)",
     model: "XMAX 300 (Euro 4/5/5+)",
+    difficulty: "Kolay",
+    mechanicMust: "Kendin Yapabilirsin",
     front: "Orijinal varyatör grubu ve yanak geometrisi muhafaza edilir.",
     roller: "8 adet 17.0 gram Malossi HTRoll (23 x 18 mm) baga (Isıya ve aşınmaya son derece dayanıklı pürüzsüz malzeme).",
     shim: "Uygulanmaz.",
     rear: "Orijinal debriyaj + Malossi Maxi Wing Clutch Bell (1440 gram).",
     springs: "Tamamen orijinal OEM kontrast ve debriyaj yayları.",
-    behavior: "Avrupa turları ve uzun mesafeli otoban sürüşlerinde motoru yormayan, titreşimsiz ve yakıt tasarruflu orijinal sürüş karakteri."
+    behavior: "Avrupa turları ve uzun mesafeli otoban sürüşlerinde motoru yormayan, titreşimsiz ve yakıt tasarruflu orijinal sürüş karakterini korur."
   },
   {
     id: 4,
     name: "Agresif Sokak / Spor Sürüş (İtalyan Tarzı)",
     model: "XMAX 300 (Euro 4/5/5+)",
+    difficulty: "Orta",
+    mechanicMust: "Tork Anahtarı (95 Nm)",
     front: "Malossi Multivar 2000 ön varyatör kiti (Kod: 5117861).",
     roller: "Kit içinden çıkan 8 adet 25 x 14.9 mm boyutlarında 8.0 gramlık HTRoll bagalar.",
     shim: "Malossi burç arkasına 0.5 mm ön şim.",
     rear: "Malossi Maxi Fly System debriyaj grubu.",
     springs: "Malossi Sarı Kontrast Yayı (1500 RPM arka tork yayı).",
-    behavior: "Şehir içinde agresif ara hızlanmalar ve ani gaz açmalarda mükemmel reaksiyon veren doğrusal tork eğrisi."
+    behavior: "Şehir içinde agresif ara hızlanmalar ve ani gaz açmalarda mükemmel reaksiyon veren, motoru sürekli tork zirvesinde tutan spor kurulum."
   },
   {
     id: 5,
     name: "Sınırları Zorlayan Yarış / Drag Setupı",
     model: "XMAX 300 (Tayland Halimax Tarzı)",
+    difficulty: "Zor (CNC & İleri Mekanik)",
+    mechanicMust: "Profesyonel Ar-Ge Atölyesi Şart",
     front: "Polini Hi-Speed 12-Roller varyatör (Kod: 241.741). Kasnak yanakları 13.5° açısına çekilir ve kanallar sonuna kadar frezelenir.",
     roller: "12 adet Polini 7.0 gram özel aramid-nylon baga.",
     shim: "Sürücü burcu arkasına 0.8 mm çelik şim.",
@@ -119,23 +135,27 @@ const SETUPS = [
     id: 6,
     name: "Günlük Şehir İçi Esneklik Kurulumu",
     model: "XMAX 400 (Euro 3/4)",
+    difficulty: "Orta",
+    mechanicMust: "Debriyaj Temizliği Gerektirir",
     front: "Orijinal varyatör grubu muhafaza edilir.",
     roller: "Dr. Pulley 25 x 15 mm boyutlarında 15.0 gramlık kızaklı bagalar.",
     shim: "Uygulanmaz.",
     rear: "Malossi Maxi Fly Clutch debriyaj seti (Kod: 5212819).",
     springs: "Orijinal kontrast yayı + debriyaj pabuçlarına Malossi Sarı debriyaj yayları.",
-    behavior: "Ağır şasinin alt devirlerdeki sarsıntısını ve kavrama gecikmesini giderir. Kalkış devrini 800 RPM yukarı taşır."
+    behavior: "Ağır şasinin alt devirlerdeki sarsıntısını ve kavrama gecikmesini tamamen giderir. Kalkış devrini 800 RPM yukarı taşır."
   },
   {
     id: 7,
     name: "Performanslı Otoban ve Touring Setupı",
     model: "XMAX 400 (Euro 3/4)",
+    difficulty: "Zor (Hassas Montaj)",
+    mechanicMust: "Torklama ve Havalandırma Kontrolü",
     front: "Malossi Multivar 2000 ön varyatör kiti (Kod: 5114148).",
     roller: "25 x 14.9 mm boyutunda 8 adet baga: Simetrik karıştırılmış 4 adet 10g ve 4 adet 12g baga.",
     shim: "Kit içeriğindeki 2 adet 0.5 mm kalınlığında şim burç arkasına yerleştirilir.",
     rear: "Malossi Maxi Fly System debriyaj ve çan kiti (160mm, 1664g - Kod: 5216331).",
     springs: "Kit içeriğinde yer alan Malossi Beyaz kontrast yayı.",
-    behavior: "Rampalarda ve otoyol sollamalarında şanzımanın anında vites küçültmesini (downshift) sağlayarak kesintisiz güç sunar."
+    behavior: "Rampalarda ve otoyol sollamalarında şanzımanın anında vites küçültmesini (downshift) sağlayarak kesintisiz ve akıcı otoban sürüşü sunar."
   }
 ];
 
@@ -150,15 +170,18 @@ const COMPARISON_MATRIX = [
 ];
 
 export default function VariatorPerformancePage() {
-  // Simulator State
+  // 1. Diagram Explorer Hotspot State
+  const [selectedHotspot, setSelectedHotspot] = useState<string>("rollers");
+
+  // 2. Simulator State
   const [selectedModel, setSelectedModel] = useState<ModelType>("300cc");
   const [selectedWeightMode, setSelectedWeightMode] = useState<string>("fp");
 
-  // Brand Explorer State
+  // 3. Brand Explorer State
   const [activeBrand, setActiveBrand] = useState<string>("malossi");
 
-  // Setup Wizard State
-  const [activeSetupId, setActiveSetupId] = useState<number>(4);
+  // 4. Setup Wizard State
+  const [activeSetupId, setActiveSetupId] = useState<number>(1);
 
   // Model-specific weight options for Simulator
   const simulatorData = {
@@ -206,7 +229,7 @@ export default function VariatorPerformancePage() {
     },
     "250cc": {
       name: "XMAX 250 (Blue Core)",
-      stock: "15.0 Gram ( veya 17.0 Gram)",
+      stock: "15.0 Gram (veya 17.0 Gram)",
       options: [
         {
           id: "stock",
@@ -245,7 +268,7 @@ export default function VariatorPerformancePage() {
           id: "fp",
           weight: "15.0g (-2.0g Modifikasyonu)",
           title: "🏆 En İyi F/P Şehir İçi Esneklik",
-          description: "Ağır kasnak yapısına sahip XMAX 400&apos;ü hantallıktan kurtaran en etkili moddur. Kalkış devrini 800 RPM yukarı taşıyarak kavramayı hızlandırır.",
+          description: "Ağır kasnak yapısına sahip XMAX 400'ü hantallıktan kurtaran en etkili moddur. Kalkış devrini 800 RPM yukarı taşıyarak kavramayı hızlandırır.",
           stats: { launch: 80, economy: 80, topSpeed: 90, comfort: 85 },
           pros: "Debriyaj kaydırmasını engeller, ara hızlanmaları belirgin şekilde serileştirir.",
           cons: "CVT kutusu içi harareti artırır (soğutmalı debriyaj çanı ile kombine edilmelidir)."
@@ -263,6 +286,7 @@ export default function VariatorPerformancePage() {
       title: "Malossi Multivar 2000",
       origin: "İtalya (ITA)",
       characteristic: "Tork ve Ara Hızlanma Odaklı — Dünya Standardı",
+      image: "/images/performans/malossi_multivar_render.png",
       philosophy: "Malossi, orijinal varyatörün 6 bagalı yapısını radikal bir kararla 8 bagalı sisteme dönüştürmüştür. Buradaki mühendislik amacı, merkezkaç kuvvetinin rampa yüzeylerine homojen yayılmasını sağlamak ve kayış üzerindeki titreşimleri sönümlemektir. 25x14.9 mm boyutlarındaki HTRoll bagalarla çalışır.",
       hubDetails: "Sürücü burcu (hub) alaşımlı çelikten imal edilmiş olup, sert krom kaplama ve elmas uçla taşlanmış yüzeye sahiptir. Bu sayede sürtünme katsayısı minimuma indirilmiştir.",
       pros: ["8 bagalı sistemle mükemmel balans ve sıfır titreşim", "Türkiye pazarında en geniş yedek parça ve baga desteği", "Yüksek torkla inanılmaz agresif ara hızlanmalar"],
@@ -273,6 +297,7 @@ export default function VariatorPerformancePage() {
       title: "Polini Hi-Speed 12-Roller",
       origin: "İtalya (ITA)",
       characteristic: "Maksimum Pürüzsüzlük ve Milisaniyelik Gaz Tepkisi",
+      image: "/images/performans/polini_hispeed_render.png",
       philosophy: "Polini, şanzıman dengesi ve kesintisiz ivmelenme konusunda en uç mühendisliği sunar. Ağırlık dağılımını kusursuzlaştırmak için 12 bagalı bir varyatör tasarlamıştır. Son derece hafif (7 gram) aramid-nylon fiber alaşımlı bagalarla dönüş esnasındaki dairesel sapmayı sıfıra indirir.",
       hubDetails: "Patentli yağlama sistemine sahiptir. Kasnak burcu karbon benzeri elmas (DLC - Diamond Like Carbon) kaplamalı çelikten üretilmiştir. Burç içindeki geniş gres haznesi ve özel yay, gresin sürekli ve homojen dağılmasını sağlayarak aşınmayı %60 azaltır.",
       pros: ["12 baga ile mükemmel balans ve sıfır kaçıklık", "DLC kaplamalı burç sayesinde aşınmaya karşı olağanüstü ömür", "Gecikmesiz, doğrudan tekerleğe iletilen gaz tepkisi"],
@@ -283,6 +308,7 @@ export default function VariatorPerformancePage() {
       title: "J.Costa Transverse PRO",
       origin: "İspanya (ESP)",
       characteristic: "Ezber Bozan Eksenel (Transversal) Güç İletimi",
+      image: "/images/performans/jcosta_axial_render.png",
       philosophy: "Geleneksel dairesel yuvarlanan baga hareketini tamamen reddeden, kendine özgü bir dikey eksenel çalışma sistemidir. Mermi şeklindeki yüksek mukavemetli plastik ağırlıklar, varyatör gövdesindeki dikey yuvalarda dışa doğru kayarak kasnağı doğrudan iter. Rampa sürtünmesi tamamen sıfırlanmıştır.",
       hubDetails: "Tamamen kuru çalışan transvers mermili gövde. Klasik rampa plakası bulunmaz, bu sayede şanzımandaki mekanik gürültü ve kayıp minimuma indirilmiştir.",
       pros: ["Rakiplerinden çok daha hızlı devirlenme (Instant RPM jump)", "Kusursuz doğrusal tork eğrisi ve debriyaj kaydırmasının sıfırlanması", "Varyatör ağırlığı doğrudan kasnağı ittiği için yüksek son hız (+10 km/h)"],
@@ -292,8 +318,9 @@ export default function VariatorPerformancePage() {
     tdr: {
       title: "TDR CVT Performance Pulley V.23",
       origin: "Tayland / Endonezya (SEA)",
+      image: "/images/performans/tdr_performance_render.png",
       characteristic: "Agresif Kalkış ve Yüksek Isı Transferi — F/P Canavarı",
-      philosophy: "Güneydoğu Asya&apos;nın aşırı sıcak ve nemli ikliminde, debriyaj kaydırmasını önlemek ve kalkıştaki hantallığı gidermek amacıyla tasarlanmıştır. Ön varyatör kasnak yüzey açısı orijinal 14.0 dereceden dikleştirilerek 13.8 dereceye çekilmiştir.",
+      philosophy: "Güneydoğu Asya'nın aşırı sıcak ve nemli ikliminde, debriyaj kaydırmasını önlemek ve kalkıştaki hantallığı gidermek amacıyla tasarlanmıştır. Ön varyatör kasnak yüzey açısı orijinal 14.0 dereceden dikleştirilerek 13.8 dereceye çekilmiştir.",
       hubDetails: "TDR Gold serisindeki altın sarısı teflon kaplama, rampa yataklarında bagaların sürtünmesini ve aşırı ısınmasını engeller.",
       pros: ["13.8° dikleştirilmiş açı sayesinde muazzam kalkış torku (kısa vites etkisi)", "Yüksek ısı iletim katsayısına sahip özel alüminyum alaşım", "Ekonomik bütçeyle en yüksek verimi sunan F/P odaklı yapı"],
       cons: ["Uzun ömürlülük açısından slider plastikleri İtalyan rakiplerine göre daha erken aşınır", "Çok yüksek hızlarda (top speed) stabilite sınırlıdır"],
@@ -303,49 +330,184 @@ export default function VariatorPerformancePage() {
 
   const currentBrand = brandData[activeBrand as keyof typeof brandData];
 
-  // Setup recipes
-  const currentSetup = SETUPS.find(s => s.id === activeSetupId) || SETUPS[3];
+  // Hotspot details
+  const hotspotData = {
+    rollers: {
+      title: "Baga & Ağırlık Sistemi (Roller Weights)",
+      desc: "Ön varyatörün kalbi bagalardır. Motor devri arttıkça merkezkaç kuvvetiyle dışarı doğru fırlarlar ve varyatör yanağını iterek kayışın yukarı tırmanmasını (vites büyütmeyi) sağlarlar.",
+      olderPersona: "💡 Sade Anlatım: Bisiklette ön vitesi büyütmek gibidir. Stok bagaları (örn. XMAX 300'de 17.5g) sadece 1.5g hafifletip 16g yaparsanız, şanzıman daha geç vites büyütür. Bu sayede motor torklu devirde kalkar, o sinir bozucu silkeleme/titreme tamamen yok olur ve gaz kolu aşırı canlı hissettirir!",
+      danger: "Aşırı hafifletme (örn. 12g) motorun otoyolda çok bağırmasına ve yakıtın fırlamasına sebep olur. Denge şarttır."
+    },
+    pulleys: {
+      title: "Ön Varyatör Yanak Açısı (Drive Sheaves)",
+      desc: "Kayışın ön şanzımanda üzerinde döndüğü konik yanaklardır. Orijinal fabrika açısı 14.0 derecedir. Bu açı kayışın dengeli ama uyuşuk tırmanması için ayarlanmıştır.",
+      olderPersona: "💡 Sade Anlatım: Eğer bu yanakların açısını torna işlemiyle (Bubut Derajat) 13.8 dereceye dikleştirirseniz, kayış başlangıçta daha aşağıda kalır. Bu da motorunuza kısa vites (örn. 1. vites) etkisi vererek rampa yukarı iki kişi çıkarken dahi motora muazzam bir tork kazandırır.",
+      danger: "Hassas torna yapılmazsa balans bozulur ve krank mili kesilerek motor kullanılmaz hale gelebilir."
+    },
+    belt: {
+      title: "Şanzıman Tahrik Kayışı (CVT Drive Belt)",
+      desc: "Motor bloğunun gücünü doğrudan ön kasnaktan arka debriyaja ileten yegane organdır. Kevlar, kauçuk ve yüksek esnekliğe sahip iplik dokusundan imal edilir.",
+      olderPersona: "💡 Sade Anlatım: Motorun gücünü tekerleğe götüren köprüdür. Performans varyatörü takıldığında şanzıman daha hızlı vites değiştirdiği için kayışa çok daha fazla yük biner. Bu yüzden 15.000 km'de bir mutlaka orijinal Yamaha (`B74-E7641-00`) veya güçlendirilmiş kevlar kayışlar kullanılmalıdır.",
+      danger: "Kalitesiz taklit kayışlar otoyol sürüşünde hararetten dolayı koparak CVT kapağını parçalayabilir."
+    },
+    clutch: {
+      title: "Arka Debriyaj & Kontrast Yay (Clutch System)",
+      desc: "Gücün son halkasıdır. Ön varyatör ne kadar mükemmel olursa olsun, arka debriyaj pabuçları çanı tam kavrayamazsa veya kayış arka tarafta kaçırma (slipping) yaparsa güç ısıya dönüşür ve kaybolur.",
+      olderPersona: "💡 Sade Anlatım: Debriyaj pabuçları dönme kuvvetiyle dışarı açılıp çana kilitlenir. Ortadaki devasa yay (kontrast yayı) ise kayışın arka kasnakta sıkı durmasını sağlar. Eğer kontrast yayını daha sert bir yayla (örn. Malossi Sarı Yay) değiştirirseniz kayış asla kaçırmaz ve motorunuz anında gaz yer.",
+      danger: "Gereksiz aşırı sert kontrast yaylar şanzıman hararetini yükseltir ve son hızı (top speed) baltalar."
+    }
+  };
+
+  const activeHotspot = hotspotData[selectedHotspot as keyof typeof hotspotData];
+
+  // Setup recipes helper
+  const currentSetup = SETUPS.find(s => s.id === activeSetupId) || SETUPS[0];
 
   return (
     <>
-      <article className="container-x py-16">
+      <article className="container-x py-16 text-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Breadcrumb - Highly Visible */}
         <Link
           href="/performans"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-yamaha-200 hover:text-electric-cyan"
+          className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.2em] text-yamaha-200 hover:text-electric-cyan transition-colors"
         >
-          <ChevronLeft className="h-4 w-4" />
-          Performans Paneli
+          <ChevronLeft className="h-5 w-5" />
+          Mühendislik Paneli
         </Link>
 
+        {/* Dynamic Spatial Header */}
         <Reveal>
-          <header className="mt-6 max-w-3xl">
-            <span className="chip">CVT &amp; Aktarma Organları</span>
-            <h1 className="mt-4 h-display text-4xl font-semibold leading-tight text-white sm:text-5xl">
-              Varyatör &amp; CVT <span className="text-electric">Mühendislik Laboratuvarı.</span>
+          <header className="mt-8 max-w-4xl border-b border-white/[0.08] pb-8">
+            <span className="chip text-xs px-3.5 py-1.5 bg-electric-cyan/15 text-electric-cyan font-mono border border-electric-cyan/35 uppercase tracking-widest rounded-full">
+              Sürekli Değişken Şanzıman (CVT) Rehberi
+            </span>
+            <h1 className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-none bg-gradient-to-r from-white via-carbon-100 to-electric-cyan bg-clip-text text-transparent">
+              Varyatör & Şanzıman <span className="text-electric-cyan block sm:inline">Mühendislik Laboratuvarı.</span>
             </h1>
-            <p className="mt-4 text-pretty text-base leading-relaxed text-carbon-200">
-              Yamaha XMAX motorlarında gücü yöneten en kritik ünite CVT şanzımandır. Burası kuru bir rapor sayfası değil; bizzat sürüş tarzınıza göre şanzımanınızı nasıl optimize edeceğinizi test edebileceğiniz **etkileşimli bir simülasyon ve mühendislik merkezidir.**
+            <p className="mt-6 text-lg sm:text-xl leading-relaxed text-carbon-200 font-medium">
+              XMAX motorunuzda sürüş keyfini, yakıtı ve ömrü belirleyen en kritik yer burasıdır. Bu sayfa kuru bir rapor sayfası değil; bizzat şanzımanınızı interaktif simülatörler ve 3D görsellerle tasarlayabileceğiniz **yaşayan bir modifikasyon merkezidir.**
             </p>
           </header>
         </Reveal>
 
-        {/* SECTION 1: INTERACTIVE ROLLER SIMULATOR */}
-        <section className="mt-16 space-y-6">
+        {/* SECTION 1: INTERACTIVE 3D EXPLORER SCHEMATIC */}
+        <section className="mt-20 space-y-8">
           <Reveal>
-            <div className="flex flex-col gap-2">
-              <span className="text-xs font-mono uppercase tracking-widest text-electric-cyan">Etkileşimli Asistan</span>
-              <h2 className="h-display text-2xl font-semibold text-white sm:text-3xl">
-                1. Baga Ağırlığı &amp; Karakter Simülatörü
+            <div className="flex flex-col gap-3">
+              <span className="text-xs font-mono uppercase tracking-widest text-electric-cyan font-bold">1. Bölüm: İnteraktif Anatomi</span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
+                CVT Şanzıman Nasıl Çalışır?
               </h2>
-              <p className="text-sm text-carbon-200 leading-relaxed max-w-3xl">
-                Şanzıman varyatörünü değiştirmeden, sadece varyatör bagalarının (roller weights) ağırlığını değiştirerek motorunuzun karakterini nasıl tamamen değiştirebileceğinizi simüle edin. Aşağıdan modelinizi seçin ve ağırlık modlarına tıklayın:
+              <p className="text-base sm:text-lg text-carbon-200 leading-relaxed max-w-3xl">
+                Bir 50 yaş XMAX kullanıcısı olarak, şanzımanı değiştirmeden önce parçaları görsel olarak tanıyalım. Aşağıdaki patlatılmış 3D şema görselindeki parçaların butonlarına tıklayarak mekanik görevlerini en sade dille okuyun:
+              </p>
+            </div>
+          </Reveal>
+
+          {/* Diagram Spatial Layout */}
+          <Reveal delay={0.05}>
+            <div className="grid gap-8 lg:grid-cols-12 mt-6">
+              
+              {/* Left Side: Massive 3D Image Showcase */}
+              <div className="lg:col-span-7 glass border border-white/[0.08] p-4 sm:p-6 rounded-3xl bg-gradient-to-b from-white/[0.02] to-transparent relative overflow-hidden flex flex-col justify-center items-center group">
+                <div className="absolute inset-0 bg-gradient-to-tr from-electric-cyan/5 via-transparent to-transparent pointer-events-none" />
+                
+                {/* 3D Visual Frame */}
+                <div className="w-full relative aspect-square max-w-[500px] transition-all duration-700 hover:scale-[1.03]">
+                  <Image
+                    src="/images/performans/xmax_cvt_schematic.png"
+                    alt="Yamaha XMAX 3D CVT Schematic Render"
+                    fill
+                    priority
+                    sizes="(max-w-768px) 100vw, 500px"
+                    className="object-contain rounded-2xl drop-shadow-[0_0_35px_rgba(0,242,254,0.15)]"
+                  />
+                </div>
+                
+                {/* Spatial Overlay UI Buttons representing Hotspots */}
+                <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-2 mt-4 pt-4 border-t border-white/[0.06]">
+                  {[
+                    { id: "rollers", label: "⚙️ 1. Bagalar" },
+                    { id: "pulleys", label: "📐 2. Kasnaklar" },
+                    { id: "belt", label: "🎗️ 3. Kayış" },
+                    { id: "clutch", label: "🌀 4. Debriyaj" }
+                  ].map((hot) => (
+                    <button
+                      key={hot.id}
+                      onClick={() => setSelectedHotspot(hot.id)}
+                      className={cn(
+                        "py-3 px-2 text-xs sm:text-sm font-bold rounded-xl transition-all border text-center whitespace-nowrap",
+                        selectedHotspot === hot.id
+                          ? "bg-electric-cyan text-ink-950 border-electric-cyan font-extrabold shadow-[0_0_20px_rgba(0,242,254,0.3)] scale-[1.05]"
+                          : "text-carbon-300 hover:text-white border-white/[0.06] bg-white/[0.015]"
+                      )}
+                    >
+                      {hot.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right Side: Informative Card Panel */}
+              <div className="lg:col-span-5 glass p-6 sm:p-8 rounded-3xl border border-white/[0.08] flex flex-col justify-between relative overflow-hidden bg-gradient-to-r from-white/[0.02] to-transparent shadow-2xl">
+                
+                <div>
+                  <div className="flex items-center gap-3 border-b border-white/[0.08] pb-4">
+                    <span className="p-2.5 rounded-xl bg-electric-cyan/15 text-electric-cyan border border-electric-cyan/20">
+                      <HelpCircle className="h-6 w-6" />
+                    </span>
+                    <div>
+                      <span className="text-[10px] font-mono text-electric-cyan uppercase tracking-widest block font-bold">Seçilen Parçanın Görevi</span>
+                      <h3 className="text-xl sm:text-2xl font-black text-white mt-0.5">{activeHotspot.title}</h3>
+                    </div>
+                  </div>
+
+                  <p className="mt-6 text-sm sm:text-base leading-relaxed text-carbon-200">
+                    {activeHotspot.desc}
+                  </p>
+
+                  <div className="mt-6 bg-white/[0.02] border border-white/[0.04] p-5 rounded-2xl relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-2 opacity-5">
+                      <Info className="size-16 text-electric-cyan" />
+                    </div>
+                    <p className="text-base sm:text-lg leading-relaxed text-white font-medium">
+                      {activeHotspot.olderPersona}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-8 border-t border-red-500/20 pt-4 bg-red-500/[0.02] p-4 rounded-xl border border-red-500/10">
+                  <span className="text-xs font-mono text-red-400 uppercase tracking-widest block font-bold flex items-center gap-1.5">
+                    <AlertTriangle className="h-4 w-4 shrink-0" /> Kritik Aşınma & Hata Riski:
+                  </span>
+                  <p className="text-xs sm:text-sm text-red-200 mt-1.5 leading-normal">
+                    {activeHotspot.danger}
+                  </p>
+                </div>
+
+              </div>
+            </div>
+          </Reveal>
+        </section>
+
+        {/* SECTION 2: THE ENHANCED ROLLER WEIGHT SIMULATOR */}
+        <section className="mt-32 space-y-8">
+          <Reveal>
+            <div className="flex flex-col gap-3">
+              <span className="text-xs font-mono uppercase tracking-widest text-electric-cyan font-bold">2. Bölüm: Baga Gramaj Asistanı</span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
+                Baga Ağırlığı & Karakter Simülatörü
+              </h2>
+              <p className="text-base sm:text-lg text-carbon-200 leading-relaxed max-w-3xl">
+                Orijinal varyatörünüze hiç dokunmadan, sadece varyatör bagalarının (ağırlıklarının) gramajını değiştirerek motorunuzun karakterini nasıl değiştirebileceğinizi simüle edin. Aşağıdan motor hacminizi seçin, ardından gramaj ayarlarına dokunarak sonuçları görün:
               </p>
             </div>
           </Reveal>
 
           {/* Model Selector Tabs */}
           <Reveal delay={0.05}>
-            <div className="flex gap-2 border-b border-white/[0.08] pb-3 overflow-x-auto">
+            <div className="flex gap-2.5 border-b border-white/[0.08] pb-4 overflow-x-auto">
               {(["300cc", "250cc", "400cc"] as ModelType[]).map((m) => (
                 <button
                   key={m}
@@ -354,10 +516,10 @@ export default function VariatorPerformancePage() {
                     setSelectedWeightMode("stock");
                   }}
                   className={cn(
-                    "px-4 py-2 text-xs font-semibold rounded-lg transition-all whitespace-nowrap",
+                    "px-6 py-3 text-xs sm:text-sm font-extrabold rounded-xl transition-all whitespace-nowrap border",
                     selectedModel === m
-                      ? "bg-electric-cyan/15 text-electric-cyan border border-electric-cyan/30"
-                      : "text-carbon-300 hover:text-white border border-transparent"
+                      ? "bg-electric-cyan/15 text-electric-cyan border-electric-cyan/40 shadow-[0_0_15px_rgba(0,242,254,0.15)]"
+                      : "text-carbon-300 hover:text-white border-transparent bg-transparent"
                   )}
                 >
                   {m === "300cc" ? "XMAX 300 (Euro 4/5/5+)" : m === "250cc" ? "XMAX 250 (Blue Core)" : "XMAX 400 (YP400R)"}
@@ -366,109 +528,111 @@ export default function VariatorPerformancePage() {
             </div>
           </Reveal>
 
-          {/* Simulator Layout */}
+          {/* Simulator Panel */}
           <Reveal delay={0.08}>
-            <div className="grid gap-6 lg:grid-cols-12 mt-6">
-              {/* Left Side: Option Cards */}
-              <div className="lg:col-span-5 flex flex-col gap-3">
-                <span className="text-[10px] font-mono text-carbon-400 uppercase tracking-wider block">Karakter Seçenekleri (Stok Ağırlık: {selectedSimulator.stock})</span>
+            <div className="grid gap-8 lg:grid-cols-12 mt-6">
+              
+              {/* Left Side: Massive options stack */}
+              <div className="lg:col-span-5 flex flex-col gap-4">
+                <span className="text-[10px] font-mono text-carbon-400 uppercase tracking-widest block font-bold">Karakteristik Ağırlık Seçenekleri (Stok: {selectedSimulator.stock})</span>
                 {selectedSimulator.options.map((opt) => (
                   <button
                     key={opt.id}
                     onClick={() => setSelectedWeightMode(opt.id)}
                     className={cn(
-                      "w-full text-left p-4 rounded-xl border transition-all flex justify-between items-center",
+                      "w-full text-left p-5 rounded-2xl border transition-all flex justify-between items-center group relative overflow-hidden",
                       selectedWeightMode === opt.id
-                        ? "border-electric-cyan/40 bg-gradient-to-r from-electric-cyan/10 to-transparent shadow-ambient-blue"
+                        ? "border-electric-cyan/45 bg-gradient-to-r from-electric-cyan/10 to-transparent shadow-[0_0_20px_rgba(0,242,254,0.08)] scale-[1.02]"
                         : "border-white/[0.06] bg-white/[0.01] hover:border-white/20"
                     )}
                   >
                     <div>
-                      <div className="text-xs font-mono text-electric-cyan font-semibold">{opt.weight}</div>
-                      <div className="text-sm font-semibold text-white mt-0.5">{opt.title}</div>
+                      <span className="text-xs font-mono text-electric-cyan font-bold tracking-wider">{opt.weight}</span>
+                      <h4 className="text-base sm:text-lg font-black text-white mt-1 group-hover:text-electric-cyan transition-colors">{opt.title}</h4>
                     </div>
                     <span className={cn(
-                      "size-4 rounded-full border flex items-center justify-center text-[10px]",
+                      "size-6 rounded-full border flex items-center justify-center text-xs font-extrabold transition-all",
                       selectedWeightMode === opt.id
-                        ? "border-electric-cyan bg-electric-cyan text-ink-950 font-bold"
+                        ? "border-electric-cyan bg-electric-cyan text-ink-950 scale-110"
                         : "border-carbon-400"
                     )}>
-                      {selectedWeightMode === opt.id && "✓"}
+                      {selectedWeightMode === opt.id ? "✓" : ""}
                     </span>
                   </button>
                 ))}
               </div>
 
-              {/* Right Side: Simulation Results Dashboard */}
-              <div className="lg:col-span-7 glass p-6 sm:p-8 flex flex-col justify-between rounded-2xl relative overflow-hidden">
+              {/* Right Side: Massive visual statistics dashboard */}
+              <div className="lg:col-span-7 glass p-6 sm:p-8 rounded-3xl border border-white/[0.08] flex flex-col justify-between relative overflow-hidden bg-gradient-to-b from-white/[0.02] to-transparent shadow-2xl">
+                
                 <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
                   <Gauge className="size-48 text-electric-cyan" />
                 </div>
 
                 <div>
-                  <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/[0.06] pb-4">
+                  <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/[0.06] pb-4">
                     <div>
-                      <span className="text-[9px] font-mono text-electric-cyan uppercase tracking-widest block">Simüle Edilen Kurulum</span>
-                      <h3 className="h-display text-xl font-bold text-white mt-1">{activeOption.title}</h3>
+                      <span className="text-[10px] font-mono text-electric-cyan uppercase tracking-widest block font-bold">Seçilen Karakter</span>
+                      <h3 className="text-xl sm:text-2xl font-black text-white mt-1">{activeOption.title}</h3>
                     </div>
-                    <div className="rounded border border-white/[0.08] bg-white/[0.02] px-2.5 py-1 font-mono text-xs text-carbon-300">
+                    <span className="rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-2 font-mono text-xs sm:text-sm text-electric-cyan font-bold">
                       Öneri: {activeOption.weight}
-                    </div>
+                    </span>
                   </div>
 
-                  <p className="mt-4 text-xs leading-relaxed text-carbon-200">
+                  <p className="mt-6 text-sm sm:text-base leading-relaxed text-carbon-200">
                     {activeOption.description}
                   </p>
 
-                  {/* Visual Stats Bars */}
-                  <div className="mt-6 space-y-3.5">
+                  {/* Visual Stats Bars - Massive sized for 50+ age persona */}
+                  <div className="mt-8 space-y-5">
                     <div>
-                      <div className="flex justify-between text-[11px] font-mono text-carbon-300 mb-1">
-                        <span>Kalkış &amp; Ara Hızlanma Atikliği</span>
-                        <span className="text-white font-bold">{activeOption.stats.launch}%</span>
+                      <div className="flex justify-between text-xs sm:text-sm font-bold text-carbon-200 mb-2">
+                        <span>🚀 Kalkış & Rampada Çekiş Gücü</span>
+                        <span className="text-white font-extrabold">{activeOption.stats.launch}%</span>
                       </div>
-                      <div className="h-1.5 w-full bg-white/[0.04] rounded-full overflow-hidden">
+                      <div className="h-3 w-full bg-white/[0.04] rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-gradient-to-r from-electric-cyan to-yamaha-400 transition-all duration-500"
+                          className="h-full bg-gradient-to-r from-electric-cyan to-yamaha-400 transition-all duration-700"
                           style={{ width: `${activeOption.stats.launch}%` }}
                         />
                       </div>
                     </div>
 
                     <div>
-                      <div className="flex justify-between text-[11px] font-mono text-carbon-300 mb-1">
-                        <span>Yakıt Ekonomisi</span>
-                        <span className="text-white font-bold">{activeOption.stats.economy}%</span>
+                      <div className="flex justify-between text-xs sm:text-sm font-bold text-carbon-200 mb-2">
+                        <span>⛽ Yakıt Tasarrufu (Ekonomi)</span>
+                        <span className="text-white font-extrabold">{activeOption.stats.economy}%</span>
                       </div>
-                      <div className="h-1.5 w-full bg-white/[0.04] rounded-full overflow-hidden">
+                      <div className="h-3 w-full bg-white/[0.04] rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-gradient-to-r from-electric-cyan to-yamaha-400 transition-all duration-500"
+                          className="h-full bg-gradient-to-r from-electric-cyan to-yamaha-400 transition-all duration-700"
                           style={{ width: `${activeOption.stats.economy}%` }}
                         />
                       </div>
                     </div>
 
                     <div>
-                      <div className="flex justify-between text-[11px] font-mono text-carbon-300 mb-1">
-                        <span>Son Hıza Ulaşma Kolaylığı</span>
-                        <span className="text-white font-bold">{activeOption.stats.topSpeed}%</span>
+                      <div className="flex justify-between text-xs sm:text-sm font-bold text-carbon-200 mb-2">
+                        <span>🏁 Son Hıza (Top Speed) Ulaşma Limiti</span>
+                        <span className="text-white font-extrabold">{activeOption.stats.topSpeed}%</span>
                       </div>
-                      <div className="h-1.5 w-full bg-white/[0.04] rounded-full overflow-hidden">
+                      <div className="h-3 w-full bg-white/[0.04] rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-gradient-to-r from-electric-cyan to-yamaha-400 transition-all duration-500"
+                          className="h-full bg-gradient-to-r from-electric-cyan to-yamaha-400 transition-all duration-700"
                           style={{ width: `${activeOption.stats.topSpeed}%` }}
                         />
                       </div>
                     </div>
 
                     <div>
-                      <div className="flex justify-between text-[11px] font-mono text-carbon-300 mb-1">
-                        <span>Uzun Yol Seyir Konforu</span>
-                        <span className="text-white font-bold">{activeOption.stats.comfort}%</span>
+                      <div className="flex justify-between text-xs sm:text-sm font-bold text-carbon-200 mb-2">
+                        <span>🤫 Sessizlik ve Uzun Yol Seyir Konforu</span>
+                        <span className="text-white font-extrabold">{activeOption.stats.comfort}%</span>
                       </div>
-                      <div className="h-1.5 w-full bg-white/[0.04] rounded-full overflow-hidden">
+                      <div className="h-3 w-full bg-white/[0.04] rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-gradient-to-r from-electric-cyan to-yamaha-400 transition-all duration-500"
+                          className="h-full bg-gradient-to-r from-electric-cyan to-yamaha-400 transition-all duration-700"
                           style={{ width: `${activeOption.stats.comfort}%` }}
                         />
                       </div>
@@ -477,50 +641,51 @@ export default function VariatorPerformancePage() {
                 </div>
 
                 <div className="mt-8 grid gap-4 sm:grid-cols-2 pt-4 border-t border-white/[0.06]">
-                  <div className="bg-white/[0.01] border border-white/[0.04] p-3 rounded-xl">
-                    <span className="text-[9px] font-mono text-emerald-400 uppercase tracking-wider block font-bold">✓ Mekanik Avantajı</span>
-                    <span className="text-xs text-carbon-200 mt-1 block leading-normal">{activeOption.pros}</span>
+                  <div className="bg-emerald-500/[0.02] border border-emerald-500/10 p-4 rounded-xl">
+                    <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-wider block font-bold">✓ Net Mekanik Artısı</span>
+                    <p className="text-xs sm:text-sm text-carbon-100 mt-1 leading-normal font-medium">{activeOption.pros}</p>
                   </div>
-                  <div className="bg-white/[0.01] border border-white/[0.04] p-3 rounded-xl">
-                    <span className="text-[9px] font-mono text-red-400 uppercase tracking-wider block font-bold">✗ Maliyet / Dezavantaj</span>
-                    <span className="text-xs text-carbon-200 mt-1 block leading-normal">{activeOption.cons}</span>
+                  <div className="bg-red-500/[0.02] border border-red-500/10 p-4 rounded-xl">
+                    <span className="text-[10px] font-mono text-red-400 uppercase tracking-wider block font-bold">✗ Dikkat Edilecek Dezavantaj</span>
+                    <p className="text-xs sm:text-sm text-carbon-100 mt-1 leading-normal font-medium">{activeOption.cons}</p>
                   </div>
                 </div>
+
               </div>
             </div>
           </Reveal>
         </section>
 
-        {/* SECTION 2: INTERACTIVE BRAND EXPLORER */}
-        <section className="mt-24 space-y-6">
+        {/* SECTION 3: 3D PERSPECTIVE BRAND EXPLORER */}
+        <section className="mt-32 space-y-8">
           <Reveal>
-            <div className="flex flex-col gap-2">
-              <span className="text-xs font-mono uppercase tracking-widest text-electric-cyan">Marka Karşılaştırma Laboratuvarı</span>
-              <h2 className="h-display text-2xl font-semibold text-white sm:text-3xl">
-                2. Ön Varyatör Performans Devleri
+            <div className="flex flex-col gap-3">
+              <span className="text-xs font-mono uppercase tracking-widest text-electric-cyan font-bold">3. Bölüm: Marka Performans Devleri</span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
+                Performans Varyatör Markaları & Yanak Geometrileri
               </h2>
-              <p className="text-sm text-carbon-200 leading-relaxed max-w-3xl">
-                Her markanın şanzıman teorisi ve rampa açısı felsefesi tamamen farklıdır. Aşağıdan marka seçerek rampa geometrisini ve çalışma prensibini derinlemesine inceleyin:
+              <p className="text-base sm:text-lg text-carbon-200 leading-relaxed max-w-3xl">
+                Orijinal varyatörün rampaları ve yanak açıları sınırlıdır. Dünya çapındaki performans devleri kendi şanzıman teorilerini sunarlar. Aşağıdan marka seçerek premium 3D görsellerini ve çalışma felsefelerini inceleyin:
               </p>
             </div>
           </Reveal>
 
           {/* Brand Buttons */}
           <Reveal delay={0.05}>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 border-b border-white/[0.08] pb-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 border-b border-white/[0.08] pb-6">
               {[
-                { id: "malossi", name: "Malossi Multivar" },
-                { id: "polini", name: "Polini Hi-Speed" },
-                { id: "jcosta", name: "J.Costa Axial" },
-                { id: "tdr", name: "TDR Performance" }
+                { id: "malossi", name: "Malossi Multivar (8 Baga)" },
+                { id: "polini", name: "Polini Hi-Speed (12 Baga)" },
+                { id: "jcosta", name: "J.Costa Transverse (Axial)" },
+                { id: "tdr", name: "TDR Pulley (Teflon Gold)" }
               ].map((b) => (
                 <button
                   key={b.id}
                   onClick={() => setActiveBrand(b.id)}
                   className={cn(
-                    "px-4 py-3 text-xs font-semibold rounded-xl transition-all border text-center",
+                    "px-4 py-4 text-xs sm:text-sm font-extrabold rounded-2xl transition-all border text-center",
                     activeBrand === b.id
-                      ? "bg-electric-cyan/15 text-electric-cyan border-electric-cyan/40 shadow-ambient-blue"
+                      ? "bg-electric-cyan/15 text-electric-cyan border-electric-cyan/45 shadow-[0_0_20px_rgba(0,242,254,0.15)] scale-[1.03]"
                       : "text-carbon-300 hover:text-white border-white/[0.06] bg-white/[0.015]"
                   )}
                 >
@@ -530,89 +695,113 @@ export default function VariatorPerformancePage() {
             </div>
           </Reveal>
 
-          {/* Brand Presentation */}
+          {/* Brand Presentation with 3D Card Hover */}
           <Reveal delay={0.08}>
-            <div className="glass gradient-edge p-6 sm:p-8 rounded-2xl mt-6">
-              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/[0.08] pb-4">
-                <div>
-                  <span className="rounded border border-white/[0.08] bg-white/[0.02] px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-electric-cyan">
-                    Menşei: {currentBrand.origin}
-                  </span>
-                  <h3 className="mt-2 h-display text-2xl font-semibold text-white">{currentBrand.title}</h3>
+            <div className="glass border border-white/[0.08] p-6 sm:p-8 rounded-3xl mt-6 bg-gradient-to-r from-white/[0.02] to-transparent shadow-2xl">
+              
+              <div className="grid gap-8 lg:grid-cols-12 items-center">
+                
+                {/* Brand Image Render - Interactive Perspective Tilt */}
+                <div className="lg:col-span-5 flex justify-center items-center">
+                  <div className="w-full relative aspect-square max-w-[360px] rounded-2xl bg-gradient-to-tr from-white/[0.01] to-white/[0.05] border border-white/[0.08] p-4 flex justify-center items-center shadow-inner group transition-all duration-700 hover:scale-105 hover:rotate-1 hover:shadow-cyan-500/10">
+                    <div className="absolute inset-0 bg-radial-gradient from-electric-cyan/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                    <Image
+                      src={currentBrand.image}
+                      alt={`${currentBrand.title} Performance Render`}
+                      width={320}
+                      height={320}
+                      className="object-contain drop-shadow-[0_0_25px_rgba(255,255,255,0.06)]"
+                    />
+                  </div>
                 </div>
-                <div className="text-right text-xs font-mono text-carbon-300">
-                  <span className="text-electric-cyan">Felsefe:</span> {currentBrand.characteristic}
+
+                {/* Brand Details */}
+                <div className="lg:col-span-7 space-y-6">
+                  <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/[0.08] pb-4">
+                    <div>
+                      <span className="rounded-lg border border-white/[0.08] bg-white/[0.04] px-3 py-1 font-mono text-xs uppercase tracking-wider text-electric-cyan font-bold">
+                        Menşei: {currentBrand.origin}
+                      </span>
+                      <h3 className="mt-3 text-2xl sm:text-3xl font-black text-white">{currentBrand.title}</h3>
+                    </div>
+                    <div className="text-right text-sm font-mono text-carbon-300">
+                      <span className="text-electric-cyan font-bold">Karakter:</span> {currentBrand.characteristic}
+                    </div>
+                  </div>
+
+                  {/* Rampa & Material Grid */}
+                  <div className="grid gap-6 md:grid-cols-2">
+                    <div>
+                      <h4 className="font-mono text-xs uppercase tracking-widest text-electric-cyan flex items-center gap-2 font-bold">
+                        <Cog className="h-4 w-4 shrink-0 text-electric-cyan animate-spin-slow" /> Tasarım Felsefesi & Rampa Yapısı
+                      </h4>
+                      <p className="mt-2 text-sm leading-relaxed text-carbon-200 font-medium">
+                        {currentBrand.philosophy}
+                      </p>
+                    </div>
+                    <div>
+                      <h4 className="font-mono text-xs uppercase tracking-widest text-electric-cyan flex items-center gap-2 font-bold">
+                        <Wrench className="h-4 w-4 shrink-0 text-electric-cyan" /> Burç & Malzeme Alaşımı
+                      </h4>
+                      <p className="mt-2 text-sm leading-relaxed text-carbon-200 font-medium">
+                        {currentBrand.hubDetails}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Pros & Cons list */}
+                  <div className="grid gap-6 sm:grid-cols-2 pt-4 border-t border-white/[0.06]">
+                    <div className="bg-emerald-500/[0.02] border border-emerald-500/10 p-5 rounded-2xl">
+                      <h4 className="font-mono text-xs uppercase tracking-widest text-emerald-400 font-bold">Mekanik Artıları (Pros)</h4>
+                      <ul className="mt-3 space-y-2">
+                        {currentBrand.pros.map((p, idx) => (
+                          <li key={idx} className="flex gap-2.5 text-sm text-carbon-100 font-medium leading-normal">
+                            <span className="text-emerald-400 shrink-0 font-extrabold">✓</span>
+                            <span>{p}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="bg-red-500/[0.02] border border-red-500/10 p-5 rounded-2xl">
+                      <h4 className="font-mono text-xs uppercase tracking-widest text-red-400 font-bold">Göz Önünde Bulundurulacaklar (Cons)</h4>
+                      <ul className="mt-3 space-y-2">
+                        {currentBrand.cons.map((c, idx) => (
+                          <li key={idx} className="flex gap-2.5 text-sm text-carbon-100 font-medium leading-normal">
+                            <span className="text-red-400 shrink-0 font-extrabold">✗</span>
+                            <span>{c}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Featured Component Card */}
+                  <div className="bg-electric-cyan/5 border border-electric-cyan/20 p-5 rounded-2xl flex gap-4">
+                    <Info className="h-6 w-6 text-electric-cyan shrink-0 mt-0.5" />
+                    <div>
+                      <span className="text-xs font-mono text-electric-cyan uppercase tracking-widest font-extrabold block">Öne Çıkan Parça & İpuçları</span>
+                      <p className="mt-2 text-sm text-carbon-200 leading-relaxed font-medium">{currentBrand.featured}</p>
+                    </div>
+                  </div>
+
                 </div>
+
               </div>
 
-              {/* Rampa & Hub Details Grid */}
-              <div className="grid gap-6 md:grid-cols-2 mt-6">
-                <div>
-                  <h4 className="font-mono text-[10px] uppercase tracking-widest text-electric-cyan flex items-center gap-1.5 font-bold">
-                    <Cog className="h-3.5 w-3.5" /> Tasarım Felsefesi &amp; Rampa Yapısı
-                  </h4>
-                  <p className="mt-2 text-xs leading-relaxed text-carbon-200">
-                    {currentBrand.philosophy}
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-mono text-[10px] uppercase tracking-widest text-electric-cyan flex items-center gap-1.5 font-bold">
-                    <Wrench className="h-3.5 w-3.5" /> Burç &amp; Malzeme Alaşımı
-                  </h4>
-                  <p className="mt-2 text-xs leading-relaxed text-carbon-200">
-                    {currentBrand.hubDetails}
-                  </p>
-                </div>
-              </div>
-
-              {/* Pros & Cons list */}
-              <div className="grid gap-6 sm:grid-cols-2 mt-6 pt-6 border-t border-white/[0.06]">
-                <div className="glass-quiet p-4 rounded-xl">
-                  <h4 className="font-mono text-[9px] uppercase tracking-widest text-emerald-400 font-bold">Mekanik Artıları (Pros)</h4>
-                  <ul className="mt-3 space-y-2">
-                    {currentBrand.pros.map((p, idx) => (
-                      <li key={idx} className="flex gap-2 text-xs text-carbon-200 leading-normal">
-                        <span className="text-emerald-400 shrink-0 font-bold">✓</span>
-                        <span>{p}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="glass-quiet p-4 rounded-xl">
-                  <h4 className="font-mono text-[9px] uppercase tracking-widest text-red-400 font-bold">Mekanik Eksileri &amp; Bakım (Cons)</h4>
-                  <ul className="mt-3 space-y-2">
-                    {currentBrand.cons.map((c, idx) => (
-                      <li key={idx} className="flex gap-2 text-xs text-carbon-200 leading-normal">
-                        <span className="text-red-400 shrink-0 font-bold">✗</span>
-                        <span>{c}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              {/* Featured Accessory */}
-              <div className="bg-electric-cyan/5 border border-electric-cyan/20 p-4 rounded-xl mt-6 flex gap-3">
-                <Info className="h-5 w-5 text-electric-cyan shrink-0 mt-0.5" />
-                <div>
-                  <span className="text-[9px] font-mono text-electric-cyan uppercase tracking-widest font-bold block">Öne Çıkan Parça Entegrasyonu</span>
-                  <p className="mt-1 text-xs text-carbon-200 leading-relaxed">{currentBrand.featured}</p>
-                </div>
-              </div>
             </div>
           </Reveal>
         </section>
 
-        {/* SECTION 3: ARKA DEBRİYAJ ÜNİTESİ */}
-        <section className="mt-24 space-y-6">
+        {/* SECTION 4: REÇETELER VE DEBRİYAJ SİSTELERİ */}
+        <section className="mt-32 space-y-8">
           <Reveal>
-            <div className="flex flex-col gap-2">
-              <span className="text-xs font-mono uppercase tracking-widest text-electric-cyan">Kayıpsız Güç Aktarımı</span>
-              <h2 className="h-display text-2xl font-semibold text-white sm:text-3xl">
-                3. Arka Debriyaj Ünitesi: Balatalar, Çanlar ve Yaylar
+            <div className="flex flex-col gap-3">
+              <span className="text-xs font-mono uppercase tracking-widest text-electric-cyan font-bold">4. Bölüm: Arka Debriyaj & Aktarım Gücü</span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
+                Kayıpsız Güç Aktarımı: Balatalar, Çanlar ve Yaylar
               </h2>
-              <p className="text-sm text-carbon-200 leading-relaxed max-w-3xl">
-                Ön varyatör motor devrine göre şanzıman oranını değiştirirken, arka grup kayışın kaçırmasını engellemek ve tekerleğe kavrama gücü sağlamakla yükümlüdür:
+              <p className="text-base sm:text-lg text-carbon-200 leading-relaxed max-w-3xl">
+                Ön varyatör ne kadar devirli çalışırsa çalışsın, arka debriyaj sistemi kayışı tam sıkıştıramaz ve kaçırırsa performansınız tamamen ısıya dönüşüp heba olur:
               </p>
             </div>
           </Reveal>
@@ -620,21 +809,21 @@ export default function VariatorPerformancePage() {
           <div className="grid gap-6 md:grid-cols-2 mt-8">
             {CLUTCHES.map((c, idx) => (
               <Reveal key={idx} delay={idx * 0.05}>
-                <div className="glass p-6 flex flex-col justify-between h-full border border-white/[0.06] hover:border-white/15 transition-all">
+                <div className="glass p-6 sm:p-8 flex flex-col justify-between h-full border border-white/[0.06] hover:border-white/20 transition-all rounded-3xl bg-gradient-to-b from-white/[0.015] to-transparent shadow-xl">
                   <div>
                     <div className="flex justify-between items-start">
-                      <span className="rounded border border-white/[0.08] bg-white/[0.02] px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-carbon-300">
+                      <span className="rounded-xl border border-white/[0.08] bg-white/[0.02] px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-wider text-carbon-300 font-bold">
                         {c.type}
                       </span>
-                      <span className="text-[10px] font-mono text-carbon-400">{c.compatibility}</span>
+                      <span className="text-xs font-mono text-carbon-400">{c.compatibility}</span>
                     </div>
-                    <h3 className="mt-4 h-display text-lg font-semibold text-white">{c.brand}</h3>
-                    <p className="mt-1 text-[10px] text-carbon-400 font-mono">{c.code}</p>
-                    <p className="mt-3 text-xs leading-relaxed text-carbon-200">{c.details}</p>
+                    <h3 className="mt-5 text-xl font-black text-white">{c.brand}</h3>
+                    <p className="mt-1 text-[11px] text-electric-cyan font-mono">{c.code}</p>
+                    <p className="mt-4 text-sm sm:text-base leading-relaxed text-carbon-200 font-medium">{c.details}</p>
                   </div>
                   <div className="mt-6 border-t border-white/[0.06] pt-4">
-                    <span className="text-[10px] font-mono text-electric-cyan block uppercase tracking-wider font-bold">Mekanik Katkı:</span>
-                    <p className="mt-1 text-xs text-white font-medium">{c.benefit}</p>
+                    <span className="text-xs font-mono text-electric-cyan block uppercase tracking-widest font-extrabold">Mekanik Avantajı:</span>
+                    <p className="mt-2 text-sm sm:text-base text-white font-semibold leading-relaxed">{c.benefit}</p>
                   </div>
                 </div>
               </Reveal>
@@ -642,224 +831,297 @@ export default function VariatorPerformancePage() {
           </div>
         </section>
 
-        {/* SECTION 4: ATÖLYE SIRLARI & KRONİK HATA UYARISI */}
-        <section className="mt-24 space-y-6">
+        {/* SECTION 5: INTERACTIVE RECIPE CONFIGURATOR (REÇETE SİHİRBAZI) */}
+        <section className="mt-32 space-y-8">
           <Reveal>
-            <div className="flex flex-col gap-2">
-              <span className="text-xs font-mono uppercase tracking-widest text-electric-cyan">İleri Düzey Mekanik</span>
-              <h2 className="h-display text-2xl font-semibold text-white sm:text-3xl">
-                4. Atölye Sırları ve İnce CVT Ayarları
+            <div className="flex flex-col gap-3">
+              <span className="text-xs font-mono uppercase tracking-widest text-electric-cyan font-bold">5. Bölüm: Kolay Kurulum Sihirbazı</span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
+                XMAX Hazır Şanzıman Reçeteleri
               </h2>
-              <p className="text-sm text-carbon-200 leading-relaxed max-w-3xl">
-                Hazır kiti takıp geçmek yerine şanzıman milimetrelerini ayarlayan Asya (Tayland/Endonezya) atölyelerinin gizli modifikasyon protokolleri:
+              <p className="text-base sm:text-lg text-carbon-200 leading-relaxed max-w-3xl">
+                Olayı basitleştirdik! Farklı modeller ve amaçlar için yıllardır test edilmiş rüştünü ispatlamış 7 özel hazır şanzıman reçetesi. Amacınıza uygun olanı seçerek adım adım gereken tüm mekanik işlemleri görün:
+              </p>
+            </div>
+          </Reveal>
+
+          {/* Setup Selector Grid */}
+          <Reveal delay={0.05}>
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5 border-b border-white/[0.08] pb-6 overflow-x-auto">
+              {SETUPS.map((s) => (
+                <button
+                  key={s.id}
+                  onClick={() => setActiveSetupId(s.id)}
+                  className={cn(
+                    "px-4 py-4 text-xs font-extrabold rounded-2xl transition-all border text-center whitespace-nowrap shrink-0",
+                    activeSetupId === s.id
+                      ? "bg-electric-cyan text-ink-950 border-electric-cyan shadow-[0_0_15px_rgba(0,242,254,0.25)] font-black scale-105"
+                      : "text-carbon-300 hover:text-white border-white/[0.06] bg-white/[0.015]"
+                  )}
+                >
+                  Kurulum #{s.id}
+                </button>
+              ))}
+            </div>
+          </Reveal>
+
+          {/* Configurator Recipe Card */}
+          <Reveal delay={0.08}>
+            <div className="glass border border-white/[0.08] p-6 sm:p-8 rounded-3xl mt-4 bg-gradient-to-b from-white/[0.02] to-transparent shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-8 opacity-5">
+                <Sparkles className="size-48 text-electric-cyan" />
+              </div>
+
+              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/[0.06] pb-5">
+                <div>
+                  <span className="text-[10px] font-mono text-electric-cyan uppercase tracking-widest block font-bold">Uyumlu Olduğu Model</span>
+                  <span className="text-base sm:text-lg text-white font-extrabold">{currentSetup.model}</span>
+                </div>
+                <div className="text-left sm:text-right">
+                  <span className="text-[10px] font-mono text-carbon-400 uppercase tracking-widest block font-bold">Reçete Amacı</span>
+                  <span className="text-lg sm:text-xl text-white font-black">{currentSetup.name}</span>
+                </div>
+              </div>
+
+              {/* Recipe Steps Breakdown */}
+              <div className="grid gap-6 md:grid-cols-3 mt-8">
+                
+                <div className="bg-white/[0.015] border border-white/[0.04] p-5 rounded-2xl hover:border-white/10 transition-colors flex flex-col justify-between">
+                  <div>
+                    <span className="font-mono text-xs text-electric-cyan font-bold block tracking-wider">🛠️ 1. ADIM: ÖN VARYATÖR & DIŞ KASNAK</span>
+                    <p className="mt-3 text-sm sm:text-base leading-relaxed text-carbon-100 font-medium">{currentSetup.front}</p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-white/[0.04] text-[11px] font-mono text-carbon-400">
+                    Kasnak Derecesi Ayarı
+                  </div>
+                </div>
+
+                <div className="bg-white/[0.015] border border-white/[0.04] p-5 rounded-2xl hover:border-white/10 transition-colors flex flex-col justify-between">
+                  <div>
+                    <span className="font-mono text-xs text-electric-cyan font-bold block tracking-wider">⚖️ 2. ADIM: BAGA VE ŞİM KURULUMU</span>
+                    <p className="mt-3 text-sm sm:text-base leading-relaxed text-carbon-100 font-medium">{currentSetup.roller}</p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-white/[0.04] text-[11px] font-mono text-carbon-300 font-bold">
+                    <span className="text-carbon-400 font-normal">Pul/Şim:</span> {currentSetup.shim}
+                  </div>
+                </div>
+
+                <div className="bg-white/[0.015] border border-white/[0.04] p-5 rounded-2xl hover:border-white/10 transition-colors flex flex-col justify-between">
+                  <div>
+                    <span className="font-mono text-xs text-electric-cyan font-bold block tracking-wider">🌀 3. ADIM: ARKA YAYLAR & DEBRİYAJ</span>
+                    <p className="mt-3 text-sm sm:text-base leading-relaxed text-carbon-100 font-medium">{currentSetup.rear}</p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-white/[0.04] text-[11px] font-mono text-carbon-300 font-bold">
+                    <span className="text-carbon-400 font-normal">Yay:</span> {currentSetup.springs}
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Behavior & Advisory Details */}
+              <div className="mt-8 grid gap-4 lg:grid-cols-12 pt-6 border-t border-white/[0.06]">
+                <div className="lg:col-span-8 bg-electric-cyan/5 border border-electric-cyan/20 p-5 rounded-2xl flex gap-4">
+                  <Zap className="h-6 w-6 text-electric-cyan shrink-0 mt-0.5 animate-pulse" />
+                  <div>
+                    <span className="text-xs font-mono text-electric-cyan uppercase tracking-widest font-extrabold block">Kurulum Yapıldıktan Sonra Sürüş Karakteri Nasıl Olur?</span>
+                    <p className="mt-2 text-sm sm:text-base text-white font-semibold leading-relaxed">{currentSetup.behavior}</p>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-4 bg-white/[0.02] border border-white/[0.08] p-5 rounded-2xl flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] font-mono text-carbon-400 uppercase tracking-widest block font-bold">Montaj Zorluğu</span>
+                    <span className="text-base sm:text-lg text-yellow-400 font-extrabold mt-1 block">{currentSetup.difficulty}</span>
+                  </div>
+                  <div className="mt-3 text-xs font-mono text-carbon-300">
+                    <span className="text-carbon-400 font-normal">Gereklilik:</span> {currentSetup.mechanicMust}
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </Reveal>
+        </section>
+
+        {/* SECTION 6: COMPARATIVE TABLE OVERHAUL (Ages 50+ legibility) */}
+        <section className="mt-32 space-y-8">
+          <Reveal>
+            <div className="flex flex-col gap-3">
+              <span className="text-xs font-mono uppercase tracking-widest text-electric-cyan font-bold">6. Bölüm: Hızlı Karşılaştırma Matrisi</span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
+                Reçetelerin Yan Yana Mukayesesi
+              </h2>
+              <p className="text-base sm:text-lg text-carbon-200 leading-relaxed max-w-3xl">
+                Hangi kuruluma gideceğinizden emin değil misiniz? Tüm reçetelerin sürüş devirlerini, gaz reaksiyonlarını, tahmini son hız değişimlerini ve bakım sürelerini tek bir büyük matristen mukayese edin:
+              </p>
+            </div>
+          </Reveal>
+
+          {/* Desktop Table View */}
+          <Reveal delay={0.05}>
+            <div className="hidden lg:block overflow-x-auto rounded-3xl border border-white/[0.08] bg-ink-950/40 backdrop-blur-md">
+              <table className="w-full text-left border-collapse min-w-[900px]">
+                <thead>
+                  <tr className="border-b border-white/[0.08] bg-white/[0.03] text-xs sm:text-sm font-mono uppercase tracking-widest text-electric-cyan">
+                    <th className="px-6 py-5 font-bold">Reçete No</th>
+                    <th className="px-6 py-5 font-bold">Hedeflenen Kullanım</th>
+                    <th className="px-6 py-5 font-bold">Gaz Tepkisi</th>
+                    <th className="px-6 py-5 font-bold">Kavrama Devri</th>
+                    <th className="px-6 py-5 font-bold">Ortalama Seyir Devri</th>
+                    <th className="px-6 py-5 font-bold">Son Hız Değişimi</th>
+                    <th className="px-6 py-5 font-bold">Önerilen Kayış</th>
+                    <th className="px-6 py-5 font-bold">Bakım Periyodu</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/[0.04] text-sm text-carbon-200 font-medium">
+                  {COMPARISON_MATRIX.map((row, idx) => (
+                    <tr key={idx} className="hover:bg-white/[0.02] transition-colors">
+                      <td className="px-6 py-5 font-black text-white">{row.no}</td>
+                      <td className="px-6 py-5 text-white">{row.target}</td>
+                      <td className="px-6 py-5 font-extrabold text-electric-cyan">{row.throttle}</td>
+                      <td className="px-6 py-5 font-mono text-white">{row.launch}</td>
+                      <td className="px-6 py-5 font-mono">{row.cruise}</td>
+                      <td className="px-6 py-5 font-bold text-white bg-white/[0.01]">{row.topSpeed}</td>
+                      <td className="px-6 py-5">{row.belt}</td>
+                      <td className="px-6 py-5 font-mono text-yellow-400 font-bold">{row.maintenance}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Mobile/Tablet Card Stack View (High Legibility, no side scrolls) */}
+            <div className="lg:hidden space-y-4">
+              {COMPARISON_MATRIX.map((row, idx) => (
+                <div key={idx} className="glass p-5 rounded-2xl border border-white/[0.06] bg-gradient-to-r from-white/[0.015] to-transparent">
+                  <div className="flex justify-between items-center border-b border-white/[0.06] pb-3 mb-3">
+                    <span className="text-sm font-black text-white bg-electric-cyan/20 text-electric-cyan px-2.5 py-1 rounded-lg">{row.no}</span>
+                    <span className="text-xs font-mono text-yellow-400 font-bold">Bakım: {row.maintenance}</span>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-y-3 gap-x-2 text-sm">
+                    <div>
+                      <span className="text-[10px] font-mono text-carbon-400 block uppercase">Hedeflenen Kullanım:</span>
+                      <span className="text-white font-bold block mt-0.5">{row.target}</span>
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-mono text-carbon-400 block uppercase">Gaz Tepkisi:</span>
+                      <span className="text-electric-cyan font-black block mt-0.5">{row.throttle}</span>
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-mono text-carbon-400 block uppercase">Kavrama Devri:</span>
+                      <span className="text-white font-mono block mt-0.5">{row.launch}</span>
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-mono text-carbon-400 block uppercase">Seyir Devri:</span>
+                      <span className="text-white font-mono block mt-0.5">{row.cruise}</span>
+                    </div>
+                    <div className="col-span-2 pt-2 border-t border-white/[0.04] flex justify-between items-center">
+                      <div>
+                        <span className="text-[10px] font-mono text-carbon-400 block uppercase">Son Hız Değişimi:</span>
+                        <span className="text-white font-bold block mt-0.5">{row.topSpeed}</span>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-[10px] font-mono text-carbon-400 block uppercase">Önerilen Kayış:</span>
+                        <span className="text-white font-bold block mt-0.5">{row.belt}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </section>
+
+        {/* SECTION 7: ATÖLYE SIRLARI & KRONİK HATA UYARISI */}
+        <section className="mt-32 space-y-8">
+          <Reveal>
+            <div className="flex flex-col gap-3">
+              <span className="text-xs font-mono uppercase tracking-widest text-electric-cyan font-bold">7. Bölüm: İnce CVT Ayarları</span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
+                İleri Düzey Atölye Sırları
+              </h2>
+              <p className="text-base sm:text-lg text-carbon-200 leading-relaxed max-w-3xl">
+                Şanzımana hazır kit takıp geçmek yetmez! Asya (Tayland ve Endonezya) atölyelerinin XMAX CVT ömrünü ve kalkış performansını milimetrik düzeyde artıran gizli protokolleri:
               </p>
             </div>
           </Reveal>
 
           <div className="grid gap-6 md:grid-cols-2 mt-8">
             <Reveal delay={0.05}>
-              <div className="glass p-6 border border-white/[0.06]">
-                <h3 className="h-display text-lg font-semibold text-white flex items-center gap-2">
-                  <span className="text-electric-cyan font-mono">01.</span>
-                  Bubut Derajat (Kasnak Derecesi İşlemi)
+              <div className="glass p-6 sm:p-8 border border-white/[0.06] rounded-3xl bg-gradient-to-b from-white/[0.01] to-transparent shadow-lg">
+                <h3 className="text-xl font-extrabold text-white flex items-center gap-2">
+                  <span className="text-electric-cyan font-mono font-black">01.</span>
+                  Bubut Derajat (Kasnak Derecesi Değiştirme)
                 </h3>
-                <p className="mt-3 text-xs leading-relaxed text-carbon-200">
-                  Orijinal varyatör yanak açısı 14.0 derecedir. Torna tezgahında yanak açısı dikleştirilerek **13.8°** (şehir içi stop-and-go ve tork) veya **13.5°** (yarış/otoban, maksimum kayış sıkıştırma oranı ve yüksek son hız) seviyelerine çekilir. Kalkıştaki hafif zayıflık kasnak şimleri ile dengelenir.
+                <p className="mt-4 text-sm sm:text-base leading-relaxed text-carbon-200 font-medium">
+                  Ön varyatör yanak açısı fabrikasyon olarak 14.0 derecedir. Torna tezgahında yanak açısı dikleştirilerek **13.8°** (özellikle şehir içi stop-and-go ve rampa torkunu canlandırmak için) veya **13.5°** (yarış tipi, kasnağın kayışı son limitine kadar sıkıştırması için) seviyelerine çekilir.
                 </p>
               </div>
             </Reveal>
 
             <Reveal delay={0.1}>
-              <div className="glass p-6 border border-white/[0.06]">
-                <h3 className="h-display text-lg font-semibold text-white flex items-center gap-2">
-                  <span className="text-electric-cyan font-mono">02.</span>
-                  Kerok Jalur (Rampa Frezeleme)
+              <div className="glass p-6 sm:p-8 border border-white/[0.06] rounded-3xl bg-gradient-to-b from-white/[0.01] to-transparent shadow-lg">
+                <h3 className="text-xl font-extrabold text-white flex items-center gap-2">
+                  <span className="text-electric-cyan font-mono font-black">02.</span>
+                  Kerok Jalur (Rampa Yollarını Frezeleme)
                 </h3>
-                <p className="mt-3 text-xs leading-relaxed text-carbon-200">
-                  Orijinal varyatörlerde baga rampalarının bittiği yerde bulunan güvenlik stoperleri (stoper duvarları), baganın daha yukarı çıkmasını ve dolayısıyla kayışın ön varyatörde en dış çepere ulaşmasını engeller. Baga kanallarının CNC frezeyle 1.5 ila 2.0 mm daha geriye doğru kazınması motorun iç aksamına dokunmadan **+10 km/h ila +15 km/h** temiz son hız sağlar.
+                <p className="mt-4 text-sm sm:text-base leading-relaxed text-carbon-200 font-medium">
+                  Stok varyatörlerde bagaların kaydığı kanalların (rampaların) bittiği yerde güvenlik sınır stoper duvarları bulunur. Bu stoperler baganın daha yukarı tırmanıp kayışı en dış çepere sıkıştırmasını engeller. Kanalların CNC frezeyle 1.5 - 2.0 mm geriye kazınması motora dokunmadan **+10 km/h ila +15 km/h** temiz son hız kazandırır.
                 </p>
               </div>
             </Reveal>
 
             <Reveal delay={0.15}>
-              <div className="glass p-6 border border-white/[0.06]">
-                <h3 className="h-display text-lg font-semibold text-white flex items-center gap-2">
-                  <span className="text-electric-cyan font-mono">03.</span>
-                  Şim (Shim Washer) İnce Ayarı
+              <div className="glass p-6 sm:p-8 border border-white/[0.06] rounded-3xl bg-gradient-to-b from-white/[0.01] to-transparent shadow-lg">
+                <h3 className="text-xl font-extrabold text-white flex items-center gap-2">
+                  <span className="text-electric-cyan font-mono font-black">03.</span>
+                  Kasnak Şimi (Shim Washer) İnce Ayarı
                 </h3>
-                <p className="mt-3 text-xs leading-relaxed text-carbon-200">
-                  Varyatör burcu ile sabit yanak arasına yerleştirilen **0.5 mm ila 0.8 mm** kalınlığındaki çelik pullar, başlangıçta iki kasnak yanağını birbirinden uzaklaştırarak kayışın ön varyatör miline en yakın noktaya (dip noktaya) inmesini sağlar. Bu durum bisikletlerde en küçük ön vitese geçmekle aynı etkiye sahiptir; kalkış torku muazzam artar.
+                <p className="mt-4 text-sm sm:text-base leading-relaxed text-carbon-200 font-medium">
+                  Hareketli varyatör burcu ile sabit yanak arasına **0.5 mm ila 0.8 mm** kalınlığında çelik pul (şim) konur. Bu durum yanakları birbirinden uzaklaştırarak kayışın en dip noktaya (en küçük ön vitese) inmesini sağlar. Kalkış torkunuzu muazzam canlandırır.
                 </p>
               </div>
             </Reveal>
 
             <Reveal delay={0.2}>
-              <div className="glass p-6 border border-white/[0.06]">
-                <h3 className="h-display text-lg font-semibold text-white flex items-center gap-2">
-                  <span className="text-electric-cyan font-mono">04.</span>
-                  CVT Isı &amp; Gres Yönetimi
+              <div className="glass p-6 sm:p-8 border border-white/[0.06] rounded-3xl bg-gradient-to-b from-white/[0.01] to-transparent shadow-lg">
+                <h3 className="text-xl font-extrabold text-white flex items-center gap-2">
+                  <span className="text-electric-cyan font-mono font-black">04.</span>
+                  CVT Hararet, Hava Süngeri & Gres Yönetimi
                 </h3>
-                <p className="mt-3 text-xs leading-relaxed text-carbon-200">
-                  CVT kutusundaki aşırı sıcaklık kayış genleşmesine, baga erimesine ve debriyaj balatalarının camlaşmasına (glazing) yol açar. Atölyelerde havalandırma süngeri çıkarılarak paslanmaz metal tel süzgeç montajı yapılır (+%40 hava akışı). Gres olarak sadece burç içine **0.5 - 1.0 gram** yüksek ısıya dayanıklı lityum sabunlu/polyurea gres (`Malossi MHR Grease - 7615375b`) sürülmeli, bagalar kuru bırakılmalıdır.
+                <p className="mt-4 text-sm sm:text-base leading-relaxed text-carbon-200 font-medium">
+                  Aşırı ısı kayışın gevşemesine, debriyajın kaçırmasına sebep olur. Atölyelerde şanzıman hava kapağındaki sünger sökülerek paslanmaz tel süzgeç takılır (hava akışı %40 artar). Gres olarak sadece burç yatağına **0.5 gram** yüksek ısıya dayanıklı polyurea gres (`Malossi MHR Grease - 7615375b`) sürülür, bagalar tamamen kuru bırakılır.
                 </p>
               </div>
             </Reveal>
           </div>
 
           <Reveal delay={0.25}>
-            <div className="rounded-2xl border border-red-500/20 bg-red-500/5 p-5 flex gap-3 mt-6">
-              <AlertTriangle className="h-6 w-6 text-red-500 shrink-0 mt-0.5" />
+            <div className="rounded-3xl border border-red-500/20 bg-red-500/5 p-6 flex gap-4 mt-8 relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-4 opacity-5">
+                <AlertTriangle className="size-24 text-red-500" />
+              </div>
+              <AlertTriangle className="h-8 w-8 text-red-500 shrink-0 mt-0.5" />
               <div>
-                <h4 className="text-sm font-semibold text-red-200">Hayati Atölye Hatası Uyarısı!</h4>
-                <p className="mt-1 text-xs leading-relaxed text-carbon-200">
-                  Amatör modifikasyoncular şanzıman şimi (pul) ararken parça kataloğunda &quot;Shim&quot; olarak geçen **B74-12168-R0** parça kodlu ürünü sipariş etmektedir. Ancak bu parça CVT şimi değil, motorun silindir kapağında yer alan **2.0 mm kalınlığındaki subap ayar şimidir (valve tappet shim).** Bu kalınlığın varyatör miline takılması durumunda krank somununun diş kapma payı kalmaz ve somun fırlayarak motor bloğunda yıkıcı mekanik hasarlara yol açar.
+                <h4 className="text-lg font-black text-red-200">⚠️ En Sık Yapılan Hayati Atölye Hatası!</h4>
+                <p className="mt-2 text-sm sm:text-base leading-relaxed text-red-100 font-medium">
+                  Bazı acemi modifiyeciler kasnak şimi (pul) ararken parça kataloğunda &ldquo;Şim&rdquo; olarak geçen **B74-12168-R0** parça kodlu ürünü almaktadır. Ancak bu parça CVT şimi değil, motorun silindir kapağında yer alan **2.0 mm kalınlığındaki subap ayar şimidir (valve tappet shim).** Bu aşırı kalın şimi varyatör miline takarsanız, krank somununun diş kapma payı kalmaz ve otoyolda giderken somun fırlayarak motor bloğunda binlerce liralık yıkıcı hasar açar!
                 </p>
               </div>
             </div>
           </Reveal>
         </section>
 
-        {/* SECTION 5: INTERACTIVE SETUP WIZARD */}
-        <section className="mt-24 space-y-6">
+        {/* SECTION 8: MÜHENDİSLİK ADVISORIES (SONUÇLAR) */}
+        <section className="mt-32 space-y-8">
           <Reveal>
-            <div className="flex flex-col gap-2">
-              <span className="text-xs font-mono uppercase tracking-widest text-electric-cyan">Şanzıman Reçeteleri</span>
-              <h2 className="h-display text-2xl font-semibold text-white sm:text-3xl">
-                5. Model Bazlı Hazır Şanzıman Reçeteleri
+            <div className="flex flex-col gap-3">
+              <span className="text-xs font-mono uppercase tracking-widest text-electric-cyan font-bold">8. Bölüm: Mühendislik Tavsiyeleri</span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
+                Mühendislik İlkeleri ve Altın Kurallar
               </h2>
-              <p className="text-sm text-carbon-200 leading-relaxed max-w-3xl">
-                Farklı motor hacimleri ve sürüş tarzları için rüştünü ispatlamış şanzıman reçeteleri. Aşağıdan sürüş reçetesini seçin:
-              </p>
-            </div>
-          </Reveal>
-
-          {/* Setup Selector Tabs */}
-          <Reveal delay={0.05}>
-            <div className="flex gap-2 border-b border-white/[0.08] pb-3 overflow-x-auto">
-              {SETUPS.map((s) => (
-                <button
-                  key={s.id}
-                  onClick={() => setActiveSetupId(s.id)}
-                  className={cn(
-                    "px-4 py-2 text-xs font-semibold rounded-lg transition-all whitespace-nowrap",
-                    activeSetupId === s.id
-                      ? "bg-electric-cyan/15 text-electric-cyan border border-electric-cyan/30 shadow-ambient-blue"
-                      : "text-carbon-300 hover:text-white border border-transparent"
-                  )}
-                >
-                  Fikir #{s.id} - {s.name.split(" (")[0]}
-                </button>
-              ))}
-            </div>
-          </Reveal>
-
-          {/* Active Setup Dashboard */}
-          <Reveal delay={0.08}>
-            <div className="glass gradient-edge p-6 sm:p-8 rounded-2xl mt-4">
-              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/[0.06] pb-4">
-                <div>
-                  <span className="text-[9px] font-mono text-electric-cyan uppercase tracking-widest block font-bold">Uygulanan Model</span>
-                  <span className="text-sm text-white font-semibold">{currentSetup.model}</span>
-                </div>
-                <div>
-                  <span className="text-[9px] font-mono text-carbon-400 uppercase tracking-widest block font-bold text-right">Reçete Adı</span>
-                  <span className="text-sm text-white font-semibold block text-right">{currentSetup.name}</span>
-                </div>
-              </div>
-
-              {/* Recipe Steps */}
-              <div className="grid gap-6 md:grid-cols-3 mt-6">
-                <div className="glass-quiet p-4 rounded-xl">
-                  <span className="font-mono text-[9px] uppercase tracking-widest text-electric-cyan font-bold block">1. ÖN VARYATÖR &amp; DERİCİLENDİRME</span>
-                  <p className="mt-2 text-xs leading-relaxed text-carbon-200">{currentSetup.front}</p>
-                </div>
-
-                <div className="glass-quiet p-4 rounded-xl">
-                  <span className="font-mono text-[9px] uppercase tracking-widest text-electric-cyan font-bold block">2. BAGA AĞIRLIĞI &amp; ŞİM SETUPLARI</span>
-                  <p className="mt-2 text-xs leading-relaxed text-carbon-200">{currentSetup.roller}</p>
-                  <div className="mt-2 pt-2 border-t border-white/[0.04] text-[11px] font-mono text-carbon-300">
-                    <span className="text-carbon-400">Şim:</span> {currentSetup.shim}
-                  </div>
-                </div>
-
-                <div className="glass-quiet p-4 rounded-xl">
-                  <span className="font-mono text-[9px] uppercase tracking-widest text-electric-cyan font-bold block">3. ARKA DEBRİYAJ &amp; KONTRAST YAYLAR</span>
-                  <p className="mt-2 text-xs leading-relaxed text-carbon-200">{currentSetup.rear}</p>
-                  <div className="mt-2 pt-2 border-t border-white/[0.04] text-[11px] font-mono text-carbon-300">
-                    <span className="text-carbon-400">Yaylar:</span> {currentSetup.springs}
-                  </div>
-                </div>
-              </div>
-
-              {/* Summary of behavior */}
-              <div className="mt-6 bg-electric-cyan/5 border border-electric-cyan/20 p-4 rounded-xl flex gap-3">
-                <Zap className="h-5 w-5 text-electric-cyan shrink-0 mt-0.5 animate-pulse" />
-                <div>
-                  <span className="text-[9px] font-mono text-electric-cyan uppercase tracking-widest font-bold block">Mekanik İvmelenme Karakteri</span>
-                  <p className="mt-1 text-xs text-white font-medium leading-relaxed">{currentSetup.behavior}</p>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-        </section>
-
-        {/* SECTION 6: COMPARATIVE TABLE */}
-        <section className="mt-24 space-y-6">
-          <Reveal>
-            <div className="flex flex-col gap-2">
-              <span className="text-xs font-mono uppercase tracking-widest text-electric-cyan">Performans Matrisi</span>
-              <h2 className="h-display text-2xl font-semibold text-white sm:text-3xl">
-                6. Tüm Reçetelerin Karşılaştırmalı Analiz Matrisi
-              </h2>
-              <p className="text-sm text-carbon-200 leading-relaxed max-w-3xl">
-                Geliştirilen şanzıman reçetelerinin sürüş verilerini ve ömür parametrelerini tek bir matris üzerinden hızlıca karşılaştırın:
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.05}>
-            <div className="overflow-x-auto rounded-2xl border border-white/[0.06] bg-ink-950/40 backdrop-blur-md">
-              <table className="w-full text-left border-collapse min-w-[900px]">
-                <thead>
-                  <tr className="border-b border-white/[0.08] bg-white/[0.02] text-xs font-mono uppercase tracking-wider text-electric-cyan">
-                    <th className="px-4 py-4">Reçete</th>
-                    <th className="px-4 py-4">Hedeflenen Kullanım</th>
-                    <th className="px-4 py-4">Gaz Tepkisi</th>
-                    <th className="px-4 py-4">Kavrama Devri</th>
-                    <th className="px-4 py-4">Ortalama Sürüş</th>
-                    <th className="px-4 py-4">Top Speed Değişimi</th>
-                    <th className="px-4 py-4">Önerilen Kayış</th>
-                    <th className="px-4 py-4">Bakım Periyodu</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-white/[0.04] text-xs text-carbon-200">
-                  {COMPARISON_MATRIX.map((row, idx) => (
-                    <tr key={idx} className="hover:bg-white/[0.01] transition-colors">
-                      <td className="px-4 py-4 font-semibold text-white">{row.no}</td>
-                      <td className="px-4 py-4">{row.target}</td>
-                      <td className="px-4 py-4 font-medium text-electric-cyan">{row.throttle}</td>
-                      <td className="px-4 py-4 font-mono">{row.launch}</td>
-                      <td className="px-4 py-4 font-mono">{row.cruise}</td>
-                      <td className="px-4 py-4 font-mono text-white font-medium">{row.topSpeed}</td>
-                      <td className="px-4 py-4">{row.belt}</td>
-                      <td className="px-4 py-4 font-mono font-medium text-carbon-300">{row.maintenance}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </Reveal>
-        </section>
-
-        {/* SECTION 7: MÜHENDİSLİK ADVISORIES */}
-        <section className="mt-24 space-y-6">
-          <Reveal>
-            <div className="flex flex-col gap-2">
-              <span className="text-xs font-mono uppercase tracking-widest text-electric-cyan">Mühendislik Tavsiyeleri</span>
-              <h2 className="h-display text-2xl font-semibold text-white sm:text-3xl">
-                7. Sonuç ve Temel İlkeler
-              </h2>
-              <p className="mt-3 text-sm leading-relaxed text-carbon-200 max-w-3xl">
+              <p className="text-base sm:text-lg text-carbon-200 leading-relaxed max-w-3xl">
                 Yamaha XMAX şanzıman modifikasyonlarında uzun ömürlü ve sağlıklı güç aktarımı elde etmek için mutlaka uyulması gereken mühendislik ilkeleri:
               </p>
             </div>
@@ -867,48 +1129,48 @@ export default function VariatorPerformancePage() {
 
           <div className="grid gap-6 md:grid-cols-3 mt-8">
             <Reveal delay={0.05}>
-              <div className="glass p-6 h-full flex flex-col justify-between">
+              <div className="glass p-6 sm:p-8 h-full flex flex-col justify-between rounded-3xl border border-white/[0.06] bg-gradient-to-b from-white/[0.01] to-transparent">
                 <div>
-                  <span className="grid size-9 place-items-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-electric-cyan">
-                    <Layers className="h-4 w-4" />
+                  <span className="grid size-12 place-items-center rounded-2xl border border-white/[0.08] bg-white/[0.03] text-electric-cyan shadow-lg">
+                    <Layers className="h-6 w-6" />
                   </span>
-                  <h3 className="mt-5 h-display text-lg font-semibold text-white">
-                    Aktarma Organlarında Dengenin Korunması
+                  <h3 className="mt-6 text-xl font-bold text-white">
+                    Şanzıman Dengesi Şarttır
                   </h3>
-                  <p className="mt-3 text-xs leading-relaxed text-carbon-200">
-                    Sadece ön varyatörün hafifletilmesi tek başına verimli bir çözüm sunmaz. Ön varyatördeki baga hafifletme işlemi, mutlaka arka gruptaki kontrast yayının sertliği ile dengelenmelidir. Denge kurulmadığı takdirde vites değişim eğrisinde tutarsızlıklar, kayış kaçırmaları ve aşırı yakıt tüketimi meydana gelecektir.
+                  <p className="mt-3 text-sm sm:text-base leading-relaxed text-carbon-200 font-medium">
+                    Sadece ön varyatör bagalarını hafifletmek tek başına çözüm değildir. Ön varyatördeki hafifletme işlemi, mutlaka arka gruptaki kontrast yayının sertliği ile dengelenmelidir. Aksi takdirde kayış kaçırma yapar, aşırı yakıt tüketirsiniz ve motor bağırır ama gitmez.
                   </p>
                 </div>
               </div>
             </Reveal>
 
             <Reveal delay={0.1}>
-              <div className="glass p-6 h-full flex flex-col justify-between">
+              <div className="glass p-6 sm:p-8 h-full flex flex-col justify-between rounded-3xl border border-white/[0.06] bg-gradient-to-b from-white/[0.01] to-transparent">
                 <div>
-                  <span className="grid size-9 place-items-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-electric-cyan">
-                    <ShieldCheck className="h-4 w-4" />
+                  <span className="grid size-12 place-items-center rounded-2xl border border-white/[0.08] bg-white/[0.03] text-electric-cyan shadow-lg">
+                    <ShieldCheck className="h-6 w-6" />
                   </span>
-                  <h3 className="mt-5 h-display text-lg font-semibold text-white">
-                    Malzeme Mühendisliği ve Aşınma Direnci
+                  <h3 className="mt-6 text-xl font-bold text-white">
+                    Kaliteli Malzeme Tercih Edin
                   </h3>
-                  <p className="mt-3 text-xs leading-relaxed text-carbon-200">
-                    Şanzıman içi sıcaklıkların otoyol sürüşlerinde ekstrem limitlere ulaştığı bilinmektedir. Bu nedenle, kalitesiz alaşımlı taklit varyatörler yerine elmas taşlamalı burçlara sahip, DLC kaplamalı veya patentli havalandırma kanatlı İtalyan/Tayvan menşeili performans parçalarının tercih edilmesi sürüş güvenliği açısından son derece önemlidir.
+                  <p className="mt-3 text-sm sm:text-base leading-relaxed text-carbon-200 font-medium">
+                    Şanzıman içi sıcaklıklar otoyol sürüşlerinde ekstrem limitlere ulaşır. Kalitesiz alaşımlı taklit varyatörler veya kalitesiz bagalar aşırı ısıda erir. Bu nedenle, elmas taşlamalı burçlara sahip patentli İtalyan (Malossi, Polini) veya sertifikalı Asya (TDR) parçalarını tercih etmeniz sürüş güvenliği için hayatidir.
                   </p>
                 </div>
               </div>
             </Reveal>
 
             <Reveal delay={0.15}>
-              <div className="glass p-6 h-full flex flex-col justify-between">
+              <div className="glass p-6 sm:p-8 h-full flex flex-col justify-between rounded-3xl border border-white/[0.06] bg-gradient-to-b from-white/[0.01] to-transparent">
                 <div>
-                  <span className="grid size-9 place-items-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-electric-cyan">
-                    <Wrench className="h-4 w-4" />
+                  <span className="grid size-12 place-items-center rounded-2xl border border-white/[0.08] bg-white/[0.03] text-electric-cyan shadow-lg">
+                    <Wrench className="h-6 w-6" />
                   </span>
-                  <h3 className="mt-5 h-display text-lg font-semibold text-white">
-                    Hassas Atölye İşçiliği
+                  <h3 className="mt-6 text-xl font-bold text-white">
+                    Hassas İşçilik ve Temizlik
                   </h3>
-                  <p className="mt-3 text-xs leading-relaxed text-carbon-200">
-                    Torna ve kanal kazıma (bubut/kerok) gibi geri dönüşü olmayan mekanik müdahalelerin yalnızca bu konuda uzmanlaşmış Ar-Ge merkezlerinde, CNC teknolojisi kullanılarak mikron hassasiyetinde yapılması gerekir. Hatalı yapılan manuel işlemler varyatörün balansını bozarak krank milinin kesilmesine yol açabilecek ağır motor hasarlarına zemin hazırlar. Sürücülerin, motor kapaklarındaki supap şimleri ile şanzıman pullarını karıştırmaması gibi temel montaj hassasiyetlerine dikkat etmesi şanzıman ömrünü doğrudan belirler.
+                  <p className="mt-3 text-sm sm:text-base leading-relaxed text-carbon-200 font-medium">
+                    Kanal kazıma (kerok) gibi torna işlemlerinin yalnızca CNC teknolojisi kullanılarak hassas biçimde yapılması gerekir. Manuel hatalı yapılan işlemler varyatörün balansını bozarak krank milinin kırılmasına yol açabilecek ağır motor hasarlarına zemin hazırlar. Kurulum yaparken temizlik ve mikron ayarları şanzıman ömrünü doğrudan belirler.
                   </p>
                 </div>
               </div>
@@ -916,20 +1178,21 @@ export default function VariatorPerformancePage() {
           </div>
         </section>
 
-        {/* SECTION 8: KRİTİK MONTAJ NOTU */}
-        <section className="mt-16">
+        {/* SECTION 9: KRİTİK MONTAJ NOTU (Tork anahtarı) */}
+        <section className="mt-20">
           <Reveal>
-            <div className="rounded-2xl border border-yellow-500/20 bg-yellow-500/5 p-5 flex gap-3">
-              <ShieldAlert className="h-6 w-6 text-yellow-500 shrink-0 mt-0.5" />
+            <div className="rounded-3xl border border-yellow-500/20 bg-yellow-500/5 p-6 flex gap-4">
+              <ShieldAlert className="h-8 w-8 text-yellow-500 shrink-0 mt-0.5 animate-pulse" />
               <div>
-                <h4 className="text-sm font-semibold text-yellow-200">Kritik Torklama ve Montaj Notu!</h4>
-                <p className="mt-1 text-xs leading-relaxed text-carbon-200">
-                  Varyatör somunları sıkılırken **kesinlikle havalı tabanca kullanılmamalıdır**. Krank milinin dişleri geri dönüşü olmayan şekilde zarar görebilir veya aşırı sıkılmadan dolayı kasnak çatlayabilir. Birincil kasnak somunu tork anahtarı kullanılarak **95 Nm** değerinde sıkılmalı, somunda fabrika verisi yeni kilit pulu tercih edilmelidir.
+                <h4 className="text-lg font-black text-yellow-200">🛑 Kritik Torklama ve Montaj Uyarısı!</h4>
+                <p className="mt-2 text-sm sm:text-base leading-relaxed text-carbon-200 font-medium">
+                  Varyatör somunları sıkılırken **kesinlikle havalı tabanca (darbeli tabanca) kullanılmamalıdır**. Havalı darbeli tabanca krank milinin yatak dişlerini geri dönüşü olmayan şekilde sıyırıp bozar. Birincil ön varyatör somunu mutlaka tork anahtarı (torque wrench) kullanılarak fabrika standardı olan **95 Nm** değerinde hassasça sıkılmalıdır.
                 </p>
               </div>
             </div>
           </Reveal>
         </section>
+
       </article>
     </>
   );
