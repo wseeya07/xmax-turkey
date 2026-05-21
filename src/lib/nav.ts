@@ -51,7 +51,7 @@ export type NavSimple = {
 
 export const NAV: (NavMega | NavSimple)[] = [
   {
-    href: "/performans",
+    href: "/varyator",
     label: "Performans",
     description: "CVT, egzoz, ECU ve hava akışı modifikasyonları",
     featured: {
@@ -81,7 +81,7 @@ export const NAV: (NavMega | NavSimple)[] = [
     ]
   },
   {
-    href: "/bakim",
+    href: "/periyodik-bakim",
     label: "Bakım",
     description: "Kilometre bazlı servis takvimi ve sıvı kapasiteleri",
     featured: {

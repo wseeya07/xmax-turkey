@@ -12,7 +12,7 @@ import { Reveal } from "@/components/reveal";
 
 const PILLARS = [
   {
-    href: "/performans",
+    href: "/varyator",
     title: "Performans",
     summary: "CVT, egzoz, hava akışı, ECU.",
     detail:
@@ -23,7 +23,7 @@ const PILLARS = [
     span: "lg:col-span-7 lg:row-span-2"
   },
   {
-    href: "/bakim",
+    href: "/periyodik-bakim",
     title: "Bakım",
     summary: "Kilometre bazlı servis planı.",
     detail: "1.000 → 40.000 km, sıvılar ve filtreler.",
