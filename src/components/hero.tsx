@@ -26,11 +26,11 @@ export function Hero() {
     <section className="relative overflow-hidden pb-24 pt-16 sm:pt-24">
       <div className="absolute inset-0 grid-faint" aria-hidden />
       <div
-        className="pointer-events-none absolute -top-40 left-1/2 h-[560px] w-[940px] -translate-x-1/2 rounded-full bg-yamaha-500/25 blur-[140px]"
+        className="pointer-events-none absolute top-4 left-1/2 h-[380px] w-[720px] -translate-x-1/2 rounded-full bg-yamaha-500/20 blur-[130px]"
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute -bottom-32 right-[10%] h-[420px] w-[420px] rounded-full bg-electric-violet/25 blur-[120px]"
+        className="pointer-events-none absolute bottom-4 right-[10%] h-[300px] w-[300px] rounded-full bg-electric-violet/15 blur-[100px]"
         aria-hidden
       />
 
@@ -47,18 +47,16 @@ export function Hero() {
               XMAX teknik referansı
             </span>
 
-            <h1 className="mt-6 h-display max-w-[14ch] text-balance text-[clamp(2.6rem,7vw,5.6rem)] font-semibold leading-tighter-display tracking-tightest text-white">
-              <span className="text-fade">Sahibinden,</span>
+            <h1 className="mt-6 h-display max-w-[16ch] text-balance text-[clamp(2.6rem,7vw,5.6rem)] font-semibold leading-tighter-display tracking-tightest text-white">
+              <span className="text-fade">Performans &</span>
               <br />
-              <span className="text-fade">sahibe.</span>
+              <span className="text-fade">Mühendislik.</span>
               <br />
-              <span className="text-electric">XMAX bilgi katmanı.</span>
+              <span className="text-electric">XMAX Bilgi Portalı.</span>
             </h1>
 
             <p className="mt-7 max-w-xl text-pretty text-base leading-relaxed text-carbon-200 sm:text-lg">
-              Varyatör karşılaştırması, kilometre bazlı servis takvimi, hata
-              kodları ve mekanik rehberler — yetkili servis dilinden
-              arındırılmış, doğrudan sahibin işine yarayacak biçimde.
+              Varyatör modifikasyonları, mekanik silindir ve tork setups, fren sistemi yükseltmeleri ve kilometre bazlı bakım takvimi — doğrudan sürücülerin ihtiyacı olan teknik doğrulukla.
             </p>
 
             <div className="mt-9 flex flex-wrap gap-3">

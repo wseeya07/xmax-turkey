@@ -8,11 +8,11 @@ export function FinalCTA() {
       <Reveal>
         <div className="glass-frost gradient-edge relative overflow-hidden p-10 sm:p-16">
           <div
-            className="pointer-events-none absolute -right-32 -top-32 h-[420px] w-[420px] rounded-full bg-yamaha-500/35 blur-3xl"
+            className="pointer-events-none absolute right-4 top-4 h-[240px] w-[240px] rounded-full bg-yamaha-500/20 blur-[100px]"
             aria-hidden
           />
           <div
-            className="pointer-events-none absolute -bottom-40 -left-20 h-[420px] w-[420px] rounded-full bg-electric-violet/25 blur-3xl"
+            className="pointer-events-none absolute bottom-4 left-4 h-[240px] w-[240px] rounded-full bg-electric-violet/15 blur-[100px]"
             aria-hidden
           />
 

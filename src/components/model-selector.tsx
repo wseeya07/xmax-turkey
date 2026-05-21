@@ -69,7 +69,7 @@ export function ModelSelector() {
           className="glass-frost gradient-edge relative flex h-full flex-col overflow-hidden p-8"
         >
           <div
-            className="pointer-events-none absolute -top-20 right-0 h-72 w-72 rounded-full bg-yamaha-500/25 blur-3xl"
+            className="pointer-events-none absolute top-4 right-4 h-56 w-56 rounded-full bg-yamaha-500/15 blur-3xl"
             aria-hidden
           />
           <div className="relative">
