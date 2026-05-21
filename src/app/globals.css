@@ -14,14 +14,36 @@
   }
 
   body {
-    @apply bg-ink-950 text-carbon-100 font-body antialiased;
-    background-image:
-      radial-gradient(70% 50% at 50% -10%, rgba(20, 102, 239, 0.18) 0%, rgba(5, 6, 7, 0) 60%),
-      radial-gradient(40% 30% at 90% 10%, rgba(34, 230, 255, 0.08) 0%, rgba(5, 6, 7, 0) 70%);
+    @apply bg-ink-950 font-sans text-carbon-100 antialiased;
   }
 
   ::selection {
-    @apply bg-yamaha-600/40 text-white;
+    @apply bg-yamaha-500/40 text-white;
+  }
+
+  /* Soft global mesh background */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -2;
+    background:
+      radial-gradient(ellipse 70% 50% at 12% -10%, rgba(46, 125, 255, 0.28) 0%, transparent 55%),
+      radial-gradient(ellipse 55% 45% at 92% 4%, rgba(38, 232, 255, 0.16) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 55% at 50% 110%, rgba(138, 107, 255, 0.18) 0%, transparent 60%),
+      #040507;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>");
+    opacity: 0.5;
+    mix-blend-mode: overlay;
   }
 }
 
@@ -32,43 +54,100 @@
 
   .h-display {
     @apply font-display tracking-tightest;
+    font-variation-settings: "wght" 540, "opsz" 96;
   }
 
-  .panel {
-    @apply relative overflow-hidden rounded-2xl border border-white/[0.06] bg-gradient-to-b from-white/[0.04] to-white/[0.015] shadow-edge;
+  .glass {
+    @apply relative rounded-3xl border border-white/[0.07] bg-white/[0.025] backdrop-blur-2xl;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.07),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.025),
+      0 24px 80px -32px rgba(0, 0, 0, 0.65);
   }
 
-  .panel-quiet {
-    @apply rounded-2xl border border-white/[0.06] bg-white/[0.02];
+  .glass-quiet {
+    @apply relative rounded-2xl border border-white/[0.06] bg-white/[0.015] backdrop-blur-xl;
+  }
+
+  .glass-frost {
+    @apply relative rounded-3xl border border-white/[0.08] backdrop-blur-2xl;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.012) 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.02),
+      0 40px 100px -40px rgba(8, 16, 34, 0.95);
   }
 
   .chip {
-    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-carbon-200;
+    @apply inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.035] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-carbon-200 backdrop-blur-xl;
   }
 
-  .grid-bg {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-    background-size: 56px 56px;
-    mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 75%);
+  .eyebrow {
+    @apply font-mono text-[10px] uppercase tracking-[0.24em] text-carbon-300;
   }
 
-  .gradient-border {
+  .gradient-edge {
     position: relative;
   }
-  .gradient-border::before {
+  .gradient-edge::before {
     content: "";
     position: absolute;
     inset: 0;
     padding: 1px;
     border-radius: inherit;
-    background: linear-gradient(140deg, rgba(46, 133, 255, 0.55), rgba(34, 230, 255, 0.15) 40%, rgba(255, 255, 255, 0.03) 70%);
+    background: linear-gradient(
+      135deg,
+      rgba(140, 193, 255, 0.55) 0%,
+      rgba(38, 232, 255, 0.25) 20%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(138, 107, 255, 0.25) 90%
+    );
     -webkit-mask:
       linear-gradient(#000 0 0) content-box,
       linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
             mask-composite: exclude;
     pointer-events: none;
+    opacity: 0.55;
+  }
+
+  .grid-faint {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 20%, #000 30%, transparent 75%);
+  }
+
+  .text-fade {
+    background: linear-gradient(180deg, #fff 0%, #fff 50%, rgba(255, 255, 255, 0.55) 100%);
+    -webkit-background-clip: text;
+            background-clip: text;
+    color: transparent;
+  }
+
+  .text-electric {
+    background: linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #8cc1ff 38%,
+      #26e8ff 62%,
+      #8a6bff 100%
+    );
+    -webkit-background-clip: text;
+            background-clip: text;
+    color: transparent;
+  }
+
+  .divider-glow {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(140, 193, 255, 0.35) 50%,
+      transparent 100%
+    );
   }
 }
 
@@ -78,5 +157,8 @@
   }
   .text-pretty {
     text-wrap: pretty;
+  }
+  .mask-fade-b {
+    mask-image: linear-gradient(180deg, #000 0%, #000 70%, transparent 100%);
   }
 }

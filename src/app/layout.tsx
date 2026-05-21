@@ -1,21 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import { Sora, Inter, JetBrains_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { SITE } from "@/lib/site";
 
-const display = Sora({
+const display = Bricolage_Grotesque({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["400", "500", "600", "700", "800"],
   display: "swap"
 });
 
-const body = Inter({
+const sans = Manrope({
   subsets: ["latin"],
-  variable: "--font-body",
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans",
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap"
 });
 
@@ -43,6 +42,8 @@ export const metadata: Metadata = {
     "XMAX varyatör",
     "XMAX modifikasyon",
     "XMAX bakım",
+    "XMAX lastik basıncı",
+    "XMAX hata kodları",
     "Malossi XMAX",
     "Spectro XMAX",
     "TDR XMAX",
@@ -51,9 +52,7 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: "/",
-    languages: {
-      "tr-TR": "/"
-    }
+    languages: { "tr-TR": "/" }
   },
   openGraph: {
     type: "website",
@@ -75,7 +74,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#050607",
+  themeColor: "#040507",
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1
@@ -95,21 +94,12 @@ const websiteJsonLd = {
   "@type": "WebSite",
   name: SITE.name,
   url: SITE.url,
-  inLanguage: "tr-TR",
-  potentialAction: {
-    "@type": "SearchAction",
-    target: `${SITE.url}/ara?q={search_term_string}`,
-    "query-input": "required name=search_term_string"
-  }
+  inLanguage: "tr-TR"
 };
 
-export default function RootLayout({
-  children
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="tr" className={`${display.variable} ${body.variable} ${mono.variable}`}>
+    <html lang="tr" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
       <body>
         <script
           type="application/ld+json"

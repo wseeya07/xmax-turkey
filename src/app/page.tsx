@@ -1,8 +1,9 @@
 import { Hero } from "@/components/hero";
-import { VerticalBento } from "@/components/vertical-bento";
-import { GenerationStrip } from "@/components/generation-strip";
-import { VariatorTeaser } from "@/components/variator-teaser";
+import { ContentPillars } from "@/components/content-pillars";
+import { ModelSelector } from "@/components/model-selector";
+import { VariatorTable } from "@/components/variator-table";
 import { MaintenanceTimeline } from "@/components/maintenance-timeline";
+import { QuickReference } from "@/components/quick-reference";
 import { HowToStrip } from "@/components/howto-strip";
 import { FinalCTA } from "@/components/final-cta";
 import { SITE } from "@/lib/site";
@@ -13,26 +14,26 @@ const faqJsonLd = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "XMAX 300 için en uygun varyatör baga ağırlığı nedir?",
+      name: "XMAX 300 için önerilen lastik basıncı nedir?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Şehir içi sürüş için 13g, karma kullanım için 12g, pist için 11g önerilir. Stok 14g'dir; ağırlığı düşürmek erken devir ve agresif kalkış sağlar."
+        text: "Ön 2.0 bar, arka 2.25 bar (tek kişi). Çift kişi / yüklü kullanımda arka 2.5 bar. Ölçüm soğuk lastikte yapılmalı."
       }
     },
     {
       "@type": "Question",
-      name: "XMAX antifriz değişimi ne sıklıkta yapılmalı?",
+      name: "XMAX 300 hata kodu okunur mu?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yaklaşık 20.000 km veya 2 yılda bir. Sistem havasının alınması kritik; aksi halde motor aşırı ısınabilir."
+        text: "Evet. ECU pano lambası yanıp söndüğünde sayı serisi okunur. ABS/TCS uyarıları ayrı lambalar ile bildirilir. Sözlük için /bilgi/hata-kodlari sayfasına bakın."
       }
     },
     {
       "@type": "Question",
-      name: "XMAX varyatör bakımı kaç kilometrede yapılır?",
+      name: "XMAX varyatör bakımı ne zaman yapılır?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "İlk slider ve baga kontrolü 10.000 km civarında, tam revizyon 20.000 km'de önerilir. Kayış (drive belt) genellikle 40.000 km'de değişir."
+        text: "Slider ve baga kontrolü 10.000 km, tam revizyon 20.000 km, drive belt değişimi 40.000 km civarında önerilir."
       }
     }
   ]
@@ -42,12 +43,7 @@ const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "Ana Sayfa",
-      item: SITE.url
-    }
+    { "@type": "ListItem", position: 1, name: "Ana Sayfa", item: SITE.url }
   ]
 };
 
@@ -63,10 +59,11 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <Hero />
-      <VerticalBento />
-      <GenerationStrip />
-      <VariatorTeaser />
+      <ContentPillars />
+      <ModelSelector />
+      <VariatorTable />
       <MaintenanceTimeline />
+      <QuickReference />
       <HowToStrip />
       <FinalCTA />
     </>

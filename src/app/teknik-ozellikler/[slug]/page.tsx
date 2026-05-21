@@ -98,7 +98,7 @@ export default function GenerationPage({ params }: { params: Params }) {
       </Reveal>
 
       <Reveal>
-        <div className="mt-10 panel gradient-border p-6">
+        <div className="mt-10 glass gradient-edge p-6">
           <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-yamaha-300">
             Motor & Şasi
           </div>
@@ -118,7 +118,7 @@ export default function GenerationPage({ params }: { params: Params }) {
       </Reveal>
 
       <Reveal>
-        <div className="mt-4 panel p-6">
+        <div className="mt-4 glass p-6">
           <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-yamaha-300">
             Servis Parçaları
           </div>
@@ -139,14 +139,14 @@ export default function GenerationPage({ params }: { params: Params }) {
       </Reveal>
 
       <Reveal>
-        <div className="mt-4 panel p-6">
+        <div className="mt-4 glass p-6">
           <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-yamaha-300">
             İlgili Rehberler
           </div>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             <Link
               href="/periyodik-bakim"
-              className="panel-quiet group flex items-center justify-between p-4 text-sm transition hover:bg-white/[0.05]"
+              className="glass-quiet group flex items-center justify-between p-4 text-sm transition hover:bg-white/[0.05]"
             >
               <span>Periyodik bakım takvimi</span>
               <span className="text-yamaha-300 transition group-hover:text-yamaha-200">
@@ -155,7 +155,7 @@ export default function GenerationPage({ params }: { params: Params }) {
             </Link>
             <Link
               href="/varyator"
-              className="panel-quiet group flex items-center justify-between p-4 text-sm transition hover:bg-white/[0.05]"
+              className="glass-quiet group flex items-center justify-between p-4 text-sm transition hover:bg-white/[0.05]"
             >
               <span>Bu modele uygun varyatörler</span>
               <span className="text-yamaha-300 transition group-hover:text-yamaha-200">

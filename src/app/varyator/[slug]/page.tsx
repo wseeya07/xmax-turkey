@@ -78,7 +78,7 @@ export default function VariatorBrandPage({ params }: { params: Params }) {
 
       <div className="mt-12 grid gap-4 lg:grid-cols-2">
         <Reveal>
-          <div className="panel p-6">
+          <div className="glass p-6">
             <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-yamaha-300">
               Artıları
             </div>
@@ -93,7 +93,7 @@ export default function VariatorBrandPage({ params }: { params: Params }) {
           </div>
         </Reveal>
         <Reveal delay={0.05}>
-          <div className="panel p-6">
+          <div className="glass p-6">
             <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-yamaha-300">
               Eksileri
             </div>
@@ -110,7 +110,7 @@ export default function VariatorBrandPage({ params }: { params: Params }) {
       </div>
 
       <Reveal>
-        <div className="mt-4 panel p-6">
+        <div className="mt-4 glass p-6">
           <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-yamaha-300">
             Baga Ağırlığı
           </div>
@@ -137,13 +137,13 @@ export default function VariatorBrandPage({ params }: { params: Params }) {
           </p>
 
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
-            <div className="panel-quiet p-4">
+            <div className="glass-quiet p-4">
               <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-carbon-300">
                 Yay (Stok)
               </div>
               <div className="mt-1 text-sm text-white">{brand.springRate.stock}</div>
             </div>
-            <div className="panel-quiet p-4">
+            <div className="glass-quiet p-4">
               <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-carbon-300">
                 Yay Opsiyonları
               </div>
@@ -157,7 +157,7 @@ export default function VariatorBrandPage({ params }: { params: Params }) {
 
       {fits.length > 0 && (
         <Reveal>
-          <div className="mt-4 panel p-6">
+          <div className="mt-4 glass p-6">
             <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-yamaha-300">
               Uyumlu Jenerasyonlar
             </div>
@@ -178,7 +178,7 @@ export default function VariatorBrandPage({ params }: { params: Params }) {
       )}
 
       <Reveal>
-        <div className="mt-4 panel gradient-border p-6">
+        <div className="mt-4 glass gradient-edge p-6">
           <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-yamaha-300">
             Kime tavsiye
           </div>

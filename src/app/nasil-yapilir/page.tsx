@@ -59,7 +59,7 @@ export default function HowToIndexPage() {
           <Reveal key={g.slug} delay={i * 0.06}>
             <Link
               href={`/nasil-yapilir/${g.slug}`}
-              className="panel gradient-border group flex h-full flex-col justify-between p-7 transition hover:-translate-y-0.5"
+              className="glass gradient-edge group flex h-full flex-col justify-between p-7 transition hover:-translate-y-0.5"
             >
               <div>
                 <div className="flex items-center gap-2">

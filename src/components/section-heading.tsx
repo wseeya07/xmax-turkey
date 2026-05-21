@@ -11,15 +11,12 @@ export function SectionHeading({ eyebrow, title, description, align = "left" }: 
   return (
     <Reveal>
       <div className={align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
-        <span className="chip">
-          <span className="size-1.5 rounded-full bg-yamaha-300" />
-          {eyebrow}
-        </span>
-        <h2 className="mt-4 h-display text-balance text-3xl font-semibold leading-[1.05] text-white sm:text-4xl md:text-5xl">
+        <div className="eyebrow">{eyebrow}</div>
+        <h2 className="mt-3 h-display text-balance text-[clamp(2rem,4.6vw,3.4rem)] font-semibold leading-tighter-display tracking-tightest text-white">
           {title}
         </h2>
         {description && (
-          <p className="mt-4 text-pretty text-base leading-relaxed text-carbon-200 sm:text-lg">
+          <p className="mt-5 text-pretty text-base leading-relaxed text-carbon-200">
             {description}
           </p>
         )}

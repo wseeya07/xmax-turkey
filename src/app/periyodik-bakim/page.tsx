@@ -55,7 +55,7 @@ export default function MaintenancePage() {
       <section className="container-x space-y-6 py-12">
         {MAINTENANCE_SCHEDULE.map((stop, i) => (
           <Reveal key={stop.km} delay={i * 0.04}>
-            <article className="panel gradient-border p-6 sm:p-8">
+            <article className="glass gradient-edge p-6 sm:p-8">
               <header className="flex flex-wrap items-baseline justify-between gap-4">
                 <div>
                   <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-yamaha-300">

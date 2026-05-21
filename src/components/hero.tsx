@@ -2,118 +2,141 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, Gauge, Wrench, BookOpen, Database } from "lucide-react";
+import { ArrowUpRight, Gauge, Wrench, Bike, AlertCircle } from "lucide-react";
 
-const PILLARS = [
-  { icon: Gauge, label: "Varyatör Modifikasyonu" },
-  { icon: Wrench, label: "Periyodik Bakım" },
-  { icon: BookOpen, label: "Nasıl Yapılır" },
-  { icon: Database, label: "Teknik Özellikler" }
+const QUICK = [
+  { icon: Gauge, label: "Varyatör", href: "/varyator" },
+  { icon: Wrench, label: "Bakım", href: "/periyodik-bakim" },
+  { icon: Bike, label: "Modeller", href: "/teknik-ozellikler" },
+  { icon: AlertCircle, label: "Hata kodları", href: "/bilgi/hata-kodlari" }
 ];
 
-const STATS = [
-  { value: "4", suffix: "", label: "Jenerasyon" },
-  { value: "20K+", suffix: "", label: "KM Bakım Planı" },
-  { value: "3", suffix: "", label: "Varyatör Markası" },
-  { value: "100%", suffix: "", label: "Türkçe İçerik" }
+const HERO_SPEC = [
+  { k: "Motor", v: "292 cc · Blue Core" },
+  { k: "Tepe güç", v: "27.6 hp @ 7250" },
+  { k: "Tork", v: "29 Nm @ 5750" },
+  { k: "Ağırlık", v: "183 kg" }
 ];
 
 export function Hero() {
   const reduced = useReducedMotion();
+  const fade = reduced ? { initial: false } : { initial: { opacity: 0, y: 18 } };
 
   return (
-    <section className="relative overflow-hidden pb-20 pt-14 sm:pt-20">
-      <div className="absolute inset-0 grid-bg" aria-hidden />
+    <section className="relative overflow-hidden pb-24 pt-16 sm:pt-24">
+      <div className="absolute inset-0 grid-faint" aria-hidden />
       <div
-        className="pointer-events-none absolute -top-32 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-yamaha-500/20 blur-3xl"
+        className="pointer-events-none absolute -top-40 left-1/2 h-[560px] w-[940px] -translate-x-1/2 rounded-full bg-yamaha-500/25 blur-[140px]"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute -bottom-32 right-[10%] h-[420px] w-[420px] rounded-full bg-electric-violet/25 blur-[120px]"
         aria-hidden
       />
 
       <div className="container-x relative">
-        <motion.div
-          initial={reduced ? false : { opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col items-start gap-6"
-        >
-          <span className="chip">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-yamaha-400 opacity-60" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-yamaha-300" />
+        <div className="grid items-end gap-12 lg:grid-cols-12">
+          <motion.div
+            {...fade}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-8"
+          >
+            <span className="chip">
+              <span className="size-1.5 rounded-full bg-electric-cyan shadow-[0_0_10px_2px_rgba(38,232,255,0.6)]" />
+              XMAX teknik referansı
             </span>
-            Türkiye&apos;nin XMAX Bilgi Platformu
-          </span>
 
-          <h1 className="h-display max-w-[18ch] text-balance text-4xl font-semibold leading-[0.98] text-white sm:text-6xl md:text-7xl">
-            XMAX için{" "}
-            <span className="relative inline-block">
-              <span className="bg-gradient-to-br from-white via-yamaha-200 to-yamaha-500 bg-clip-text text-transparent">
-                teknik
-              </span>
-            </span>{" "}
-            ve{" "}
-            <span className="bg-gradient-to-br from-yamaha-300 via-yamaha-500 to-neon-cyan bg-clip-text text-transparent">
-              mekanik
-            </span>{" "}
-            referans.
-          </h1>
+            <h1 className="mt-6 h-display max-w-[14ch] text-balance text-[clamp(2.6rem,7vw,5.6rem)] font-semibold leading-tighter-display tracking-tightest text-white">
+              <span className="text-fade">Sahibinden,</span>
+              <br />
+              <span className="text-fade">sahibe.</span>
+              <br />
+              <span className="text-electric">XMAX bilgi katmanı.</span>
+            </h1>
 
-          <p className="max-w-2xl text-pretty text-base leading-relaxed text-carbon-200 sm:text-lg">
-            Varyatör modifikasyonlarından kilometre bazlı bakım planına, antifriz
-            değişiminden jenerasyon karşılaştırmasına — Yamaha XMAX sahibinin
-            ihtiyacı olan her bilginin tek adresi.
-          </p>
+            <p className="mt-7 max-w-xl text-pretty text-base leading-relaxed text-carbon-200 sm:text-lg">
+              Varyatör karşılaştırması, kilometre bazlı servis takvimi, hata
+              kodları ve mekanik rehberler — yetkili servis dilinden
+              arındırılmış, doğrudan sahibin işine yarayacak biçimde.
+            </p>
 
-          <div className="flex flex-wrap gap-3">
-            <Link
-              href="/teknik-ozellikler"
-              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-yamaha-400 to-yamaha-600 px-5 py-3 text-sm font-semibold text-white shadow-glow transition hover:from-yamaha-300 hover:to-yamaha-500"
-            >
-              Modelimi bul
-              <ArrowUpRight className="h-4 w-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </Link>
-            <Link
-              href="/periyodik-bakim"
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
-            >
-              Bakım planlayıcıyı aç
-            </Link>
-          </div>
-
-          <ul className="mt-2 flex flex-wrap gap-2">
-            {PILLARS.map((p) => (
-              <li
-                key={p.label}
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs font-medium text-carbon-200"
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Link
+                href="/teknik-ozellikler"
+                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-b from-yamaha-400 to-yamaha-700 px-5 py-3 text-sm font-semibold text-white shadow-ambient-blue transition hover:from-yamaha-300 hover:to-yamaha-600"
               >
-                <p.icon className="h-3.5 w-3.5 text-yamaha-300" />
-                {p.label}
-              </li>
-            ))}
-          </ul>
-        </motion.div>
-
-        <motion.dl
-          initial={reduced ? false : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-14 grid grid-cols-2 gap-3 sm:mt-20 sm:grid-cols-4"
-        >
-          {STATS.map((s) => (
-            <div
-              key={s.label}
-              className="panel gradient-border px-5 py-5"
-            >
-              <dt className="font-mono text-[10px] uppercase tracking-[0.22em] text-carbon-300">
-                {s.label}
-              </dt>
-              <dd className="mt-2 h-display text-3xl font-semibold text-white sm:text-4xl">
-                {s.value}
-                <span className="text-yamaha-300">{s.suffix}</span>
-              </dd>
+                <span className="absolute inset-0 bg-[radial-gradient(circle_at_30%_-20%,rgba(255,255,255,0.4),transparent_60%)] opacity-70" />
+                <span className="relative">Modelimi bul</span>
+                <ArrowUpRight className="relative h-4 w-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </Link>
+              <Link
+                href="/periyodik-bakim"
+                className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.04] px-5 py-3 text-sm font-semibold text-white backdrop-blur-xl transition hover:border-white/15 hover:bg-white/[0.07]"
+              >
+                Bakım takvimini aç
+              </Link>
             </div>
-          ))}
-        </motion.dl>
+
+            <ul className="mt-8 flex flex-wrap gap-1.5">
+              {QUICK.map((q) => (
+                <li key={q.label}>
+                  <Link
+                    href={q.href}
+                    className="group inline-flex items-center gap-2 rounded-full border border-white/[0.06] bg-white/[0.025] px-3 py-1.5 text-xs font-medium text-carbon-200 backdrop-blur-xl transition hover:border-white/15 hover:text-white"
+                  >
+                    <q.icon className="h-3.5 w-3.5 text-yamaha-300 transition group-hover:text-electric-cyan" />
+                    {q.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Floating spec card */}
+          <motion.div
+            initial={reduced ? false : { opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.85, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-4"
+          >
+            <div className="glass-frost gradient-edge relative overflow-hidden p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="eyebrow">Spec snapshot</div>
+                  <div className="mt-1 h-display text-xl font-semibold text-white">
+                    XMAX 300 · 2023+
+                  </div>
+                </div>
+                <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-electric-cyan">
+                  Euro 5
+                </div>
+              </div>
+
+              <dl className="mt-6 grid gap-px overflow-hidden rounded-2xl bg-white/[0.06]">
+                {HERO_SPEC.map((s) => (
+                  <div
+                    key={s.k}
+                    className="flex items-baseline justify-between bg-ink-900/80 px-4 py-3"
+                  >
+                    <dt className="font-mono text-[10px] uppercase tracking-[0.22em] text-carbon-300">
+                      {s.k}
+                    </dt>
+                    <dd className="font-mono text-sm text-white">{s.v}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <Link
+                href="/teknik-ozellikler/xmax-300-2023"
+                className="mt-6 inline-flex w-full items-center justify-between rounded-2xl border border-white/[0.07] bg-white/[0.025] px-4 py-3 text-sm font-medium text-white transition hover:border-yamaha-400/40"
+              >
+                Tam teknik profil
+                <ArrowUpRight className="h-4 w-4 text-yamaha-300" />
+              </Link>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

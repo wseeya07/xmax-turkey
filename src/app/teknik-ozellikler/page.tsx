@@ -50,7 +50,7 @@ export default function SpecsIndexPage() {
 
       <section className="container-x py-12">
         <Reveal>
-          <div className="panel overflow-hidden">
+          <div className="glass overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full min-w-[720px] text-left text-sm">
                 <thead>
@@ -123,7 +123,7 @@ export default function SpecsIndexPage() {
             <Reveal key={g.slug} delay={i * 0.05}>
               <Link
                 href={`/teknik-ozellikler/${g.slug}`}
-                className="panel gradient-border group flex h-full flex-col justify-between p-6 transition hover:-translate-y-0.5"
+                className="glass gradient-edge group flex h-full flex-col justify-between p-6 transition hover:-translate-y-0.5"
               >
                 <div>
                   <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-carbon-300">

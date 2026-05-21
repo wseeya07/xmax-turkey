@@ -59,7 +59,7 @@ export default function VariatorIndexPage() {
             <Reveal key={b.slug} delay={i * 0.05}>
               <Link
                 href={`/varyator/${b.slug}`}
-                className="panel gradient-border group flex h-full flex-col justify-between p-7 transition hover:-translate-y-0.5"
+                className="glass gradient-edge group flex h-full flex-col justify-between p-7 transition hover:-translate-y-0.5"
               >
                 <div>
                   <div className="flex items-center justify-between">
@@ -95,7 +95,7 @@ export default function VariatorIndexPage() {
 
       <section className="container-x py-16">
         <Reveal>
-          <div className="panel p-8 sm:p-10">
+          <div className="glass p-8 sm:p-10">
             <span className="chip">
               <span className="size-1.5 rounded-full bg-yamaha-300" />
               Baga Ağırlığı Rehberi
@@ -108,7 +108,7 @@ export default function VariatorIndexPage() {
             </p>
             <div className="mt-8 grid gap-4 md:grid-cols-3">
               {ROLLER_GUIDE.rules.map((r) => (
-                <div key={r.title} className="panel-quiet p-5">
+                <div key={r.title} className="glass-quiet p-5">
                   <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-yamaha-300">
                     Kural
                   </div>

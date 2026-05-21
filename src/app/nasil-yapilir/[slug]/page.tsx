@@ -87,7 +87,7 @@ export default function GuidePage({ params }: { params: Params }) {
 
       <div className="mt-10 grid gap-4 lg:grid-cols-2">
         <Reveal>
-          <div className="panel p-6">
+          <div className="glass p-6">
             <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-yamaha-300">
               Aletler
             </div>
@@ -102,7 +102,7 @@ export default function GuidePage({ params }: { params: Params }) {
           </div>
         </Reveal>
         <Reveal delay={0.05}>
-          <div className="panel p-6">
+          <div className="glass p-6">
             <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-yamaha-300">
               Parçalar
             </div>
@@ -125,7 +125,7 @@ export default function GuidePage({ params }: { params: Params }) {
         <ol className="mt-6 space-y-4">
           {g.steps.map((s, i) => (
             <Reveal key={s.title} delay={i * 0.04}>
-              <li className="panel gradient-border p-6 sm:p-7">
+              <li className="glass gradient-edge p-6 sm:p-7">
                 <div className="flex items-start gap-5">
                   <span className="grid size-12 shrink-0 place-items-center rounded-2xl border border-yamaha-400/30 bg-gradient-to-b from-yamaha-500/20 to-yamaha-700/10 font-mono text-sm font-semibold text-yamaha-100">
                     0{i + 1}
