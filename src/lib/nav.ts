@@ -24,6 +24,14 @@ export const NAV: NavItem[] = [
   },
   { href: "/periyodik-bakim", label: "Bakım", description: "Servis takvimi" },
   { href: "/nasil-yapilir", label: "Rehberler", description: "Adım adım mekanik" },
-  { href: "/teknik-ozellikler", label: "Modeller", description: "Jenerasyon tablosu" },
+  {
+    href: "/teknik-ozellikler",
+    label: "Modeller",
+    description: "Jenerasyon tablosu",
+    items: [
+      { href: "/teknik-ozellikler", label: "Teknik Özellikler", description: "Detaylı jenerasyon tablosu" },
+      { href: "/satin-alma-rehberi", label: "Satın Alma Rehberi", description: "Jenerasyon karşılaştırmaları & tavsiyeler" }
+    ]
+  },
   { href: "/bilgi", label: "Bilgi", description: "Hızlı referans" }
 ];

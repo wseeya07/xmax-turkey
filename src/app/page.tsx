@@ -1,6 +1,7 @@
 import { Hero } from "@/components/hero";
 import { ContentPillars } from "@/components/content-pillars";
 import { ModelSelector } from "@/components/model-selector";
+import { BuyingGuidePromo } from "@/components/buying-guide-promo";
 import { VariatorTable } from "@/components/variator-table";
 import { MaintenanceTimeline } from "@/components/maintenance-timeline";
 import { QuickReference } from "@/components/quick-reference";
@@ -61,6 +62,7 @@ export default function HomePage() {
       <Hero />
       <ContentPillars />
       <ModelSelector />
+      <BuyingGuidePromo />
       <VariatorTable />
       <MaintenanceTimeline />
       <QuickReference />
