@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ChevronLeft, ArrowUpRight, Gauge, Cog, Scale, ShieldAlert } from "lucide-react";
+import { ChevronLeft, ArrowUpRight, Gauge, Cog, Scale, ShieldAlert, Wrench, Layers, ShieldCheck } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
 import { Reveal } from "@/components/reveal";
 
@@ -190,6 +190,67 @@ export default function VariatorPerformancePage() {
               </div>
             </Reveal>
           ))}
+        </section>
+
+        <section className="mt-16 space-y-6">
+          <Reveal>
+            <h2 className="h-display text-2xl font-semibold text-white sm:text-3xl">
+              Mühendislik &amp; Akıllı Ayar İlkeleri
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-carbon-200 max-w-3xl">
+              Yamaha XMAX serisinde gerçekleştirilecek CVT modifikasyonları, tamamen kullanıcının sürüş karakteri, kullanım coğrafyası ve bütçesiyle uyumlu olmalıdır. Yapılan mekanik analizler ve bölgesel atölye deneyimleri doğrultusunda şu temel mühendislik ilkeleri göz önünde bulundurulmalıdır:
+            </p>
+          </Reveal>
+
+          <div className="grid gap-6 md:grid-cols-3 mt-8">
+            <Reveal delay={0.05}>
+              <div className="glass p-6 h-full flex flex-col justify-between">
+                <div>
+                  <span className="grid size-9 place-items-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-electric-cyan">
+                    <Layers className="h-4 w-4" />
+                  </span>
+                  <h3 className="mt-5 h-display text-lg font-semibold text-white">
+                    Aktarma Organlarında Dengenin Korunması
+                  </h3>
+                  <p className="mt-3 text-xs leading-relaxed text-carbon-200">
+                    Sadece ön varyatörün hafifletilmesi tek başına verimli bir çözüm sunmaz. Ön varyatördeki baga hafifletme işlemi, mutlaka arka gruptaki kontrast yayının sertliği ile dengelenmelidir. Denge kurulmadığı takdirde vites değişim eğrisinde tutarsızlıklar, kayış kaçırmaları ve aşırı yakıt tüketimi meydana gelecektir.
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.1}>
+              <div className="glass p-6 h-full flex flex-col justify-between">
+                <div>
+                  <span className="grid size-9 place-items-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-electric-cyan">
+                    <ShieldCheck className="h-4 w-4" />
+                  </span>
+                  <h3 className="mt-5 h-display text-lg font-semibold text-white">
+                    Malzeme Mühendisliği ve Aşınma Direnci
+                  </h3>
+                  <p className="mt-3 text-xs leading-relaxed text-carbon-200">
+                    Şanzıman içi sıcaklıkların otoyol sürüşlerinde ekstrem limitlere ulaştığı bilinmektedir. Bu nedenle, kalitesiz alaşımlı taklit varyatörler yerine elmas taşlamalı burçlara sahip, DLC kaplamalı veya patentli havalandırma kanatlı İtalyan/Tayvan menşeili performans parçalarının tercih edilmesi sürüş güvenliği açısından son derece önemlidir.
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.15}>
+              <div className="glass p-6 h-full flex flex-col justify-between">
+                <div>
+                  <span className="grid size-9 place-items-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-electric-cyan">
+                    <Wrench className="h-4 w-4" />
+                  </span>
+                  <h3 className="mt-5 h-display text-lg font-semibold text-white">
+                    Hassas Atölye İşçiliği
+                  </h3>
+                  <p className="mt-3 text-xs leading-relaxed text-carbon-200">
+                    Torna ve kanal kazıma (bubut/kerok) gibi geri dönüşü olmayan mekanik müdahalelerin yalnızca bu konuda uzmanlaşmış Ar-Ge merkezlerinde, CNC teknolojisi kullanılarak mikron hassasiyetinde yapılması gerekir. Hatalı yapılan manuel işlemler varyatörün balansını bozarak krank milinin kesilmesine yol açabilecek ağır motor hasarlarına zemin hazırlar.
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+          </div>
         </section>
 
         <section className="mt-16">
