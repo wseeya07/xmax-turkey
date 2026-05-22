@@ -31,11 +31,11 @@ const PILLARS = [
   },
   {
     href: "/performans/fren",
-    title: "Fren Sistemleri ve Disk Yükseltme",
-    description: "RPD fren sistemleri, büyük ön/arka diskler, sinterli balatalar.",
-    detail: "Artan gücü dizginlemek için RPD kaliperler, çelik fren hortumları, genişletilmiş dalgalı diskler ve optimum durdurma gücü analizleri.",
+    title: "Fren Mühendisliği & Hidrolik Lab",
+    description: "Brembo radyal, RPD floating disk, RCS master silindir, EBC sinter, ABS jumper.",
+    detail: "Brake fade fiziği, kaliper karşılaştırma laboratuvarı, RCS 14/15/17 master silindir seçimi, çelik hortum karşılaştırması, balata µ analizi ve model bazlı komple fren reçeteleri.",
     icon: Bike,
-    tags: ["RPD", "Çelik Hortum", "Ön Disk", "Arka Disk"],
+    tags: ["Brembo M4", "GP4-RX", "RCS", "HEL", "EBC HH", "DOT 5.1"],
     ready: true
   }
 ];
@@ -48,7 +48,7 @@ const SETUPS = [
     items: [
       "Spectro veya TDR Racing Varyatör (13g Baga ile)",
       "Stok debriyaj + TDR %10 sert debriyaj yayı",
-      "RPD sinterli ön/arka fren balataları (Stok diskler)"
+      "Brembo XS sinter ön/arka balata + HEL çelik hortum (stok disk)"
     ],
     difficulty: "Kolay",
     cost: "Ekonomik"
@@ -60,7 +60,7 @@ const SETUPS = [
     items: [
       "Malossi Multivar 2000 veya Jcosta Transverse Varyatör",
       "BRT Dereceli Egzantrik Mili (Stage 1)",
-      "RPD 267mm Ön Büyük Dalgalı Disk + Çelik Fren Hortumları"
+      "RPD 300 mm Floating Ön Disk + RPD Blitz 4P + RCS 14"
     ],
     difficulty: "Orta",
     cost: "Orta Segment"
@@ -72,7 +72,7 @@ const SETUPS = [
     items: [
       "BRT Seramik Silindir Piston Kiti (Enjektör + Gaz Kelebeği Set)",
       "Jcosta EVO 5 Varyatör + Özel Karbon Kayış",
-      "RPD Komple Fren Kaliperi ve Disk Seti"
+      "Brembo GP4-RX + RCS 15 + Allegri direkt hat + EBC GPFAX (pist)"
     ],
     difficulty: "İleri (Mekanik Şart)",
     cost: "Premium"
