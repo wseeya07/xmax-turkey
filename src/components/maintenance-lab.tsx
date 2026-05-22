@@ -64,6 +64,20 @@ const OIL_LAB: OilLabData[] = [
     api: "SG ve üzeri"
   },
   {
+    brand: "Yamalube GP",
+    variant: "10W-40 (Racing)",
+    baseOil: "Tam Sentetik (Grup V Ester)",
+    density: "~0.858",
+    kv40: "91.5",
+    kv100: "14.8",
+    vi: "169",
+    flash: "244",
+    pour: "-36",
+    tbn: "8.4",
+    jaso: "MA2",
+    api: "SL"
+  },
+  {
     brand: "Motul 7100",
     variant: "10W-40 (Ester)",
     baseOil: "%100 Sentetik (Grup V Ester)",
@@ -139,6 +153,15 @@ const OIL_PROFILES: {
       "Yamaha'nın tescilli markası; motorun orijinal toleranslarına ve malzeme uyumuna göre mineral + sentetik baz yağların dengeli harmanıdır. Katalitik konvertör ve egzoz arıtmasıyla tam uyumlu, standart sürüşte yeterli aşınma koruması sunar.",
     bestFor: "Servis garantisi, günlük şehir içi sürüş, OEM uyumu önceliği.",
     note: "Yarı sentetik yapı nedeniyle yüksek devirli otoban sürüşlerinde viskozite kararlılığını tam sentetiklere göre daha hızlı kaybedebilir."
+  },
+  {
+    brand: "Yamalube GP Racing 10W-40",
+    accent: "yamaha",
+    headline: "Yüksek Performans & Ester Koruma",
+    body:
+      "Yamaha'nın GP takımları için geliştirdiği %100 sentetik Ester bazlı özel formülasyon. Yüksek devirli otoyol kullanımlarında ve aşırı termal stres altında viskozite kararlılığını kusursuz korur, sürtünmeyi en aza indirerek güç transferini optimize eder.",
+    bestFor: "Otoban sürüşleri, yüksek performanslı kullanım, maksimum koruma.",
+    note: "Yamalube serisinin en üst tepe noktasıdır. Rodaj bittikten (1600 km) sonra tam sentetiğe geçiş için ideal bir OEM seçenektir."
   },
   {
     brand: "Motul 7100 10W-40",
