@@ -13,10 +13,10 @@ const RESOURCE_LINKS = [
 ];
 
 const MODEL_LINKS = [
-  { href: "/teknik-ozellikler/xmax-250-2014", label: "XMAX 250 (2014–2017)" },
-  { href: "/teknik-ozellikler/xmax-300-2017", label: "XMAX 300 (2017–2022)" },
-  { href: "/teknik-ozellikler/xmax-300-2023", label: "XMAX 300 (2023+)" },
-  { href: "/teknik-ozellikler/xmax-tech-max", label: "XMAX Tech MAX" }
+  { href: "/teknik-ozellikler/xmax-250-2018", label: "XMAX 250 (Ara Kasa)" },
+  { href: "/teknik-ozellikler/xmax-250-2025", label: "XMAX 250 (Plus)" },
+  { href: "/teknik-ozellikler/xmax-300-2025", label: "XMAX 300 (Plus)" },
+  { href: "/teknik-ozellikler/xmax-400-2018", label: "XMAX 400 (Ara Kasa)" }
 ];
 
 export function SiteFooter() {

@@ -36,7 +36,7 @@ export const VARIATOR_BRANDS: VariatorBrand[] = [
       stock: "Stok yay",
       options: ["+%20 Malossi Yellow", "+%30 Malossi Red"]
     },
-    fitsGenerations: ["xmax-300-2017", "xmax-300-2023", "xmax-tech-max"],
+    fitsGenerations: ["xmax-300-2018", "xmax-300-2023", "xmax-300-2025"],
     pricingTier: "premium",
     bestFor: "Son hız ve yüksek devir aralığında performans arayan kullanıcı."
   },
@@ -63,7 +63,7 @@ export const VARIATOR_BRANDS: VariatorBrand[] = [
       stock: "Stok yay yeterli",
       options: ["+%15 Spectro Sport yay"]
     },
-    fitsGenerations: ["xmax-300-2017", "xmax-300-2023"],
+    fitsGenerations: ["xmax-300-2018", "xmax-300-2023", "xmax-300-2025"],
     pricingTier: "orta",
     bestFor: "Günlük binip hafta sonu agresif sürmek isteyenler için."
   },
@@ -90,7 +90,7 @@ export const VARIATOR_BRANDS: VariatorBrand[] = [
       stock: "Stok",
       options: ["TDR +%20"]
     },
-    fitsGenerations: ["xmax-250-2014", "xmax-300-2017"],
+    fitsGenerations: ["xmax-250-2014", "xmax-250-2018", "xmax-300-2018"],
     pricingTier: "ekonomik",
     bestFor: "İlk varyatör modunu deneyecek, bütçe odaklı kullanıcı."
   }

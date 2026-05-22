@@ -55,7 +55,7 @@ const SEVERITY_BADGES: Record<string, { label: string; bg: string; text: string 
 function BuyingGuideContent() {
   const searchParams = useSearchParams();
   const [activeProfile, setActiveProfile] = useState("sehir-ici");
-  const [activeGen, setActiveGen] = useState(1); // Default to 2018-2022
+  const [activeGen, setActiveGen] = useState(3); // Default to 2018-2022 (Ara Kasa)
   const [hoveredCol, setHoveredCol] = useState<string | null>(null);
   const [openIssues, setOpenIssues] = useState<Record<number, boolean>>({});
 
@@ -294,13 +294,13 @@ function BuyingGuideContent() {
                   Model Yılları & Teknolojik Evrim
                 </h2>
                 <p className="mt-3 text-sm leading-relaxed text-carbon-200">
-                  XMAX ailesinin 2014 yılından bu yana geçirdiği 4 büyük görsel ve mekanik evrimi adım adım inceleyin.
+                  XMAX ailesinin 2005 yılından bu yana geçirdiği 6 büyük görsel ve mekanik evrimi adım adım inceleyin.
                 </p>
               </div>
             </div>
 
             {/* Timeline Steps Selector */}
-            <div className="mt-10 grid grid-cols-2 gap-2 md:grid-cols-4">
+            <div className="mt-10 grid grid-cols-2 gap-2 md:grid-cols-3 xl:grid-cols-6">
               {GEN_TIMELINE.map((evt, idx) => (
                 <button
                   key={idx}

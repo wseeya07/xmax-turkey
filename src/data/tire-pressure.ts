@@ -11,7 +11,7 @@ export type TirePressureRow = {
 export const TIRE_PRESSURE: TirePressureRow[] = [
   {
     model: "XMAX 250",
-    generations: ["xmax-250-2014"],
+    generations: ["xmax-250-2014", "xmax-250-2018", "xmax-250-2023", "xmax-250-2025"],
     front: { solo: 2.0, pillion: 2.0 },
     rear: { solo: 2.25, pillion: 2.5 },
     unit: "bar",
@@ -19,28 +19,22 @@ export const TIRE_PRESSURE: TirePressureRow[] = [
     note: "Soğuk lastik değeri — sürüşten önce ölçün."
   },
   {
-    model: "XMAX 300 (2017–2022)",
-    generations: ["xmax-300-2017"],
+    model: "XMAX 300",
+    generations: ["xmax-300-2018", "xmax-300-2023", "xmax-300-2025"],
     front: { solo: 2.0, pillion: 2.0 },
     rear: { solo: 2.25, pillion: 2.5 },
     unit: "bar",
-    size: { front: "120/70-15", rear: "140/70-14" }
+    size: { front: "120/70-15", rear: "140/70-14" },
+    note: "Soğuk lastik değeri — sürüşten önce ölçün."
   },
   {
-    model: "XMAX 300 (Yeni)",
-    generations: ["xmax-300-2023"],
+    model: "XMAX 400",
+    generations: ["xmax-400-2013", "xmax-400-2018"],
     front: { solo: 2.0, pillion: 2.0 },
     rear: { solo: 2.25, pillion: 2.5 },
     unit: "bar",
-    size: { front: "120/70-15", rear: "140/70-14" }
-  },
-  {
-    model: "XMAX Tech MAX",
-    generations: ["xmax-tech-max"],
-    front: { solo: 2.0, pillion: 2.0 },
-    rear: { solo: 2.25, pillion: 2.5 },
-    unit: "bar",
-    size: { front: "120/70-15", rear: "140/70-14" }
+    size: { front: "120/70-15", rear: "150/70-13" },
+    note: "DOHC maksi şasi için arka lastik taban genişliği 150 mm'dir."
   }
 ];
 
