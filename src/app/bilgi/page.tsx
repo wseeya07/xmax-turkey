@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight, CircleDot, AlertCircle, Droplets, GaugeCircle, BookOpen, Bike } from "lucide-react";
+import { ArrowUpRight, CircleDot, AlertCircle, Droplets, GaugeCircle, BookOpen, Bike, Atom } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
 import { Reveal } from "@/components/reveal";
 
@@ -12,6 +12,13 @@ export const metadata: Metadata = {
 };
 
 const ITEMS = [
+  {
+    href: "/bilgi/rodaj",
+    icon: Atom,
+    title: "Rodaj kılavuzu",
+    description: "DiASil silindir · segman alıştırma · 1600 km bilimsel plan.",
+    ready: true
+  },
   {
     href: "/bilgi/lastik-basinci",
     icon: CircleDot,

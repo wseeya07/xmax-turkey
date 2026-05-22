@@ -10,12 +10,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const top: MetadataRoute.Sitemap = [
     { url: SITE.url, lastModified: now, changeFrequency: "weekly", priority: 1 },
     { url: `${SITE.url}/varyator`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${SITE.url}/motor-modifikasyon`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${SITE.url}/periyodik-bakim`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${SITE.url}/nasil-yapilir`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${SITE.url}/teknik-ozellikler`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${SITE.url}/bilgi`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
     { url: `${SITE.url}/bilgi/lastik-basinci`, lastModified: now, changeFrequency: "yearly", priority: 0.8 },
     { url: `${SITE.url}/bilgi/hata-kodlari`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE.url}/bilgi/rodaj`, lastModified: now, changeFrequency: "yearly", priority: 0.85 },
     { url: `${SITE.url}/aksesuar`, lastModified: now, changeFrequency: "monthly", priority: 0.7 }
   ];
 
