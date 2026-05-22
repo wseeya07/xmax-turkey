@@ -2,12 +2,25 @@ import type { Metadata } from "next";
 import { MAINTENANCE_SCHEDULE } from "@/data/maintenance";
 import { SectionHeading } from "@/components/section-heading";
 import { Reveal } from "@/components/reveal";
+import { MaintenanceLab } from "@/components/maintenance-lab";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Periyodik Bakım Planlayıcı",
+  title: "Periyodik Bakım, Motor Yağı & Sıvı Kapasiteler — XMAX 250/300",
   description:
-    "Yamaha XMAX için kilometre bazlı bakım kalemleri: 1.000, 5.000, 10.000, 20.000 ve 40.000 km bakım planı, yağ ve filtre değişim periyotları.",
+    "Yamaha XMAX 250/300 için kilometre bazlı periyodik bakım planı, Yamalube/Motul/Castrol/Liqui Moly motor yağı laboratuvar karşılaştırması, JASO MB/MA2 ve PCV mühendisliği, SAE 80W-90 GL-4 şanzıman ve silikatsız OAT antifriz prosedürleri, sıvı kapasiteleri tablosu ve beş kritik servis hatası.",
+  keywords: [
+    "Yamaha XMAX 250 bakım",
+    "Yamaha XMAX 300 bakım",
+    "XMAX motor yağı",
+    "Yamalube 4S 10W-40",
+    "Motul 7100",
+    "JASO MB MA2",
+    "SAE 80W-90 GL-4",
+    "silikatsız OAT antifriz",
+    "XMAX sıvı kapasiteleri",
+    "NGK LMAR8A-9"
+  ],
   alternates: { canonical: "/periyodik-bakim" }
 };
 
@@ -38,17 +51,18 @@ export default function MaintenancePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
+
       <section className="container-x pb-12 pt-16 sm:pt-24">
         <SectionHeading
           eyebrow="Periyodik Bakım"
           title={
             <>
-              Kilometre bazlı,
+              Kilometre bazlı plan,
               <br className="hidden sm:block" />
-              <span className="text-yamaha-300">tahmin değil, plan.</span>
+              <span className="text-yamaha-300">laboratuvar bazlı sıvılar.</span>
             </>
           }
-          description="XMAX'in servis aralıklarını sadeleştirdik. Her duraktaki bakım kalemleri, parça referansları ve önemli notlar tek sayfada."
+          description="XMAX 250/300 için kilometre bazlı servis çizelgesi, yağ teknolojileri, şanzıman ve antifriz prosedürleri, sıvı kapasiteleri ve servis ortamında en sık yapılan beş kritik hata — tek sayfada."
         />
       </section>
 
@@ -100,6 +114,10 @@ export default function MaintenancePage() {
             </article>
           </Reveal>
         ))}
+      </section>
+
+      <section className="container-x py-16">
+        <MaintenanceLab />
       </section>
     </>
   );
