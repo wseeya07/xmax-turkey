@@ -1,0 +1,31 @@
+// Syncthing ignore patterns for xmaxturkiyecom
+// Bu paketler her makinede `npm install` ile yerel olarak kurulur;
+// senkronize edilirse kısmi (yarım) dosya transferleri Next.js / Tailwind
+// build zincirini bozar (örn. @nodelib/fs.stat/providers/sync.js eksilmesi).
+
+// Node bağımlılıkları — her makinede ayrı kurulmalı
+node_modules
+**/node_modules
+
+// Next.js build çıktıları
+.next
+**/.next
+out
+
+// Test / cache klasörleri
+.turbo
+.cache
+coverage
+.nyc_output
+
+// Lokal env ve editör meta verileri
+.env.local
+.env.*.local
+.vscode/.cache
+.idea
+*.swp
+.DS_Store
+Thumbs.db
+
+// Geçici PDF / render çıktıları
+.pdf-pages
