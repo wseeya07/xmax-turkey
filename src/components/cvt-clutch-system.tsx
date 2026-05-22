@@ -20,18 +20,33 @@ const CATEGORY_LABEL = {
 
 export function CvtClutchSystem() {
   return (
-    <section className="container-x py-24" id="debriyaj">
+    <section className="relative py-24" id="yol-3-debriyaj">
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-yamaha-400/40 to-transparent"
+        aria-hidden
+      />
+      <div className="container-x">
+      <div className="flex items-center gap-3">
+        <span className="grid size-10 place-items-center rounded-xl border border-yamaha-400/30 bg-yamaha-500/10 text-yamaha-200">
+          <Lock className="h-4 w-4" />
+        </span>
+        <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-yamaha-200">
+          Yol 3 · Arka grup · Bağımsız uygulanabilir
+        </div>
+      </div>
+
       <Reveal>
-        <div className="max-w-3xl">
-          <div className="eyebrow">Arka grup · Debriyaj</div>
-          <h2 className="mt-3 h-display text-balance text-[clamp(2rem,4.4vw,3.2rem)] font-semibold leading-tighter-display tracking-tightest text-white">
-            Ön varyatör gücü üretir,{" "}
-            <span className="text-electric">arka debriyaj iletir.</span>
+        <div className="mt-5 max-w-3xl">
+          <h2 className="h-display text-balance text-[clamp(2rem,4.4vw,3.2rem)] font-semibold leading-tighter-display tracking-tightest text-white">
+            Arka debriyaj —{" "}
+            <span className="text-electric">ön varyatöre dokunmadan</span> kazanç.
           </h2>
           <p className="mt-5 text-pretty text-base leading-relaxed text-carbon-200">
-            CVT&apos;nin yarısı, ön varyatörün arkasında oturan debriyaj sistemidir.
-            Kaçırma, ısınma, titreme — XMAX&apos;in en sık karşılaşılan aktarım
-            problemleri buradan çıkar.
+            Bu yol ön varyatörden bağımsız çalışır. Ön grup OEM kalsa bile;
+            balata, çan ve kontrast yayı yükseltmesiyle{" "}
+            <strong className="text-white">kaçırma sıfırlanır</strong>, ısı
+            kontrol altına alınır, kavrama devri istenen RPM&apos;e çekilir.
+            Yol 1 veya Yol 2 ile ayrıca kombine edilebilir.
           </p>
         </div>
       </Reveal>
@@ -158,6 +173,7 @@ export function CvtClutchSystem() {
           </div>
         </div>
       </Reveal>
+      </div>
     </section>
   );
 }

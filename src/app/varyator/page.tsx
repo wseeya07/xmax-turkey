@@ -52,11 +52,11 @@ const TIER_TONE: Record<string, string> = {
 };
 
 const TOC = [
-  { href: "#iki-yol", label: "İki yol" },
+  { href: "#uc-yol", label: "Üç yol" },
   { href: "#yol-1-baga", label: "Yol 1 · Baga" },
   { href: "#yol-2-kit", label: "Yol 2 · Komple kit" },
+  { href: "#yol-3-debriyaj", label: "Yol 3 · Debriyaj" },
   { href: "#atolye-sirlari", label: "Atölye sırları" },
-  { href: "#debriyaj", label: "Debriyaj" },
   { href: "#setuplar", label: "Reçeteler" }
 ];
 
@@ -114,11 +114,11 @@ export default function VariatorHubPage() {
                 <span className="text-electric">en kritik organ.</span>
               </h1>
               <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-carbon-200 sm:text-lg">
-                XMAX&apos;te varyatör performansı iki yola ayrılır:{" "}
-                <strong className="text-white">sadece baga değişimi</strong> ya
-                da <strong className="text-white">komple varyatör kiti</strong>.
-                Bu sayfa ikisini de net biçimde anlatır, sonra ortak konulara
-                (atölye sırları, debriyaj, reçeteler) geçer.
+                XMAX&apos;te CVT performansı{" "}
+                <strong className="text-white">üç bağımsız yolda</strong>{" "}
+                gelişir: ön varyatörde sadece baga değişimi, ön varyatörde komple
+                kit, ya da ön gruba dokunmadan arka debriyaj yükseltmesi. Üçü
+                birbirinden bağımsız uygulanabilir, kombine edilebilir.
               </p>
 
               <nav className="mt-8 flex flex-wrap gap-2">
@@ -327,14 +327,19 @@ export default function VariatorHubPage() {
                   <p className="mt-2 text-base leading-relaxed text-white">
                     Baga değişimiyle motor karakteri değişir ama kasnak yanak
                     açısı (14°), rampa geometrisi ve baga sayısı OEM kalır.
-                    Marka mühendislik avantajını (Malossi 8-baga, Polini
-                    12-baga + DLC, J.Costa eksenel mermi, TDR Gold dikleştirilmiş açı)
-                    istiyorsan{" "}
+                    Marka mühendislik avantajı için{" "}
                     <a
                       href="#yol-2-kit"
                       className="text-electric-cyan underline-offset-4 hover:underline"
                     >
-                      Yol 2&apos;ye geç
+                      Yol 2 (komple kit)
+                    </a>
+                    , debriyaj kaçırma / ısı problemi için{" "}
+                    <a
+                      href="#yol-3-debriyaj"
+                      className="text-yamaha-200 underline-offset-4 hover:underline"
+                    >
+                      Yol 3 (arka grup)
                     </a>
                     .
                   </p>
@@ -500,19 +505,19 @@ export default function VariatorHubPage() {
                 </span>
                 <div>
                   <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-electric-violet">
-                    Yol 2 yan etkisi: kontrast yayı dengesi
+                    Yol 2&apos;nin tamamlayıcısı: arka grup dengesi
                   </div>
                   <p className="mt-2 text-base leading-relaxed text-white">
-                    Komple kit + yanlış kontrast yayı = kayış kaçırma, yakıt
-                    artışı, vites eğrisi tutarsızlığı. Yol 2&apos;de marka seçimi
-                    bittikten sonra mutlaka{" "}
+                    Komple ön kit + yanlış kontrast yayı = kayış kaçırma, yakıt
+                    artışı, vites eğrisi tutarsızlığı. Yol 2&apos;den sonra
+                    mutlaka{" "}
                     <a
-                      href="#debriyaj"
-                      className="text-electric-cyan underline-offset-4 hover:underline"
+                      href="#yol-3-debriyaj"
+                      className="text-yamaha-200 underline-offset-4 hover:underline"
                     >
-                      arka grup (debriyaj + kontrast yayı)
+                      Yol 3 (arka debriyaj + kontrast yayı)
                     </a>{" "}
-                    bölümünü oku.
+                    bölümünü oku — bağımsız da uygulanabilir.
                   </p>
                 </div>
               </div>
@@ -520,6 +525,9 @@ export default function VariatorHubPage() {
           </Reveal>
         </div>
       </section>
+
+      {/* YOL 3 — ARKA DEBRIYAJ (bağımsız) */}
+      <CvtClutchSystem />
 
       {/* Section divider */}
       <div className="container-x">
@@ -529,22 +537,19 @@ export default function VariatorHubPage() {
       {/* ORTAK BÖLÜMLER ETİKETİ */}
       <section className="container-x pt-16">
         <div className="text-center">
-          <div className="eyebrow">Her iki yol için</div>
+          <div className="eyebrow">Her üç yol için</div>
           <h2 className="mt-3 h-display text-balance text-[clamp(1.8rem,3.6vw,2.6rem)] font-semibold leading-tighter-display tracking-tightest text-white">
-            Atölye sırları, debriyaj sistemi, setup reçeteleri.
+            Atölye sırları, setup reçeteleri.
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-pretty text-sm leading-relaxed text-carbon-300">
-            Buradan sonrası iki yolu da kapsar — kombinasyonlar, ince ayarlar ve
-            arka grup dengesi.
+            Buradan sonrası üç yolu da kapsayan ileri seviye uygulamalar —
+            torna işçiliği, frezeleme, şim ve 7 kanıtlanmış kombinasyon.
           </p>
         </div>
       </section>
 
       {/* ATÖLYE SIRLARI */}
       <CvtWorkshopTechniques />
-
-      {/* DEBRIYAJ */}
-      <CvtClutchSystem />
 
       {/* SETUP REÇETELERİ */}
       <CvtSetupRecipes />
