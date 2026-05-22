@@ -1,9 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight, Gauge, AlertTriangle, Flame, Droplets } from "lucide-react";
+import {
+  ArrowUpRight,
+  Gauge,
+  AlertTriangle,
+  Flame,
+  Droplets,
+  CircleDot,
+  Layers
+} from "lucide-react";
 import { VARIATOR_BRANDS } from "@/data/variators";
 import { OEM_ROLLERS, SLIDING_ROLLER, MIXING_RULES } from "@/data/rollers";
 import { Reveal } from "@/components/reveal";
+import { CvtPathChooser } from "@/components/cvt-path-chooser";
 import { CvtWorkshopTechniques } from "@/components/cvt-workshop-techniques";
 import { CvtClutchSystem } from "@/components/cvt-clutch-system";
 import { CvtSetupRecipes } from "@/components/cvt-setup-recipes";
@@ -12,7 +21,7 @@ import { SITE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Varyatör (CVT) — Modifikasyon Rehberi",
   description:
-    "Yamaha XMAX 250, 300 ve 400 için varyatör ve debriyaj modifikasyon rehberi: Malossi, Polini, J.Costa ve TDR markaları, baga mühendisliği, Bubut Derajat ve Kerok Jalur atölye sırları, 7 setup reçetesi.",
+    "Yamaha XMAX için varyatör modifikasyonu iki yolda anlatılır: sadece baga (roller) değişimi (Yol 1) ve komple varyatör kiti (Yol 2 — Malossi, Polini, J.Costa, TDR Gold). 7 setup reçetesi, atölye sırları, debriyaj sistemi.",
   alternates: { canonical: "/varyator" }
 };
 
@@ -43,12 +52,36 @@ const TIER_TONE: Record<string, string> = {
 };
 
 const TOC = [
-  { href: "#markalar", label: "Markalar" },
-  { href: "#baga-muhendisligi", label: "Baga mühendisliği" },
+  { href: "#iki-yol", label: "İki yol" },
+  { href: "#yol-1-baga", label: "Yol 1 · Baga" },
+  { href: "#yol-2-kit", label: "Yol 2 · Komple kit" },
   { href: "#atolye-sirlari", label: "Atölye sırları" },
   { href: "#debriyaj", label: "Debriyaj" },
-  { href: "#setuplar", label: "Setup reçeteleri" },
-  { href: "#isi-yaglama", label: "Isı + yağlama" }
+  { href: "#setuplar", label: "Reçeteler" }
+];
+
+const ROLLER_CHARACTER = [
+  {
+    title: "Hafif baga (-1g / -2g stoktan)",
+    rpmBand: "6000 – 7000 RPM kalkış",
+    detail:
+      "Motor hızla beygir zirvesine tırmanır. Hızlanma agresif olur, dik rampada tırmanış kuvvetli. Yakıt tüketimi artar, uzun yolda devir yüksek kalır.",
+    tone: "electric-cyan"
+  },
+  {
+    title: "Ağır baga (+1g / +2g stoktan)",
+    rpmBand: "5000 – 5800 RPM seyir",
+    detail:
+      "Varyatör erken açılır, erken upshift. Kalkışta yığılma olabilir ama otoyolda motor devri düşer — konfor + ekonomi.",
+    tone: "yamaha-200"
+  },
+  {
+    title: "Sliding (kayar) baga",
+    rpmBand: "Geniş ratio bandı",
+    detail:
+      "Dr. Pulley sliding rollerlar yuvarlanmaz, kayar. Daha geç aşınır, flat spot yapmaz. Hem kalkışta hem son hızda kazanç sağlar.",
+    tone: "electric-violet"
+  }
 ];
 
 export default function VariatorHubPage() {
@@ -81,10 +114,11 @@ export default function VariatorHubPage() {
                 <span className="text-electric">en kritik organ.</span>
               </h1>
               <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-carbon-200 sm:text-lg">
-                XMAX&apos;in motor karakterini, tork eğrisini ve son hızını fabrika
-                ayarı değil — varyatör, baga, debriyaj ve kontrast yayı birlikte
-                belirler. Yamaha emisyon ve ekonomi için kalibre ediyor; gerçek
-                güç bandına ulaşmak ayarla geliyor.
+                XMAX&apos;te varyatör performansı iki yola ayrılır:{" "}
+                <strong className="text-white">sadece baga değişimi</strong> ya
+                da <strong className="text-white">komple varyatör kiti</strong>.
+                Bu sayfa ikisini de net biçimde anlatır, sonra ortak konulara
+                (atölye sırları, debriyaj, reçeteler) geçer.
               </p>
 
               <nav className="mt-8 flex flex-wrap gap-2">
@@ -106,7 +140,7 @@ export default function VariatorHubPage() {
                 <Anatomy
                   step="01"
                   title="Ön varyatör (drive pulley)"
-                  body="Motor mili üzerinde döner. Baga (roller) ağırlığı + kasnak yanak açısı kayışın çapını belirler — yani vites oranını."
+                  body="Motor mili üzerinde döner. Baga (roller) ağırlığı + kasnak yanak açısı kayışın çapını belirler — vites oranını."
                 />
                 <Anatomy
                   step="02"
@@ -124,145 +158,76 @@ export default function VariatorHubPage() {
         </div>
       </section>
 
-      {/* MARKALAR */}
-      <section className="container-x py-24" id="markalar">
-        <Reveal>
-          <div className="max-w-3xl">
-            <div className="eyebrow">Performans markaları</div>
-            <h2 className="mt-3 h-display text-balance text-[clamp(2rem,4.4vw,3.2rem)] font-semibold leading-tighter-display tracking-tightest text-white">
-              Dört marka,{" "}
-              <span className="text-electric">dört felsefe.</span>
-            </h2>
-            <p className="mt-5 text-pretty text-base leading-relaxed text-carbon-200">
-              İtalya, İspanya ve Güneydoğu Asya&apos;nın CVT mühendislik okulları —
-              aynı problemi farklı çözüyor. Baga sayısı, geometri, yağlama,
-              kasnak açısı tercihleri marka karakterini belirliyor.
-            </p>
-          </div>
-        </Reveal>
+      {/* İKİ YOL */}
+      <CvtPathChooser />
 
-        <Reveal delay={0.05}>
-          <div className="mt-12 glass overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[1000px] text-left text-sm">
-                <thead>
-                  <tr className="border-b border-white/[0.06] bg-white/[0.02]">
-                    {[
-                      "Marka",
-                      "Menşei",
-                      "Baga sayısı / ölçü",
-                      "Kit ağırlık",
-                      "Segment",
-                      "Karakter"
-                    ].map((h) => (
-                      <th
-                        key={h}
-                        className="px-5 py-4 font-mono text-[10px] uppercase tracking-[0.22em] text-carbon-300"
-                      >
-                        {h}
-                      </th>
-                    ))}
-                    <th className="px-5 py-4" />
-                  </tr>
-                </thead>
-                <tbody>
-                  {VARIATOR_BRANDS.map((b) => (
-                    <tr
-                      key={b.slug}
-                      className="group border-b border-white/[0.04] transition hover:bg-white/[0.025]"
-                    >
-                      <td className="px-5 py-5">
-                        <div className="flex items-center gap-3">
-                          <span
-                            className={`grid size-9 place-items-center rounded-lg border border-white/[0.08] bg-white/[0.03] font-display text-base font-semibold ${TIER_TONE[b.pricingTier]}`}
-                          >
-                            {b.name.charAt(0)}
-                          </span>
-                          <div>
-                            <div className="font-semibold text-white transition group-hover:text-electric-cyan">
-                              {b.name}
-                            </div>
-                            <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-carbon-300">
-                              {b.productCodes[0]?.code}
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-5 py-5 font-mono text-xs text-carbon-100">
-                        {b.origin}
-                      </td>
-                      <td className="px-5 py-5 font-mono text-xs text-white">
-                        {b.rollerCount} × {b.rollerSize}
-                      </td>
-                      <td className="px-5 py-5 font-mono text-xs text-carbon-200">
-                        {b.kitWeight}
-                      </td>
-                      <td className="px-5 py-5">
-                        <span
-                          className={`font-mono text-xs uppercase tracking-[0.22em] ${TIER_TONE[b.pricingTier]}`}
-                        >
-                          {TIER_LABEL[b.pricingTier]}
-                        </span>
-                      </td>
-                      <td className="max-w-[280px] px-5 py-5 text-xs leading-relaxed text-carbon-200">
-                        {b.bestFor}
-                      </td>
-                      <td className="px-5 py-5">
-                        <Link
-                          href={`/varyator/${b.slug}`}
-                          className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.18em] text-yamaha-200 hover:text-electric-cyan"
-                        >
-                          Aç
-                          <ArrowUpRight className="h-3 w-3" />
-                        </Link>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+      {/* YOL 1 — SADECE BAGA DEĞİŞİMİ */}
+      <section className="relative py-24" id="yol-1-baga">
+        <div className="container-x">
+          <div className="flex items-center gap-3">
+            <span className="grid size-10 place-items-center rounded-xl border border-electric-cyan/30 bg-electric-cyan/10 text-electric-cyan">
+              <CircleDot className="h-4 w-4" />
+            </span>
+            <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-electric-cyan">
+              Yol 1 · Entry · Sadece Baga
             </div>
           </div>
-        </Reveal>
-      </section>
 
-      {/* BAGA MÜHENDİSLİĞİ */}
-      <section className="container-x py-24" id="baga-muhendisligi">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
           <Reveal>
-            <div>
-              <div className="eyebrow">Roller weight</div>
-              <h2 className="mt-3 h-display text-balance text-[clamp(2rem,4.4vw,3.2rem)] font-semibold leading-tighter-display tracking-tightest text-white">
-                Baga{" "}
-                <span className="text-electric">mühendisliği.</span>
+            <div className="mt-5 max-w-3xl">
+              <h2 className="h-display text-balance text-[clamp(2rem,4.4vw,3.2rem)] font-semibold leading-tighter-display tracking-tightest text-white">
+                Stok varyatöre dokunma —{" "}
+                <span className="text-electric">sadece bagayı değiştir.</span>
               </h2>
               <p className="mt-5 text-pretty text-base leading-relaxed text-carbon-200">
-                Vites değişiminin ne zaman gerçekleştiğini varyatör bagalarının
-                kütlesi belirler. Merkezkaç kuvveti formülü:
-              </p>
-              <div className="mt-5 rounded-2xl border border-white/[0.06] bg-black/40 px-5 py-4 font-mono text-sm text-electric-cyan">
-                F<sub>c</sub> = m · ω² · r
-              </div>
-              <p className="mt-3 text-xs leading-relaxed text-carbon-300">
-                m: baga kütlesi · ω: varyatörün açısal hızı (motor devri) · r: baganın dönme eksenine mesafesi
-              </p>
-              <p className="mt-5 text-sm leading-relaxed text-carbon-200">
-                Kütle azaldıkça aynı kuvvete ulaşmak için motor daha yüksek
-                devire çıkmak zorundadır → hafif baga = agresif kalkış. Kütle
-                arttıkça erken upshift olur → ağır baga = ekonomi/konfor.
+                Stok varyatör kasnağını ve geometrisini koruyup yalnızca roller
+                weight değişimiyle motor karakterini ayarlama. En ucuz, en hızlı
+                yol — 30 dakikada evde yapılır.
               </p>
             </div>
           </Reveal>
 
-          <Reveal delay={0.06}>
-            <div className="glass gradient-edge overflow-hidden">
+          {/* Karakter tablosu */}
+          <div className="mt-12 grid gap-4 md:grid-cols-3">
+            {ROLLER_CHARACTER.map((c, i) => (
+              <Reveal key={c.title} delay={i * 0.05}>
+                <div className="glass gradient-edge h-full p-6">
+                  <div className={`font-mono text-[10px] uppercase tracking-[0.22em] text-${c.tone}`}>
+                    {c.rpmBand}
+                  </div>
+                  <h3 className="mt-2 h-display text-lg font-semibold leading-tight text-white">
+                    {c.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-carbon-200">
+                    {c.detail}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* OEM baga tablosu */}
+          <Reveal>
+            <div className="mt-12 glass overflow-hidden">
+              <div className="p-6 sm:p-8">
+                <div className="eyebrow">OEM baga referansı</div>
+                <h3 className="mt-2 h-display text-2xl font-semibold leading-tight text-white sm:text-3xl">
+                  Modelin baga ölçüsünü ve ağırlığını bul.
+                </h3>
+                <p className="mt-3 max-w-3xl text-sm leading-relaxed text-carbon-200">
+                  Stoktan -1g / -2g hafif gidersen agresifleşir, +1g / +2g ağır
+                  gidersen ekonomi/konfor kazanır. Modelin ölçüsüne uymayan
+                  baga takılmaz — 20×12, 23×18 ve 25×15 mm üç farklı yuva var.
+                </p>
+              </div>
               <div className="overflow-x-auto">
-                <table className="w-full min-w-[640px] text-left text-sm">
+                <table className="w-full min-w-[760px] text-left text-sm">
                   <thead>
-                    <tr className="border-b border-white/[0.06] bg-white/[0.02]">
+                    <tr className="border-y border-white/[0.06] bg-white/[0.02]">
                       {["Model grubu", "Baga ölçü", "OEM ağırlık", "Parça kodu", "Kayış"].map((h) => (
                         <th
                           key={h}
-                          className="px-5 py-4 font-mono text-[10px] uppercase tracking-[0.22em] text-carbon-300"
+                          className="px-6 py-4 font-mono text-[10px] uppercase tracking-[0.22em] text-carbon-300"
                         >
                           {h}
                         </th>
@@ -271,23 +236,20 @@ export default function VariatorHubPage() {
                   </thead>
                   <tbody>
                     {OEM_ROLLERS.map((r) => (
-                      <tr
-                        key={r.modelGroup}
-                        className="border-b border-white/[0.04] last:border-0"
-                      >
-                        <td className="px-5 py-4 text-sm font-semibold text-white">
+                      <tr key={r.modelGroup} className="border-b border-white/[0.04] last:border-0">
+                        <td className="px-6 py-4 text-sm font-semibold text-white">
                           {r.modelGroup}
                         </td>
-                        <td className="px-5 py-4 font-mono text-xs text-electric-cyan">
+                        <td className="px-6 py-4 font-mono text-xs text-electric-cyan">
                           {r.size}
                         </td>
-                        <td className="px-5 py-4 font-mono text-xs text-white">
+                        <td className="px-6 py-4 font-mono text-xs text-white">
                           {r.oemWeight}
                         </td>
-                        <td className="px-5 py-4 font-mono text-[11px] text-carbon-200">
+                        <td className="px-6 py-4 font-mono text-[11px] text-carbon-200">
                           {r.partCode}
                         </td>
-                        <td className="px-5 py-4 font-mono text-[11px] text-carbon-300">
+                        <td className="px-6 py-4 font-mono text-[11px] text-carbon-300">
                           {r.belt}
                         </td>
                       </tr>
@@ -297,60 +259,285 @@ export default function VariatorHubPage() {
               </div>
             </div>
           </Reveal>
-        </div>
 
-        {/* Sliding teknolojisi */}
-        <Reveal>
-          <div className="mt-12 grid gap-4 md:grid-cols-3">
-            {SLIDING_ROLLER.map((s) => (
-              <div key={s.title} className="glass-quiet p-6">
-                <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-electric-cyan">
-                  Dr. Pulley sliding
-                </div>
-                <h3 className="mt-2 h-display text-lg font-semibold leading-tight text-white">
-                  {s.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-carbon-200">
-                  {s.body}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-
-        {/* Mixing rules */}
-        <Reveal>
-          <div className="mt-10 glass p-7 sm:p-9">
-            <div className="flex items-center gap-2">
-              <AlertTriangle className="h-3.5 w-3.5 text-yamaha-200" />
-              <span className="eyebrow">Mixing weights</span>
-            </div>
-            <h3 className="mt-2 h-display text-2xl font-semibold leading-tight text-white sm:text-3xl">
-              Karışım kuralları
-            </h3>
-            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-carbon-200">
-              {MIXING_RULES.intro}
-            </p>
-            <div className="mt-8 grid gap-4 md:grid-cols-3">
-              {MIXING_RULES.rules.map((r) => (
-                <div
-                  key={r.title}
-                  className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5"
-                >
-                  <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-yamaha-200">
-                    Kural
+          {/* Sliding teknolojisi */}
+          <Reveal>
+            <div className="mt-10 grid gap-4 md:grid-cols-3">
+              {SLIDING_ROLLER.map((s) => (
+                <div key={s.title} className="glass-quiet p-6">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-electric-violet">
+                    Sliding teknoloji · Dr. Pulley
                   </div>
-                  <h4 className="mt-2 h-display text-base font-semibold leading-tight text-white">
-                    {r.title}
-                  </h4>
-                  <p className="mt-2 text-xs leading-relaxed text-carbon-200">
-                    {r.body}
+                  <h3 className="mt-2 h-display text-lg font-semibold leading-tight text-white">
+                    {s.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-carbon-200">
+                    {s.body}
                   </p>
                 </div>
               ))}
             </div>
+          </Reveal>
+
+          {/* Mixing rules */}
+          <Reveal>
+            <div className="mt-10 glass p-7 sm:p-9">
+              <div className="flex items-center gap-2">
+                <AlertTriangle className="h-3.5 w-3.5 text-yamaha-200" />
+                <span className="eyebrow">Karıştırma kuralları (Mixing weights)</span>
+              </div>
+              <h3 className="mt-2 h-display text-2xl font-semibold leading-tight text-white sm:text-3xl">
+                Farklı gramda bagalar aynı varyatörde — atölye sırrı.
+              </h3>
+              <p className="mt-3 max-w-3xl text-sm leading-relaxed text-carbon-200">
+                {MIXING_RULES.intro}
+              </p>
+              <div className="mt-8 grid gap-4 md:grid-cols-3">
+                {MIXING_RULES.rules.map((r) => (
+                  <div
+                    key={r.title}
+                    className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5"
+                  >
+                    <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-yamaha-200">
+                      Kural
+                    </div>
+                    <h4 className="mt-2 h-display text-base font-semibold leading-tight text-white">
+                      {r.title}
+                    </h4>
+                    <p className="mt-2 text-xs leading-relaxed text-carbon-200">
+                      {r.body}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Yol 1 limiti */}
+          <Reveal>
+            <div className="mt-10 rounded-3xl border border-white/[0.08] bg-gradient-to-r from-yamaha-500/[0.06] to-transparent p-7 sm:p-9">
+              <div className="flex items-start gap-4">
+                <span className="grid size-10 shrink-0 place-items-center rounded-xl border border-yamaha-400/30 bg-yamaha-500/10 text-yamaha-200">
+                  <AlertTriangle className="h-4 w-4" />
+                </span>
+                <div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-yamaha-200">
+                    Yol 1&apos;in sınırı
+                  </div>
+                  <p className="mt-2 text-base leading-relaxed text-white">
+                    Baga değişimiyle motor karakteri değişir ama kasnak yanak
+                    açısı (14°), rampa geometrisi ve baga sayısı OEM kalır.
+                    Marka mühendislik avantajını (Malossi 8-baga, Polini
+                    12-baga + DLC, J.Costa eksenel mermi, TDR Gold dikleştirilmiş açı)
+                    istiyorsan{" "}
+                    <a
+                      href="#yol-2-kit"
+                      className="text-electric-cyan underline-offset-4 hover:underline"
+                    >
+                      Yol 2&apos;ye geç
+                    </a>
+                    .
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* YOL 2 — KOMPLE KİT */}
+      <section className="relative py-24" id="yol-2-kit">
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-electric-violet/40 to-transparent"
+          aria-hidden
+        />
+        <div className="container-x">
+          <div className="flex items-center gap-3">
+            <span className="grid size-10 place-items-center rounded-xl border border-electric-violet/30 bg-electric-violet/10 text-electric-violet">
+              <Layers className="h-4 w-4" />
+            </span>
+            <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-electric-violet">
+              Yol 2 · Performans · Komple Kit
+            </div>
           </div>
-        </Reveal>
+
+          <Reveal>
+            <div className="mt-5 max-w-3xl">
+              <h2 className="h-display text-balance text-[clamp(2rem,4.4vw,3.2rem)] font-semibold leading-tighter-display tracking-tightest text-white">
+                Marka mühendisliği,{" "}
+                <span className="text-electric">yeni geometri.</span>
+              </h2>
+              <p className="mt-5 text-pretty text-base leading-relaxed text-carbon-200">
+                Komple varyatör kiti tak — orijinalin yerine farklı bir kasnak +
+                farklı baga sistemi gelir. 6 bagalı OEM yerine 8 baga (Malossi),
+                12 baga (Polini), eksenel mermi (J.Costa) veya dikleştirilmiş
+                kasnak açısı (TDR Gold). Her marka farklı bir mühendislik
+                felsefesi taşır.
+              </p>
+            </div>
+          </Reveal>
+
+          {/* 4 marka tablosu */}
+          <Reveal delay={0.05}>
+            <div className="mt-12 glass overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[1000px] text-left text-sm">
+                  <thead>
+                    <tr className="border-b border-white/[0.06] bg-white/[0.02]">
+                      {[
+                        "Marka",
+                        "Menşei",
+                        "Baga sayısı / ölçü",
+                        "Kit ağırlık",
+                        "Segment",
+                        "Karakter"
+                      ].map((h) => (
+                        <th
+                          key={h}
+                          className="px-5 py-4 font-mono text-[10px] uppercase tracking-[0.22em] text-carbon-300"
+                        >
+                          {h}
+                        </th>
+                      ))}
+                      <th className="px-5 py-4" />
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {VARIATOR_BRANDS.map((b) => (
+                      <tr
+                        key={b.slug}
+                        className="group border-b border-white/[0.04] transition hover:bg-white/[0.025]"
+                      >
+                        <td className="px-5 py-5">
+                          <div className="flex items-center gap-3">
+                            <span
+                              className={`grid size-9 place-items-center rounded-lg border border-white/[0.08] bg-white/[0.03] font-display text-base font-semibold ${TIER_TONE[b.pricingTier]}`}
+                            >
+                              {b.name.charAt(0)}
+                            </span>
+                            <div>
+                              <div className="font-semibold text-white transition group-hover:text-electric-cyan">
+                                {b.name}
+                              </div>
+                              <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-carbon-300">
+                                {b.productCodes[0]?.code}
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-5 py-5 font-mono text-xs text-carbon-100">
+                          {b.origin}
+                        </td>
+                        <td className="px-5 py-5 font-mono text-xs text-white">
+                          {b.rollerCount} × {b.rollerSize}
+                        </td>
+                        <td className="px-5 py-5 font-mono text-xs text-carbon-200">
+                          {b.kitWeight}
+                        </td>
+                        <td className="px-5 py-5">
+                          <span
+                            className={`font-mono text-xs uppercase tracking-[0.22em] ${TIER_TONE[b.pricingTier]}`}
+                          >
+                            {TIER_LABEL[b.pricingTier]}
+                          </span>
+                        </td>
+                        <td className="max-w-[280px] px-5 py-5 text-xs leading-relaxed text-carbon-200">
+                          {b.bestFor}
+                        </td>
+                        <td className="px-5 py-5">
+                          <Link
+                            href={`/varyator/${b.slug}`}
+                            className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.18em] text-yamaha-200 hover:text-electric-cyan"
+                          >
+                            Aç
+                            <ArrowUpRight className="h-3 w-3" />
+                          </Link>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Marka karakter kısa açıklama */}
+          <Reveal>
+            <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {VARIATOR_BRANDS.map((b, i) => (
+                <Reveal key={`mini-${b.slug}`} delay={i * 0.04}>
+                  <Link
+                    href={`/varyator/${b.slug}`}
+                    className="glass-quiet group flex h-full flex-col justify-between p-6 transition hover:border-white/15"
+                  >
+                    <div>
+                      <div className={`font-mono text-[10px] uppercase tracking-[0.22em] ${TIER_TONE[b.pricingTier]}`}>
+                        {b.origin}
+                      </div>
+                      <h3 className="mt-2 h-display text-xl font-semibold leading-tight text-white">
+                        {b.name}
+                      </h3>
+                      <p className="mt-3 text-sm leading-relaxed text-carbon-200">
+                        {b.positioning}
+                      </p>
+                    </div>
+                    <div className="mt-5 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.18em] text-yamaha-200 transition group-hover:text-electric-cyan">
+                      Marka detayı
+                      <ArrowUpRight className="h-3 w-3" />
+                    </div>
+                  </Link>
+                </Reveal>
+              ))}
+            </div>
+          </Reveal>
+
+          {/* Yol 2 uyarı */}
+          <Reveal>
+            <div className="mt-10 rounded-3xl border border-white/[0.08] bg-gradient-to-r from-electric-violet/[0.08] to-transparent p-7 sm:p-9">
+              <div className="flex items-start gap-4">
+                <span className="grid size-10 shrink-0 place-items-center rounded-xl border border-electric-violet/30 bg-electric-violet/10 text-electric-violet">
+                  <AlertTriangle className="h-4 w-4" />
+                </span>
+                <div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-electric-violet">
+                    Yol 2 yan etkisi: kontrast yayı dengesi
+                  </div>
+                  <p className="mt-2 text-base leading-relaxed text-white">
+                    Komple kit + yanlış kontrast yayı = kayış kaçırma, yakıt
+                    artışı, vites eğrisi tutarsızlığı. Yol 2&apos;de marka seçimi
+                    bittikten sonra mutlaka{" "}
+                    <a
+                      href="#debriyaj"
+                      className="text-electric-cyan underline-offset-4 hover:underline"
+                    >
+                      arka grup (debriyaj + kontrast yayı)
+                    </a>{" "}
+                    bölümünü oku.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Section divider */}
+      <div className="container-x">
+        <div className="divider-glow" />
+      </div>
+
+      {/* ORTAK BÖLÜMLER ETİKETİ */}
+      <section className="container-x pt-16">
+        <div className="text-center">
+          <div className="eyebrow">Her iki yol için</div>
+          <h2 className="mt-3 h-display text-balance text-[clamp(1.8rem,3.6vw,2.6rem)] font-semibold leading-tighter-display tracking-tightest text-white">
+            Atölye sırları, debriyaj sistemi, setup reçeteleri.
+          </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-pretty text-sm leading-relaxed text-carbon-300">
+            Buradan sonrası iki yolu da kapsar — kombinasyonlar, ince ayarlar ve
+            arka grup dengesi.
+          </p>
+        </div>
       </section>
 
       {/* ATÖLYE SIRLARI */}
@@ -362,7 +549,7 @@ export default function VariatorHubPage() {
       {/* SETUP REÇETELERİ */}
       <CvtSetupRecipes />
 
-      {/* ISI + YAĞLAMA UYARILARI */}
+      {/* ISI + YAĞLAMA */}
       <section className="container-x py-24" id="isi-yaglama">
         <Reveal>
           <div className="glass-frost gradient-edge relative overflow-hidden p-10 sm:p-16">
@@ -392,7 +579,8 @@ export default function VariatorHubPage() {
                   <li className="flex gap-2">
                     <span className="mt-1.5 size-1 shrink-0 rounded-full bg-red-400" />
                     Kapağa direkt delik açmak yağmurda kayış suyla kaplanır,
-                    sokak motorunda <strong className="text-red-300">yapılmaz</strong>
+                    sokak motorunda{" "}
+                    <strong className="text-red-300">yapılmaz</strong>
                   </li>
                 </ul>
               </div>
@@ -441,7 +629,7 @@ export default function VariatorHubPage() {
                   Dengeyi koru — varyatör tek başına çalışmaz.
                 </h2>
                 <p className="mt-4 max-w-xl text-base leading-relaxed text-carbon-200">
-                  Sadece ön bagayı hafifletmek tek başına çözüm değildir. Baga
+                  Sadece bagayı hafifletmek tek başına çözüm değildir. Baga
                   hafifletme mutlaka kontrast yayı sertliğiyle ve debriyaj
                   ayarıyla dengelenmelidir. Aksi halde kayış kaçırma, vites
                   eğrisi tutarsızlığı ve yakıt tüketimi artışı kaçınılmazdır.
