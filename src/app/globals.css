@@ -8,13 +8,23 @@
   }
 
   html {
+    /* +12.5% global type scale — all rem-based tailwind utilities follow */
+    font-size: 18px;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
+  @media (min-width: 1280px) {
+    /* Slightly larger on big screens for editorial feel */
+    html {
+      font-size: 18.5px;
+    }
+  }
+
   body {
     @apply bg-ink-950 font-sans text-carbon-100 antialiased;
+    line-height: 1.55;
   }
 
   ::selection {
@@ -80,11 +90,11 @@
   }
 
   .chip {
-    @apply inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.035] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-carbon-200 backdrop-blur-xl;
+    @apply inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.035] px-3 py-1 text-[12px] font-medium uppercase tracking-[0.2em] text-carbon-200 backdrop-blur-xl;
   }
 
   .eyebrow {
-    @apply font-mono text-[10px] uppercase tracking-[0.24em] text-carbon-300;
+    @apply font-mono text-[11.5px] uppercase tracking-[0.24em] text-carbon-300;
   }
 
   .gradient-edge {
