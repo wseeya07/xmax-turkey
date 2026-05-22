@@ -11,7 +11,7 @@ const SEVERITY_TONE: Record<string, string> = {
 };
 
 export function QuickReference() {
-  const tireSample = TIRE_PRESSURE[2];
+  const tireSample = TIRE_PRESSURE[1]; // XMAX 300 default
   const errSample = ERROR_CODES.slice(0, 4);
 
   return (

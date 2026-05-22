@@ -13,7 +13,7 @@ const QUICK = [
 
 const HERO_SPEC = [
   { k: "Motor", v: "292 cc · Blue Core" },
-  { k: "Tepe güç", v: "27.6 hp @ 7250" },
+  { k: "Tepe güç", v: "28 hp @ 7250" },
   { k: "Tork", v: "29 Nm @ 5750" },
   { k: "Ağırlık", v: "183 kg" }
 ];

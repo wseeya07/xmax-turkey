@@ -18,7 +18,7 @@ const PILLARS = [
     detail:
       "Varyatör marka karakterleri, baga ağırlığı seçim mantığı, slip-on egzoz karşılaştırması, ECU remap notları.",
     icon: Gauge,
-    tags: ["Malossi", "Spectro", "TDR", "Akrapovic"],
+    tags: ["Malossi", "Polini", "J.Costa", "TDR"],
     accent: "from-yamaha-500/40 via-yamaha-700/15",
     span: "lg:col-span-7 lg:row-span-2"
   },
@@ -45,10 +45,10 @@ const PILLARS = [
   {
     href: "/teknik-ozellikler",
     title: "Modeller",
-    summary: "Jenerasyon tablosu.",
-    detail: "XMAX 250, 300 (eski), 300 (yeni), Tech MAX yan yana.",
+    summary: "Dokuz jenerasyon karşılaştırması.",
+    detail: "XMAX 250, 300 ve 400 — eski / ara / yeni kasalar yan yana.",
     icon: Bike,
-    tags: ["250", "300", "Tech MAX"],
+    tags: ["250", "300", "400"],
     accent: "from-yamaha-400/25 via-electric-cyan/10",
     span: "lg:col-span-4"
   },

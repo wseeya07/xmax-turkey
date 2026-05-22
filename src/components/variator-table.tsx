@@ -23,7 +23,7 @@ export function VariatorTable() {
           <div className="max-w-2xl">
             <div className="eyebrow">Performans · CVT</div>
             <h2 className="mt-3 h-display text-balance text-[clamp(2rem,4.4vw,3.2rem)] font-semibold leading-tighter-display tracking-tightest text-white">
-              Üç marka, <span className="text-electric">üç karakter.</span>
+              Dört marka, <span className="text-electric">dört felsefe.</span>
             </h2>
           </div>
           <Link
