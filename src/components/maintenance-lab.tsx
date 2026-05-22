@@ -386,7 +386,7 @@ export function MaintenanceLab() {
             Türkiye iklim koşullarında <span className="text-electric-cyan">Yamaha XMAX</span> sıvı bakım rehberi.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-carbon-200">
-            Blue Core motor mimarisi yüksek termal verim ve minimum mekanik sürtünme esasına dayanır. Türkiye'nin coğrafi çeşitliliği
+            Blue Core motor mimarisi yüksek termal verim ve minimum mekanik sürtünme esasına dayanır. Türkiye&apos;nin coğrafi çeşitliliği
             (Akdeniz/Ege sıcakları → Doğu Anadolu kışı → Marmara dur-kalk trafiği) yağın hem soğuk akışkanlığını hem yüksek sıcaklık film
             mukavemetini sınırlandırır. Aşağıdaki interaktif panel, beş büyük markanın fizikokimyasal verilerini, JASO/PCV
             mühendisliğini, dişli ve antifriz prosedürlerini tek noktada sunar.
@@ -601,13 +601,13 @@ function OilTab() {
                 <h4 className="h-display text-lg font-semibold text-white">XMAX Mimarisi: Kuru Tip Santrifüj Debriyaj</h4>
               </div>
               <p className="mt-4 text-sm leading-relaxed text-carbon-100">
-                Yamaha XMAX 250/300'de krank mili ve silindir grubu motor yağı ile yağlanırken; kavrama sistemi{" "}
+                Yamaha XMAX 250/300&apos;de krank mili ve silindir grubu motor yağı ile yağlanırken; kavrama sistemi{" "}
                 <strong className="text-white">kuru tip santrifüj debriyaj</strong> ve kayış tahrikli CVT ünitesinden oluşur. Motor yağı
                 aktarma organlarına veya debriyaj balatalarına <em>hiçbir şekilde temas etmez</em>.
               </p>
               <p className="mt-3 text-sm leading-relaxed text-carbon-200">
                 Bu mekanik mimari nedeniyle XMAX için teorik olarak en doğru tercih{" "}
-                <strong className="text-electric-violet">JASO MB</strong>'dir; piston-silindir ve supap mekanizmasındaki parazitik
+                <strong className="text-electric-violet">JASO MB</strong>&apos;dir; piston-silindir ve supap mekanizmasındaki parazitik
                 sürtünme kayıplarını azaltır. Ancak Türkiye pazarında JASO MB ürün bulunabilirliği kısıtlıdır —{" "}
                 <strong className="text-white">JASO MA2 kullanımı motora zarar vermez</strong>, sadece yakıt ekonomisini ve gaz
                 tepkisini bir miktar düşürür.
@@ -858,7 +858,7 @@ function TransmissionTab() {
               </span>
               <h5 className="mt-4 h-display text-base font-semibold text-white">Sızıntı &amp; Karter Karışımı</h5>
               <p className="mt-2 text-xs leading-relaxed text-carbon-200">
-                Aşınan salmastra sızdırmazlık özelliğini kaybeder; soğutma sıvısı önce weep hole'dan dışarı sızar. Zamanında müdahale
+                Aşınan salmastra sızdırmazlık özelliğini kaybeder; soğutma sıvısı önce weep hole&apos;dan dışarı sızar. Zamanında müdahale
                 edilmezse kartere geçerek yağı sütlü/gri renge büründürür (yağ-su emülsiyonu) ve tüm motor yataklarını sarar.
               </p>
             </article>
@@ -984,8 +984,8 @@ function CapacityTab() {
             </span>
             <h5 className="mt-4 h-display text-base font-semibold text-white">Yağ Filtresi Kapağı Torku</h5>
             <p className="mt-2 text-xs leading-relaxed text-carbon-200">
-              Karter tapa torku 20 Nm'dir. Yağ filtresi kapağı M6 cıvataları için doğru tork değeri tam olarak{" "}
-              <strong className="text-white">10 Nm</strong>'dir; bu sınır aşıldığında çelik cıvatalar alüminyum bloğun içinde kırılır.
+              Karter tapa torku 20 Nm&apos;dir. Yağ filtresi kapağı M6 cıvataları için doğru tork değeri tam olarak{" "}
+              <strong className="text-white">10 Nm</strong>&apos;dir; bu sınır aşıldığında çelik cıvatalar alüminyum bloğun içinde kırılır.
             </p>
           </article>
         </Reveal>
@@ -1118,7 +1118,7 @@ function RedFlagsTab() {
             <div>
               <h4 className="h-display text-lg font-semibold text-white">Mühendislik Sonuç</h4>
               <p className="mt-2 text-sm leading-relaxed text-carbon-100">
-                Yamaha XMAX'in dayanıklılığı; doğru viskozite sınıfı (10W-40), doğru JASO standardı (MB ideal, MA2 güvenli), doğru kapasite
+                Yamaha XMAX&apos;in dayanıklılığı; doğru viskozite sınıfı (10W-40), doğru JASO standardı (MB ideal, MA2 güvenli), doğru kapasite
                 (1500 ml net motor yağı), doğru dişli yağı (SAE 80W-90 API GL-4) ve doğru antifriz teknolojisi (silikatsız OAT + distile
                 su) kullanımının kümülatif sonucudur. Tek bir parametredeki sapma — örneğin silikatlı antifriz veya 100 ml fazla yağ —
                 motor ömrünü on binlerce kilometre kısaltabilir.

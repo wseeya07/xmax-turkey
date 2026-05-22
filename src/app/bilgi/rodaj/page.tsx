@@ -571,7 +571,7 @@ export default function RodajPage() {
         <div className="mt-10">
           {/* Timeline rail */}
           <div className="relative">
-            <div className="absolute left-0 right-0 top-7 hidden h-px bg-gradient-to-r from-transparent via-white/15 to-transparent md:block" />
+            <div className="absolute left-0 right-0 top-7 hidden h-px bg-gradient-to-r from-transparent via-white/15 to-transparent md:block z-0" />
             <div className="relative grid grid-cols-2 gap-2 md:grid-cols-5 md:gap-3">
               {PHASES.map((p, i) => {
                 const tone = TONE_STYLES[p.tone];
@@ -583,10 +583,10 @@ export default function RodajPage() {
                     type="button"
                     onClick={() => setActivePhaseIdx(i)}
                     className={cn(
-                      "group relative flex flex-col items-start gap-3 rounded-2xl border bg-white/[0.02] p-4 text-left transition-all duration-300 hover:-translate-y-0.5",
+                      "group relative z-10 flex flex-col items-start gap-3 rounded-2xl border p-4 text-left transition-all duration-300 hover:-translate-y-0.5",
                       active
-                        ? cn("border-white/[0.18] bg-white/[0.05]", tone.glow)
-                        : "border-white/[0.06] hover:border-white/[0.12]"
+                        ? cn("border-white/[0.18] bg-[#0c1324]", tone.glow)
+                        : "border-white/[0.06] bg-[#060a13] hover:border-white/[0.12]"
                     )}
                   >
                     <div className="flex w-full items-center justify-between">

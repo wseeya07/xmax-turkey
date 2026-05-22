@@ -648,7 +648,7 @@ function BuyingGuideContent() {
                           1. Supap Boşluk Sesi (Tick-Tick):
                         </h4>
                         <p className="mt-2 text-xs text-carbon-300 leading-relaxed">
-                          Rölantide üst kapaktan gelen çok ince, metalik dikiş makinesi tarzı ritmik 'tık-tık' sesi supap boşluğunun (clearance) arttığının işaretidir. Aşırı yüksek metalik vuruş sesi ise aşınmış kam millerini gösterir.
+                          Rölantide üst kapaktan gelen çok ince, metalik dikiş makinesi tarzı ritmik &quot;tık-tık&quot; sesi supap boşluğunun (clearance) arttığının işaretidir. Aşırı yüksek metalik vuruş sesi ise aşınmış kam millerini gösterir.
                         </p>
                       </div>
 
