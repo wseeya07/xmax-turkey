@@ -56,8 +56,17 @@ export default function MechanicalPerformancePage() {
               Mekanik setups: <span className="text-electric">Hacim ve Güç.</span>
             </h1>
             <p className="mt-4 text-pretty text-base leading-relaxed text-carbon-200">
-              Varyatör modifikasyonları motorun mevcut gücünü daha iyi iletmesini sağlarken, mekanik motor setups **doğrudan beygir (HP) ve tork (Nm) üretir**. XMAX 250 ve 300 Blue Core motorları, doğru silindir piston kitleri, dereceli egzantrik milleri ve yakıt elemanlarıyla birleştirildiğinde yüksek dayanıklılıkla güçlendirilebilir.
+              Varyatör modifikasyonları motorun mevcut gücünü daha iyi iletmesini sağlarken, mekanik motor setups <strong className="text-white">doğrudan beygir (HP) ve tork (Nm) üretir</strong>. XMAX 250 ve 300 Blue Core motorları, doğru silindir piston kitleri, dereceli egzantrik milleri ve yakıt elemanlarıyla birleştirildiğinde yüksek dayanıklılıkla güçlendirilebilir.
             </p>
+            <div className="mt-5">
+              <Link
+                href="/motor-modifikasyon"
+                className="group inline-flex items-center gap-2 rounded-2xl border border-electric-violet/30 bg-electric-violet/[0.06] px-5 py-3 text-sm font-semibold text-white backdrop-blur-xl transition hover:border-electric-violet/60"
+              >
+                Tam motor modifikasyon rehberine geç — bore-up matematiği, aRacer/TuneBoss, wideband AFR ve 3 model reçetesi
+                <ArrowUpRight className="h-4 w-4 text-electric-violet transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </Link>
+            </div>
           </header>
         </Reveal>
 

@@ -11,13 +11,6 @@ const QUICK = [
   { icon: AlertCircle, label: "Hata kodları", href: "/bilgi/hata-kodlari" }
 ];
 
-const HERO_SPEC = [
-  { k: "Motor", v: "292 cc · Blue Core" },
-  { k: "Tepe güç", v: "28 hp @ 7250" },
-  { k: "Tork", v: "29 Nm @ 5750" },
-  { k: "Ağırlık", v: "183 kg" }
-];
-
 export function Hero() {
   const reduced = useReducedMotion();
   const fade = reduced ? { initial: false } : { initial: { opacity: 0, y: 18 } };
@@ -35,12 +28,11 @@ export function Hero() {
       />
 
       <div className="container-x relative">
-        <div className="grid items-end gap-12 lg:grid-cols-12">
+        <div className="max-w-4xl">
           <motion.div
             {...fade}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-8"
           >
             <span className="chip">
               <span className="size-1.5 rounded-full bg-electric-cyan shadow-[0_0_10px_2px_rgba(38,232,255,0.6)]" />
@@ -55,7 +47,7 @@ export function Hero() {
               <span className="text-electric">XMAX Bilgi Portalı.</span>
             </h1>
 
-            <p className="mt-7 max-w-xl text-pretty text-base leading-relaxed text-carbon-200 sm:text-lg">
+            <p className="mt-7 max-w-2xl text-pretty text-base leading-relaxed text-carbon-200 sm:text-lg">
               Varyatör modifikasyonları, mekanik silindir ve tork setups, fren sistemi yükseltmeleri ve kilometre bazlı bakım takvimi — doğrudan sürücülerin ihtiyacı olan teknik doğrulukla.
             </p>
 
@@ -89,50 +81,6 @@ export function Hero() {
                 </li>
               ))}
             </ul>
-          </motion.div>
-
-          {/* Floating spec card */}
-          <motion.div
-            initial={reduced ? false : { opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-4"
-          >
-            <div className="glass-frost gradient-edge relative overflow-hidden p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <div className="eyebrow">Spec snapshot</div>
-                  <div className="mt-1 h-display text-xl font-semibold text-white">
-                    XMAX 300 · 2023+
-                  </div>
-                </div>
-                <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-electric-cyan">
-                  Euro 5
-                </div>
-              </div>
-
-              <dl className="mt-6 grid gap-px overflow-hidden rounded-2xl bg-white/[0.06]">
-                {HERO_SPEC.map((s) => (
-                  <div
-                    key={s.k}
-                    className="flex items-baseline justify-between bg-ink-900/80 px-4 py-3"
-                  >
-                    <dt className="font-mono text-[10px] uppercase tracking-[0.22em] text-carbon-300">
-                      {s.k}
-                    </dt>
-                    <dd className="font-mono text-sm text-white">{s.v}</dd>
-                  </div>
-                ))}
-              </dl>
-
-              <Link
-                href="/teknik-ozellikler/xmax-300-2023"
-                className="mt-6 inline-flex w-full items-center justify-between rounded-2xl border border-white/[0.07] bg-white/[0.025] px-4 py-3 text-sm font-medium text-white transition hover:border-yamaha-400/40"
-              >
-                Tam teknik profil
-                <ArrowUpRight className="h-4 w-4 text-yamaha-300" />
-              </Link>
-            </div>
           </motion.div>
         </div>
       </div>

@@ -17,8 +17,9 @@ export const NAV: NavItem[] = [
     label: "Performans",
     description: "Yükseltme rehberleri",
     items: [
-      { href: "/performans/varyator", label: "Varyatör Modları", description: "TDR Gold, Jcosta, Malossi CVT" },
-      { href: "/performans/mekanik", label: "Mekanik Setup", description: "BRT Silindir, enjektör, egzantrik" },
+      { href: "/varyator", label: "Varyatör Modları", description: "Malossi · Polini · J.Costa · TDR Gold" },
+      { href: "/motor-modifikasyon", label: "Motor Modifikasyon", description: "Bore-up · TDR/BRT/S90 · aRacer · Wideband AFR" },
+      { href: "/performans/mekanik", label: "Mekanik Setup (Özet)", description: "BRT Silindir, enjektör, egzantrik özet" },
       { href: "/performans/fren", label: "Fren Sistemleri", description: "RPD diskler, kaliperler, balatalar" }
     ]
   },

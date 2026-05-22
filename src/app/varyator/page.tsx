@@ -642,11 +642,18 @@ export default function VariatorHubPage() {
               </div>
               <div className="flex flex-col gap-3">
                 <Link
+                  href="/motor-modifikasyon"
+                  className="group inline-flex items-center justify-between rounded-2xl bg-gradient-to-b from-electric-violet/70 to-electric-violet/40 px-5 py-4 text-sm font-semibold text-white shadow-ambient-blue transition hover:from-electric-violet/90 hover:to-electric-violet/60"
+                >
+                  Motor modifikasyon rehberine geç
+                  <ArrowUpRight className="h-4 w-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </Link>
+                <Link
                   href="/teknik-ozellikler"
-                  className="group inline-flex items-center justify-between rounded-2xl bg-gradient-to-b from-yamaha-400 to-yamaha-700 px-5 py-4 text-sm font-semibold text-white shadow-ambient-blue transition hover:from-yamaha-300 hover:to-yamaha-600"
+                  className="inline-flex items-center justify-between rounded-2xl border border-white/[0.08] bg-white/[0.04] px-5 py-4 text-sm font-semibold text-white backdrop-blur-xl transition hover:border-white/15"
                 >
                   Modelimi belirle
-                  <ArrowUpRight className="h-4 w-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  <ArrowUpRight className="h-4 w-4 text-yamaha-300" />
                 </Link>
                 <Link
                   href="/nasil-yapilir/varyator-bakimi-ve-temizligi"
