@@ -7,3 +7,12 @@ out
 next-env.d.ts
 .screenshots
 *.pdf
+
+# Syncthing artifacts
+.stfolder
+.stversions
+*sync-conflict*
+
+# Backup copies of corrupted .git after Syncthing sync issues
+.git.broken
+.git.corrupted-*

@@ -58,11 +58,18 @@ export function ModelSelector() {
           </div>
 
           {/* Model group tabs */}
-          <div className="flex gap-1 rounded-full border border-white/[0.06] bg-white/[0.02] p-1 self-start">
+          <div
+            role="tablist"
+            aria-label="Model grubu"
+            className="flex flex-wrap gap-1 rounded-full border border-white/[0.06] bg-white/[0.02] p-1 self-start"
+          >
             {GROUPS.map((g) => (
               <button
                 key={g}
                 type="button"
+                role="tab"
+                aria-selected={group === g}
+                aria-controls="generation-list"
                 onClick={() => handleGroup(g)}
                 className={cn(
                   "rounded-full px-4 py-1.5 text-sm font-medium transition",
@@ -77,13 +84,19 @@ export function ModelSelector() {
           </div>
 
           {/* Generation list */}
-          <div className="flex flex-col gap-2">
+          <div
+            id="generation-list"
+            role="tabpanel"
+            aria-label={`${group} jenerasyonları`}
+            className="flex flex-col gap-2"
+          >
             {groupItems.map((g) => {
               const isActive = g.slug === current.slug;
               return (
                 <button
                   key={g.slug}
                   type="button"
+                  aria-pressed={isActive}
                   onClick={() => setActiveSlug(g.slug)}
                   className={cn(
                     "group relative flex items-center justify-between rounded-2xl border px-5 py-4 text-left transition",
