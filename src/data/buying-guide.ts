@@ -260,6 +260,22 @@ export const CHRONIC_ISSUES: ChronicIssue[] = [
     symptom: "Çift kilitleme noktasına sahip sele altı bagaj kapağının sürüş esnasında tıkırdaması, kilit mandallarının sert plastik yuvalarının esneyerek aşınması ve kilitlememe yapması.",
     officialFix: "2023+ jenerasyonunda sele menteşe mukavemeti artırılmış, kilit dillerinde metal takviyeli karşılıklar kullanılmıştır.",
     aftermarketFix: "Seleni kapatırken yukarıdan sertçe vurarak çarpmak yerine, selenin arka/orta kısmına elinizle hafifçe bastırıp iki kilit noktasından da 'klik' sesinin gelmesini sağlayın. Kilit mandallarını silikon sprey ile düzenli yağlayın."
+  },
+  {
+    title: "Eksantrik Dişlisi Cıvatalarının Gevşemesi",
+    severity: "yuksek",
+    generationsAffected: "Özellikle 2023+ XMAX 250 (Gen 5) Modelleri",
+    symptom: "Soğuk çalıştırmada veya rölantide silindir kapağının sol üst yanından gelen düzensiz, metalik bir vuruntu/takırtı sesi. Cıvata gevşedikçe kapak yatağına sürterek metal talaşı döker.",
+    officialFix: "Yamaha yetkili servisleri şikayet üzerine silindir kapağını açarak eksantrik mili dişlisini kontrol eder. Gevşeyen cıvatalar yüksek mukavemetli sabitleyici (Loctite 243/270) ile torkunda sıkılarak sabitlenir.",
+    aftermarketFix: "Sol üst kapak bölgesindeki sesleri kulak vererek dinleyin. Eğer ritmik dikiş makinesi sesi dışında kaba bir çarpma/takırtı sesi varsa motoru kesinlikle çalıştırmayın. Kapağı açtırıp cıvataları Loctite ile torkunda sabitleyin."
+  },
+  {
+    title: "ABS Hidrolik Modülü Arızaları ve Kod 46 Hataları",
+    severity: "yuksek",
+    generationsAffected: "Tüm Jenerasyonlar (Özellikle Gen 4 ve Gen 5)",
+    symptom: "ABS uyarı lambasının 10 km/h hıza ulaşıldıktan sonra dahi sürekli yanık kalması, ABS fren sisteminin tamamen devre dışı kalması ve DIAG ekranında Kod 21 / Kod 46 hatalarının görülmesi.",
+    officialFix: "Yamaha servislerinde arızalı ABS hidrolik ünitesi komple yeni modül ile değiştirilir. Oldukça yüksek maliyetli bir parçadır.",
+    aftermarketFix: "Aküden doğrudan rölesiz beslenen sis farı, yüksek akım çeken kornalar veya kalitesiz alarm kitlerini sökün; röleli özel tesisat çekin. ABS sensör kablolarının ve okuyucu disklerin temizliğini kontrol edin. Hata geçici bir voltaj dalgalanmasından (Kod 46) kaynaklanıyorsa DIAG menüsünden (d62) silmeyi deneyin."
   }
 ];
 

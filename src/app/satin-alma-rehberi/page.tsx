@@ -64,83 +64,83 @@ const SEVERITY_BADGES: Record<string, { label: string; bg: string; text: string 
 
 const EXPERTISE_CHECKLIST = [
   {
-    category: "Motor & Transmisyon (10 Nokta)",
+    category: "Motor & Mekanik (10 Nokta)",
     items: [
-      { id: 1, text: "Soğuk Çalıştırma Eksantrik Zincir Sesi (Rattle) Kontrolü" },
-      { id: 2, text: "Supap Boşluğu 'Tıkırtı' (Tick) ve Silindir Kafası Gürültüsü" },
-      { id: 3, text: "Motor Yağ Kapağı Sızdırmazlığı ve Yağ Köpürme/Tahin Testi" },
-      { id: 4, text: "Egzoz Gazı Rengi ve Koku Teşhisi (Mavi Duman = Yağ Yakma)" },
-      { id: 5, text: "Kuru Varyatör Debriyaj Tası Titreme/Kalkış Islık Sesi Kontrolü" },
-      { id: 6, text: "Krank ve Varyatör Rulman Uğultusu (Boşluk/Aşınma Sesi)" },
-      { id: 7, text: "Karter Birleşim Yüzeyleri, Keçeler ve Yağ Sızıntı Terlemeleri" },
-      { id: 8, text: "Su Pompası Tahliye Deliği (Weep Hole) Sızıntı Teşhisi" },
-      { id: 9, text: "Gaz Tepkisi ve Rölanti Kararlılığı (4000 rpm Geçiş Pürüzsüzlüğü)" },
-      { id: 10, text: "Hava Filtresi ve PCV Hortumu Yağ Birikim (Overfill) İncelemesi" }
+      { id: 1, text: "Soğuk Blokta Marş: Motor tamamen soğukken tek marşta sorunsuz ve sarsıntısız çalışma kontrolü." },
+      { id: 2, text: "Üst Kapak Sesi: Supaplardan gelen ritmik metalik vuruntuların (tick-tick-tick) kontrolü." },
+      { id: 3, text: "Eksantrik Gergisi Sesi: Motorun sağ yanından gelen düzensiz metalik şıkırtıların tespiti." },
+      { id: 4, text: "Eksantrik Vidaları: Üst kapak sol köşesinden gelen ağır darbe/takırtı sesleri (Civata gevşeme riski)." },
+      { id: 5, text: "Arka Varyatör Rulmanı: Tekerlek elle döndürülürken varyatör kutusundan gelen uğultu/sürtünme kontrolü." },
+      { id: 6, text: "Silindir Taban Contası: Silindir bloğu ile karter birleşim hattında yağ terlemesi veya sızıntısı." },
+      { id: 7, text: "Silindir Kapağı Contası: Kapağın birleşim noktalarında kompresyon kaçağı veya antifriz/yağ kaçağı." },
+      { id: 8, text: "Yağ Süzgeci Durumu: Alt tapa üzerindeki metal telli yağ süzgecinin temizliği, yırtılma ve tıkanıklığı." },
+      { id: 9, text: "Egzoz Gazı Rengi: Motor ısındıktan sonra egzozdan mavi veya yoğun gri duman atılmaması (Yağ yakma)." },
+      { id: 10, text: "Devirdaim Pompa Sızıntısı: Su pompasının altındaki weep hole (tahliye deliği) su/yağ damlatma kontrolü." }
     ]
   },
   {
-    category: "Şasi & Süspansiyon (10 Nokta)",
+    category: "Şasi & Geometri (10 Nokta)",
     items: [
-      { id: 11, text: "Ön Amortisör Milleri Çizik ve Keçe Yağ Sızıntı/Toz Kapağı Kontrolü" },
-      { id: 12, text: "Asimetrik Şasi Kaynakları ve Robotik Kaynak Karşılaştırması" },
-      { id: 13, text: "Gidon Furş Takımı Sıkışma, Takılma veya Eksenel Boşluk Testi" },
-      { id: 14, text: "Ön ve Arka Tekerlek İz Geometrisi ve Doğrusal Şasi Hizalaması" },
-      { id: 15, text: "Motor Askı Burçları (Motor Takozları) Boşluk ve Çatlak Kontrolü" },
-      { id: 16, text: "Arka Çift Amortisör Sönümleme Kararlılığı ve Ayar Kademe Testi" },
-      { id: 17, text: "Orta ve Yan Sehpa Pim Aşınması, Gövdeye Çarpma ve Yay Mukavemeti" },
-      { id: 18, text: "Jant Kenarı Flanş Eğrilikleri ve Darbe İncelemeleri" },
-      { id: 19, text: "Salıncak Mili Burçları Eksenel Boşluk Kontrolü" },
-      { id: 20, text: "Deniz Havası/Korozyon Kaynaklı Alt Şasi Derin Paslanma İncelemesi" }
+      { id: 11, text: "Furş Yatağı Kaynakları: Gidon boynu furş yatağı çevresindeki orijinal robotik kaynak bütünlüğü." },
+      { id: 12, text: "Şasi Alt Boruları: Grenaj altındaki çelik borularda yamulma, ezilme, pres veya kaynak tamiri kontrolü." },
+      { id: 13, text: "Motor Askı Takozları: Blok bağlantı askı takozlarında çatlama, sertleşme and eksen kayması tespiti." },
+      { id: 14, text: "Amortisör Milleri: Ön amortisör krom bacaklarında mikro çizik, korozyon and eksenel eğrilik taraması." },
+      { id: 15, text: "Amortisör Keçeleri: Ön amortisör keçe diplerinde yağ halkası oluşumu and sızdırma kontrolü." },
+      { id: 16, text: "Gidon Eğriliği: Gidonun sağa and sola tam dönüş açılarındaki milimetrik simetri kontrolü." },
+      { id: 17, text: "Arka Maşa Boşluğu: Salıncak (arka maşa) burçlarında eksenel boşluk and oynamanın elle kontrolü." },
+      { id: 18, text: "Jant Yalpalama: Tekerlekler serbest dönerken flanş darbesi, eksenel salıntı and yalpa kontrolü." },
+      { id: 19, text: "Arka Amortisör Milleri: Çift arka amortisörde yağ sızıntısı and sönümleme kaybı kontrolü." },
+      { id: 20, text: "Orta Sehpa Ekseni: Sehpa kapatıldığında gövdeye tam paralel durması and darbe emici kauçuk takozu." }
     ]
   },
   {
-    category: "Fren Sistemi (10 Nokta)",
+    category: "Fren & ABS (10 Nokta)",
     items: [
-      { id: 21, text: "Ön Fren Disk Kalınlığı Ölçümü (Orijinal 4.5 mm, Aşınma Limiti 4.0 mm)" },
-      { id: 22, text: "Arka Fren Disk Kalınlığı Ölçümü ve Aşınma Kanalları Kontrolü" },
-      { id: 23, text: "Disk Yüzeyi Derin Dalgalanma, Çizik ve Isıl Mavi Renç Değişimi" },
-      { id: 24, text: "Fren Kaliper Piston Keçeleri Hidrolik Kaçak Teşhisi" },
-      { id: 25, text: "Ön ve Arka Fren Balata Kalınlık Limitleri (Min 1 mm Diş Kalınlığı)" },
-      { id: 26, text: "Manet Sürüş Hissi: Süngerimsi Kararsızlık veya Hidrolik Hava Kontrolü" },
-      { id: 27, text: "Fren Hidrolik Yağı Nem, Seviye ve Koyu Kahve Renk Değişimi" },
-      { id: 28, text: "Ön/Arka ABS Sensör Boşlukları ve Sinyal Dişlisi Eğrilik Kontrolü" },
-      { id: 29, text: "Fren Hidrolik Hortumları Çatlak, Yırtık ve Balon Yapma Testi" },
-      { id: 30, text: "Sert Duruşlarda ABS Pompa Geri Bildirimi ve TCS Müdahale Testi" }
+      { id: 21, text: "Ön Disk Kalınlığı: Ön disk kalınlığının mikrometre veya kumpasla ölçümü (Orijinal 4.5 mm, aşınma sınırı 4.0 mm)." },
+      { id: 22, text: "Arka Disk Kalınlığı: Arka disk yüzeyindeki aşınma kanalları, fatura derinliği and dalgalanma kontrolü." },
+      { id: 23, text: "Fren Balatası Kalınlığı: Balata sürtünme malzemesi kalınlığının kontrolü (Limit minimum 2 mm)." },
+      { id: 24, text: "Fren Hidrolik Seviyesi: Rezervuar pencerelerinde hidrolik seviyesi, rengi (koyu kahve olmamalı) and nemi." },
+      { id: 25, text: "ABS Sensör Kabloları: Ön and arka hız sensörü kablo kılıflarında sürtünme, aşınma and yırtık kontrolü." },
+      { id: 26, text: "ABS Okuyucu Diskleri: Tone ring (sinyal halkası) dişlerinde kırılma, eğrilik veya çamur/toz birikimi." },
+      { id: 27, text: "Fren Hortumları: Hidrolik fren hortumlarında kılcal çatlak, yırtık veya rakor diplerinde sızıntı." },
+      { id: 28, text: "Kaliper Pistonları: Kaliper pistonlarının sıkışmadan rahatça ileri-geri hareket etmesi and balata boşluğu." },
+      { id: 29, text: "ABS Modülü Rekorları: ABS hidrolik modül girişlerindeki metal rekorların sızdırmazlığı and oksit kontrolü." },
+      { id: 30, text: "Fren Müşürleri: Ön/arka fren kolları sıkıldığında stop lambasının yanma kararlılığı and müşür sesi." }
     ]
   },
   {
     category: "Elektrik & Elektronik (10 Nokta)",
     items: [
-      { id: 31, text: "Smart Key Akıllı Anahtar Uzaklaşma Kilidi ve Topuz Kilitleme Testi" },
-      { id: 32, text: "LCD/TFT Gösterge Paneli Piksel Kaybı, Buğulanma ve Buton Tepkileri" },
-      { id: 33, text: "Far, Stop, Plaka Aydınlatma, Sinyal Grubu ve Yüksek Sinyal Konumu" },
-      { id: 34, text: "Rölanti ve Devirli Akü Voltaj Testi (13.8V - 14.4V Barem)" },
-      { id: 35, text: "Gizli DIAG Menüsü (d01-d61) Geçmiş Hata Kodları Analizi" },
-      { id: 36, text: "Çekiş Kontrol Sistemi (TCS) Gidondan İptal/Aktivasyon Butonu Testi" },
-      { id: 37, text: "Radyatör Soğutma Fanı Sıcaklık Devreye Girme/Otomatik Kapanma Testi" },
-      { id: 38, text: "Konjektör (Regülatör) Isınma Durumu ve Akım Kararlılığı" },
-      { id: 39, text: "Kablo Tesisatı Koruma Kılıfları Çatlakları ve Oksitlenme İncelemesi" },
-      { id: 40, text: "Garmin Navigasyon / Y-Connect Bluetooth Eşleşme ve Sensör Verisi" }
+      { id: 31, text: "Akü Boşta Voltajı: Multimetre ile kontak kapalıyken akü voltajı ölçümü (Minimum 12.5 V olmalıdır)." },
+      { id: 32, text: "Şarj Voltajı: Motor çalışırken and devir çevirirken kutup başı şarj voltajı (13.8 V - 14.8 V aralığı)." },
+      { id: 33, text: "Marş Akımı Çekişi: Marş anında akü voltajının 9.6 V seviyesinin altına düşmemesi (akü sağlık kontrolü)." },
+      { id: 34, text: "Smart Key İletişimi: Anahtarsız çalıştırma sisteminin algılama mesafesi, topuz kilitleme and pil uyarısı." },
+      { id: 35, text: "Sele Kilidi Motoru: Sele açma butonuna basıldığında elektro-mekanik kilit mekanizmasının açılma hızı." },
+      { id: 36, text: "Sonradan Çekilen Tesisat: Sis farı, alarm, çakmaklık eklentilerinde röle, sigorta and izole kablo kullanımı." },
+      { id: 37, text: "Gösterge Selamlaması: Kontak ilk açıldığında tüm ikaz ışıklarının (ABS, motor arıza vb.) yanıp sönmesi." },
+      { id: 38, text: "Far and Sinyal Grubu: Orijinal LED farlarda titreme/kırpışma and sinyal rölesinin ritmik hızı." },
+      { id: 39, text: "Yan Sehpa Müşürü: Yan sehpa açıkken marşın engellenmesi and motor çalışırken açıldığında stop etme." },
+      { id: 40, text: "Rad Fanı Çalışması: Motor harareti yükseldiğinde radyatör fanının ses çıkarmadan devreye girmesi." }
     ]
   },
   {
-    category: "Grenaj & Kaporta (5 Nokta)",
+    category: "Kaporta & Kozmetik (5 Nokta)",
     items: [
-      { id: 41, text: "Grenaj Birleşim Boşlukları Simetrisi ve Tırnak Kırığı Tespiti" },
-      { id: 42, text: "Grenaj İç Yüzeylerinde Tel Zımba veya Havya Plastik Kaynak İzi" },
-      { id: 43, text: "UV Işık Altında Vernik Altı Tozlar, Zımpara İzleri ve Boya Geçişleri" },
-      { id: 44, text: "Sele Menteşe Pim Boşlukları ve Çift Noktadan Kilitleme Testi" },
-      { id: 45, text: "Ön Cam Ayar Mekanizması Manuel Pim / Elektrikli Motor Akıcılığı" }
+      { id: 41, text: "Grenaj UV Analizi: UV ışık altında panellerin orijinal vernik/boya yansıma simetrisi (Boyalı parça tespiti)." },
+      { id: 42, text: "Plastik Onarımlar: Panel içlerinde havya and kelepçe (zip tie) ile yapılmış plastik kaynak izlerinin aranması." },
+      { id: 43, text: "Panel Boşlukları: Grenaj birleşim çizgilerindeki (tüm gövdede) milimetrik simetri and boşluk kontrolü." },
+      { id: 44, text: "Cam Kızak Mekanizması: Ayarlanabilir ön siperlik camı kızaklarının pürüzsüz çalışması and boşluk durumu." },
+      { id: 45, text: "Sele Kilidi Menteşesi: Sele menteşesinde eksenel boşluk, kırılma, yırtılma and sele kapanma hizası." }
     ]
   },
   {
-    category: "Yasal & Evrak Kontrolü (5 Nokta)",
+    category: "Yasal & Evrak (5 Nokta)",
     items: [
-      { id: 46, text: "Gövde ve Blok Üzerindeki Şasi/Motor Numaralarının Ruhsat Eşleşmesi" },
-      { id: 47, text: "Tramer 5664 Hasar Kaydı, Çarpma, Ağır Hasar ve KM Sorgusu" },
-      { id: 48, text: "TÜVTÜRK Periyodik Muayene Geçerlilik ve Egzoz Emisyon Ölçümü" },
-      { id: 49, text: "E-Devlet Üzerinde Rehin, Haciz, Hak Mahrumiyeti Kontrolü" },
-      { id: 50, text: "6 Haneli Smart Key PIN Kodu Kartı ve Acil Durum Anahtarı Teslimi" }
+      { id: 46, text: "Şasi No Doğrulaması: Gidon boynu altındaki 17 haneli şasi numarasının ruhsatla tam eşleşmesi." },
+      { id: 47, text: "Motor No Doğrulaması: Blok üzerindeki motor numarasının okunabilirliği, kazınma olmaması and ruhsat eşleşmesi." },
+      { id: 48, text: "TRAMER Hasar Kaydı: SMS 5664 üzerinden and şasi numarasıyla e-Devlet/SBM portallarından detaylı hasar sorgusu." },
+      { id: 49, text: "Tescil Durumu: e-Devlet üzerinden aktif rehin, haciz, hak mahrumiyeti veya çekme belgesi sorgusu." },
+      { id: 50, text: "Yedek Anahtar: Orijinal 6 haneli akıllı anahtar PIN kod kartı, yedek anahtar and acil mekanik anahtarı." }
     ]
   }
 ];
@@ -153,6 +153,8 @@ function BuyingGuideContent() {
   const [openIssues, setOpenIssues] = useState<Record<number, boolean>>({});
   const [activeEkspertizTab, setActiveEkspertizTab] = useState("sasi-akustik");
   const [checkedItems, setCheckedItems] = useState<Record<number, boolean>>({});
+  const [diskThickness, setDiskThickness] = useState(4.5);
+  const [odometer, setOdometer] = useState(10000);
 
   const toggleCheckItem = (id: number) => {
     setCheckedItems((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -680,25 +682,110 @@ function BuyingGuideContent() {
               {activeEkspertizTab === "km-asinma" && (
                 <div className="space-y-6">
                   <div className="grid gap-6 md:grid-cols-2">
-                    <div className="glass-frost p-6 border-emerald-500/10 bg-emerald-500/[0.01]">
-                      <h3 className="text-lg font-bold text-white h-display flex items-center gap-2">
-                        <Calculator className="h-5 w-5 text-emerald-400" />
-                        Kilometre Aşınma İndeksi ve Disk Formülü
-                      </h3>
-                      <p className="mt-3 text-xs leading-relaxed text-carbon-200">
-                        Göstergedeki kilometre saatlerinin geri çekilmesi (odometer rollback) en yaygın sahtekarlıktır. Ancak mekanik metal aşınması asla yalan söylemez. Ön disk orijinal kalınlığı üzerinden kilometre tahmini yapabilirsiniz.
-                      </p>
-                      
-                      <div className="mt-6 rounded-xl bg-ink-950/80 p-5 border border-white/[0.04]">
-                        <div className="font-mono text-[10px] uppercase tracking-wider text-carbon-400">Metalik Aşınma Teşhis Formülü</div>
-                        <div className="mt-2 text-base font-mono font-bold text-emerald-400">
-                          Δt = t_yeni - t_mevcut
+                    <div className="glass-frost p-6 border-emerald-500/10 bg-emerald-500/[0.01] flex flex-col justify-between">
+                      <div>
+                        <h3 className="text-lg font-bold text-white h-display flex items-center gap-2">
+                          <Calculator className="h-5 w-5 text-emerald-400" />
+                          Kilometre Aşınma İndeksi &amp; Km Sahtekarlığı Hesaplayıcı
+                        </h3>
+                        <p className="mt-3 text-xs leading-relaxed text-carbon-200">
+                          Göstergedeki kilometre saatlerinin geri çekilmesi (odometer rollback) en yaygın sahtekarlıktır. Ancak mekanik metal aşınması asla yalan söylemez. Aşağıdaki araç ile disk kalınlığını ve kilometreyi girip risk analizi yapabilirsiniz.
+                        </p>
+
+                        {/* Interactive Calculator Inputs */}
+                        <div className="mt-6 space-y-5">
+                          <div>
+                            <div className="flex justify-between text-xs font-mono mb-2">
+                              <span className="text-carbon-300">Ölçülen Ön Disk Kalınlığı:</span>
+                              <span className="text-emerald-400 font-bold">{diskThickness.toFixed(1)} mm</span>
+                            </div>
+                            <input
+                              type="range"
+                              min="3.5"
+                              max="4.5"
+                              step="0.1"
+                              value={diskThickness}
+                              onChange={(e) => setDiskThickness(parseFloat(e.target.value))}
+                              className="w-full h-1 bg-white/[0.08] rounded-lg appearance-none cursor-pointer accent-emerald-400"
+                            />
+                            <div className="flex justify-between text-[10px] text-carbon-400 font-mono mt-1">
+                              <span>3.5 mm (Aşırı Aşınmış)</span>
+                              <span>4.0 mm (Sınır)</span>
+                              <span>4.5 mm (Yeni/Sıfır)</span>
+                            </div>
+                          </div>
+
+                          <div>
+                            <div className="flex justify-between text-xs font-mono mb-2">
+                              <span className="text-carbon-300">Gösterge Kilometresi:</span>
+                              <span className="text-emerald-400 font-bold">{odometer.toLocaleString("tr-TR")} km</span>
+                            </div>
+                            <input
+                              type="range"
+                              min="1000"
+                              max="80000"
+                              step="1000"
+                              value={odometer}
+                              onChange={(e) => setOdometer(parseInt(e.target.value))}
+                              className="w-full h-1 bg-white/[0.08] rounded-lg appearance-none cursor-pointer accent-emerald-400"
+                            />
+                            <div className="flex justify-between text-[10px] text-carbon-400 font-mono mt-1">
+                              <span>1.000 km</span>
+                              <span>40.000 km</span>
+                              <span>80.000 km+</span>
+                            </div>
+                          </div>
                         </div>
-                        <ul className="mt-3 space-y-2 text-xs text-carbon-300">
-                          <li>• Orijinal Ön Disk Kalınlığı (t_yeni): <strong className="text-white">4.5 mm</strong></li>
-                          <li>• Aşınma Aşırı Risk Sınırı (t_limit): <strong className="text-white">4.0 mm</strong></li>
-                          <li>• Aşınma Farkı (Δt) <strong className="text-rose-400">≥ 0.3 mm</strong> iken gösterge <strong className="text-rose-400">&lt; 15.000 km</strong> ise kilometre <strong className="text-rose-400">kesinlikle geri çekilmiştir!</strong> (Normal şartlarda disk 15.000 km&apos;de bu kadar aşınamaz).</li>
-                        </ul>
+                      </div>
+
+                      {/* Calculator Analysis Output */}
+                      <div className="mt-6 rounded-xl bg-black/40 p-5 border border-white/[0.04]">
+                        <div className="font-mono text-[9px] uppercase tracking-wider text-carbon-400">Metalik Aşınma Analiz Raporu</div>
+                        <div className="mt-3 grid grid-cols-2 gap-2 text-center">
+                          <div className="bg-white/[0.02] p-2 rounded-lg">
+                            <span className="text-[9px] text-carbon-400 block font-mono">HESAPLANAN AŞINMA</span>
+                            <span className="text-sm font-mono font-bold text-white">{(4.5 - diskThickness).toFixed(2)} mm</span>
+                          </div>
+                          <div className="bg-white/[0.02] p-2 rounded-lg">
+                            <span className="text-[9px] text-carbon-400 block font-mono">DİSK DURUMU</span>
+                            <span className={`text-sm font-mono font-bold ${diskThickness < 4.0 ? "text-rose-400" : "text-emerald-400"}`}>
+                              {diskThickness < 4.0 ? "LİMİT DIŞI" : "GÜVENLİ"}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Decision banners */}
+                        {(4.5 - diskThickness) >= 0.3 && odometer < 15000 ? (
+                          <div className="mt-4 rounded-lg border border-rose-500/20 bg-rose-500/10 p-3.5 flex gap-2.5">
+                            <ShieldAlert className="h-5 w-5 text-rose-400 shrink-0 mt-0.5" />
+                            <div>
+                              <h5 className="text-xs font-bold text-rose-400 uppercase tracking-wider">KİLOMETRE SAHTEKARLIĞI RİSKİ!</h5>
+                              <p className="mt-1 text-[11px] leading-relaxed text-carbon-200">
+                                <strong className="text-white">KRİTİK UYARI:</strong> Orijinal ön disk kalınlığı {(4.5 - diskThickness).toFixed(2)} mm aşınmıştır. 15.000 km altındaki bir motorda bu seviyede aşınma gerçekleşemez. Kilometre en az 2 kat geri çekilmiş olabilir!
+                              </p>
+                            </div>
+                          </div>
+                        ) : diskThickness < 4.0 ? (
+                          <div className="mt-4 rounded-lg border border-rose-500/20 bg-rose-500/10 p-3.5 flex gap-2.5">
+                            <AlertCircle className="h-5 w-5 text-rose-400 shrink-0 mt-0.5" />
+                            <div>
+                              <h5 className="text-xs font-bold text-rose-400 uppercase tracking-wider">DİSK GÜVENLİK SINIRI AŞILDI!</h5>
+                              <p className="mt-1 text-[11px] leading-relaxed text-carbon-200">
+                                Disk kalınlığı emniyet limiti olan <strong className="text-white">4.0 mm</strong> altına inmiştir. Frenaj esnasında diskin kırılma riski vardır. Derhal yenisiyle değiştirilmesi gerekir. (Tahmini parça maliyeti: 3.000 TL).
+                              </p>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="mt-4 rounded-lg border border-emerald-500/20 bg-emerald-500/10 p-3.5 flex gap-2.5">
+                            <Check className="h-5 w-5 text-emerald-400 shrink-0 mt-0.5" />
+                            <div>
+                              <h5 className="text-xs font-bold text-emerald-400 uppercase tracking-wider">KM UYUMLU / DÜŞÜK RİSK</h5>
+                              <p className="mt-1 text-[11px] leading-relaxed text-carbon-200">
+                                Ölçülen aşınma miktarı ve beyan edilen kilometre değerleri birbiriyle tutarlı görünüyor. Mekanik açıdan şüpheli bir kilometre durumu tespit edilmemiştir.
+                              </p>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
 
@@ -756,69 +843,125 @@ function BuyingGuideContent() {
 
               {/* Tab 3: OBD-siz DIAG Modu */}
               {activeEkspertizTab === "diag-modu" && (
-                <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr]">
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="text-lg font-bold text-white h-display flex items-center gap-2">
-                        <Wrench className="h-5 w-5 text-electric-cyan" />
-                        Göstergeden Gizli DIAG Moduna Giriş Protokolü
-                      </h3>
-                      <p className="mt-3 text-xs leading-relaxed text-carbon-200">
-                        XMAX, yetkili servise gitmeden veya OBD arıza tespit cihazı bağlamadan kendi göstergesi üzerinden geçmiş arızaları okuma ve silme yeteneğine sahiptir. Bu gizli menüye girmek için aşağıdaki adımları sırasıyla uygulayın:
-                      </p>
+                <div className="space-y-6">
+                  <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr]">
+                    <div className="space-y-6">
+                      <div>
+                        <h3 className="text-lg font-bold text-white h-display flex items-center gap-2">
+                          <Wrench className="h-5 w-5 text-electric-cyan" />
+                          Göstergeden Gizli DIAG Moduna Giriş Protokolü
+                        </h3>
+                        <p className="mt-3 text-xs leading-relaxed text-carbon-200">
+                          XMAX, yetkili servise gitmeden veya OBD arıza tespit cihazı bağlamadan kendi göstergesi üzerinden geçmiş arızaları okuma ve silme yeteneğine sahiptir. Bu gizli menüye girmek için aşağıdaki adımları sırasıyla uygulayın:
+                        </p>
+                      </div>
+
+                      <div className="relative border-l-2 border-electric-cyan/20 pl-6 space-y-6">
+                        <div className="relative">
+                          <span className="absolute -left-[31px] top-0.5 flex size-4 items-center justify-center rounded-full bg-electric-cyan text-[10px] font-bold text-ink-950">1</span>
+                          <h4 className="text-xs font-semibold text-white">Başlangıç Hazırlığı</h4>
+                          <p className="mt-1 text-xs text-carbon-300">Smart Key topuzunun tamamen kapalı (OFF) ve gidon kilidinin açık olduğundan emin olun.</p>
+                        </div>
+
+                        <div className="relative">
+                          <span className="absolute -left-[31px] top-0.5 flex size-4 items-center justify-center rounded-full bg-electric-cyan text-[10px] font-bold text-ink-950">2</span>
+                          <h4 className="text-xs font-semibold text-white">Select + Reset Kombinasyonu</h4>
+                          <p className="mt-1 text-xs text-carbon-300">Gösterge panelindeki <strong className="text-white">SELECT ve RESET</strong> butonlarına aynı anda basın ve parmağınızı çekmeyin.</p>
+                        </div>
+
+                        <div className="relative">
+                          <span className="absolute -left-[31px] top-0.5 flex size-4 items-center justify-center rounded-full bg-electric-cyan text-[10px] font-bold text-ink-950">3</span>
+                          <h4 className="text-xs font-semibold text-white">Gücü Açın</h4>
+                          <p className="mt-1 text-xs text-carbon-300">Butonlara basılı tutarken Smart Key topuzunu <strong className="text-white">ON</strong> konumuna getirin.</p>
+                        </div>
+
+                        <div className="relative">
+                          <span className="absolute -left-[31px] top-0.5 flex size-4 items-center justify-center rounded-full bg-electric-cyan text-[10px] font-bold text-ink-950">4</span>
+                          <h4 className="text-xs font-semibold text-white">Giriş Beklemesi (8 Saniye)</h4>
+                          <p className="mt-1 text-xs text-carbon-300">Kadranda ışıklar yandıktan sonra butonları <strong className="text-white">en az 8 saniye</strong> daha basılı tutmaya devam edin. Ekranda &apos;DIAG&apos; yazısı belirdiğinde menüye girmiş olursunuz.</p>
+                        </div>
+                      </div>
                     </div>
 
-                    <div className="relative border-l-2 border-electric-cyan/20 pl-6 space-y-6">
-                      <div className="relative">
-                        <span className="absolute -left-[31px] top-0.5 flex size-4 items-center justify-center rounded-full bg-electric-cyan text-[10px] font-bold text-ink-950">1</span>
-                        <h4 className="text-xs font-semibold text-white">Başlangıç Hazırlığı</h4>
-                        <p className="mt-1 text-xs text-carbon-300">Smart Key topuzunun tamamen kapalı (OFF) ve gidon kilidinin açık olduğundan emin olun.</p>
+                    <div className="glass-frost p-6 border-white/[0.04] bg-white/[0.005] flex flex-col justify-between">
+                      <div>
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-yamaha-300">DIAG Menüsü & Lamba Sıfırlama</h4>
+                        
+                        <div className="mt-4 space-y-3.5 text-xs text-carbon-300 leading-relaxed">
+                          <p>
+                            <strong className="text-white">d01 - d61 Hata Menüleri:</strong> SELECT tuşuna basarak parametreler arasında geçiş yapabilirsiniz. d01-d60 arası canlı sensör değerlerini (gaz kelebeği voltajı vb.) gösterirken, <strong className="text-white">d61</strong> geçmişte kaydedilmiş hata kodlarını listeler. Burada arıza kodları varsa motor geçmişte elektronik sorun yaşamıştır.
+                          </p>
+                          <p>
+                            <strong className="text-white">d62 Hata Silme:</strong> d61 ekranındayken RESET tuşuna basılı tutarak tüm geçmiş hata kayıtlarını hafızadan temizleyebilirsiniz.
+                          </p>
+                          <p>
+                            <strong className="text-white">Oil & V-Belt Trip Sıfırlama:</strong> Yağ veya kayış servis lambası yanıp sönüyorsa, göstergeyi TRIP moduna getirin. <strong className="text-white">TRIP</strong> butonuna 3 saniye basılı tutun (rakamlar yanıp sönmeye başlayacaktır), ardından butonu bırakıp tekrar <strong className="text-white">15 saniye boyunca</strong> basılı tutarak trip değerini sıfırlayabilirsiniz.
+                          </p>
+                        </div>
                       </div>
 
-                      <div className="relative">
-                        <span className="absolute -left-[31px] top-0.5 flex size-4 items-center justify-center rounded-full bg-electric-cyan text-[10px] font-bold text-ink-950">2</span>
-                        <h4 className="text-xs font-semibold text-white">Select + Reset Kombinasyonu</h4>
-                        <p className="mt-1 text-xs text-carbon-300">Gösterge panelindeki <strong className="text-white">SELECT ve RESET</strong> butonlarına aynı anda basın ve parmağınızı çekmeyin.</p>
-                      </div>
-
-                      <div className="relative">
-                        <span className="absolute -left-[31px] top-0.5 flex size-4 items-center justify-center rounded-full bg-electric-cyan text-[10px] font-bold text-ink-950">3</span>
-                        <h4 className="text-xs font-semibold text-white">Gücü Açın</h4>
-                        <p className="mt-1 text-xs text-carbon-300">Butonlara basılı tutarken Smart Key topuzunu <strong className="text-white">ON</strong> konumuna getirin.</p>
-                      </div>
-
-                      <div className="relative">
-                        <span className="absolute -left-[31px] top-0.5 flex size-4 items-center justify-center rounded-full bg-electric-cyan text-[10px] font-bold text-ink-950">4</span>
-                        <h4 className="text-xs font-semibold text-white">Giriş Beklemesi (8 Saniye)</h4>
-                        <p className="mt-1 text-xs text-carbon-300">Kadranda ışıklar yandıktan sonra butonları <strong className="text-white">en az 8 saniye</strong> daha basılı tutmaya devam edin. Ekranda &apos;DIAG&apos; yazısı belirdiğinde menüye girmiş olursunuz.</p>
+                      <div className="mt-6 rounded-xl border border-rose-500/20 bg-rose-500/5 p-4 flex gap-3">
+                        <AlertTriangle className="h-5 w-5 text-rose-400 shrink-0 mt-0.5" />
+                        <div>
+                          <h5 className="text-xs font-bold text-white uppercase tracking-wider">Kritik Akü Uyarısı</h5>
+                          <p className="mt-1 text-[11px] text-carbon-200">
+                            DIAG menüsündeyken motor beyni (ECU) sürekli açık kaldığından aküyü hızlı tüketir. Kontrol işlemlerini 5 dakikadan kısa sürede bitirin veya aküye bir şarj koruma cihazı bağlayın.
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="glass-frost p-6 border-white/[0.04] bg-white/[0.005] flex flex-col justify-between">
-                    <div>
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-yamaha-300">DIAG Menüsü & Lamba Sıfırlama</h4>
-                      
-                      <div className="mt-4 space-y-3.5 text-xs text-carbon-300 leading-relaxed">
-                        <p>
-                          <strong className="text-white">d01 - d61 Hata Menüleri:</strong> SELECT tuşuna basarak parametreler arasında geçiş yapabilirsiniz. d01-d60 arası canlı sensör değerlerini (gaz kelebeği voltajı vb.) gösterirken, <strong className="text-white">d61</strong> geçmişte kaydedilmiş hata kodlarını listeler. Burada arıza kodları varsa motor geçmişte elektronik sorun yaşamıştır.
-                        </p>
-                        <p>
-                          <strong className="text-white">d62 Hata Silme:</strong> d61 ekranındayken RESET tuşuna basılı tutarak tüm geçmiş hata kayıtlarını hafızadan temizleyebilirsiniz.
-                        </p>
-                        <p>
-                          <strong className="text-white">Oil & V-Belt Trip Sıfırlama:</strong> Yağ veya kayış servis lambası yanıp sönüyorsa, göstergeyi TRIP moduna getirin. <strong className="text-white">TRIP</strong> butonuna 3 saniye basılı tutun (rakamlar yanıp sönmeye başlayacaktır), ardından butonu bırakıp tekrar <strong className="text-white">15 saniye boyunca</strong> basılı tutarak trip değerini sıfırlayabilirsiniz.
-                        </p>
-                      </div>
-                    </div>
+                  {/* ABS Diagnostics Section */}
+                  <div className="mt-8 border-t border-white/[0.06] pt-8">
+                    <h3 className="text-lg font-bold text-white h-display flex items-center gap-2 mb-6">
+                      <ShieldAlert className="h-5 w-5 text-electric-cyan" />
+                      ABS İkaz Lambası &amp; Manuel Test Konnektörü Teşhisi
+                    </h3>
 
-                    <div className="mt-6 rounded-xl border border-rose-500/20 bg-rose-500/5 p-4 flex gap-3">
-                      <AlertTriangle className="h-5 w-5 text-rose-400 shrink-0 mt-0.5" />
-                      <div>
-                        <h5 className="text-xs font-bold text-white uppercase tracking-wider">Kritik Akü Uyarısı</h5>
-                        <p className="mt-1 text-[11px] text-carbon-200">
-                          DIAG menüsündeyken motor beyni (ECU) sürekli açık kaldığından aküyü hızlı tüketir. Kontrol işlemlerini 5 dakikadan kısa sürede bitirin veya aküye bir şarj koruma cihazı bağlayın.
-                        </p>
+                    <div className="grid gap-6 md:grid-cols-2">
+                      <div className="glass-frost p-6 border-white/[0.04] bg-white/[0.005]">
+                        <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
+                          <span className="h-2 w-2 rounded-full bg-amber-400" />
+                          ABS İkaz Lambası Sürüş Davranış Analizi
+                        </h4>
+                        <div className="mt-4 space-y-4 text-xs text-carbon-300">
+                          <div className="p-3 bg-white/[0.015] border border-white/[0.04] rounded-xl">
+                            <strong className="text-white block mb-1">Kontak Açıldığında Sabit Yanma:</strong>
+                            Motosiklet ilk çalıştırıldığında ABS lambası yanar. Tekerlek hız sensörleri kendini test etmek için <strong className="text-white">10 km/h</strong> hıza ulaşana kadar lambayı açık tutar. Bu hız aşıldığında sönmelidir.
+                          </div>
+                          <div className="p-3 bg-white/[0.015] border border-white/[0.04] rounded-xl">
+                            <strong className="text-white block mb-1">Sürüş Esnasında Sürekli Yanması:</strong>
+                            ABS tamamen devre dışıdır. En yaygın sebepleri: Ön/arka hız sensör kablosunun kopması, okuyucu tone ring dişlerinin çamurla dolması/eğrilmesi, ABS sigortasının atması veya ABS hidrolik ünitesinin arızalanmasıdır.
+                          </div>
+                          <div className="p-3 bg-white/[0.015] border border-white/[0.04] rounded-xl">
+                            <strong className="text-white block mb-1">Sürüş Esnasında Yanıp Sönmesi:</strong>
+                            ABS beyni aktif ancak ön ve arka tekerlek arasında hız uyumsuzluğu algılıyor. Motor orta sehpada çalıştırılıp arka tekerlek döndürüldüğünde (veya tek teker - wheelie yapıldığında) sistem arıza moduna geçerek yanıp söner. Fren müşürünün hatalı ayarı da bunu tetikler.
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="glass-frost p-6 border-white/[0.04] bg-white/[0.005] flex flex-col justify-between">
+                        <div>
+                          <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
+                            <span className="h-2 w-2 rounded-full bg-electric-cyan" />
+                            Gizli ABS Manuel Test Konnektör Protokolü
+                          </h4>
+                          <div className="mt-4 space-y-3 text-xs text-carbon-300 leading-relaxed">
+                            <p>
+                              Yamaha, ABS hata kodlarını harici bilgisayar bağlamadan okumak için ön panel kapağının arkasına gök mavisi (Sky Blue) bir test kablosu konumlandırmıştır.
+                            </p>
+                            <div className="bg-ink-950/80 p-4 border border-white/[0.04] rounded-xl font-mono text-[11px] text-electric-cyan space-y-1">
+                              <div>1. Kontağı kapatın (OFF).</div>
+                              <div>2. Gök mavisi test kablosunu bir jumper tel yardımıyla şasiye (Siyah/Şasi toprağı) köprüleyin.</div>
+                              <div>3. Kontağı açın (ON) ve marşa basmayın.</div>
+                              <div>4. ABS ikaz ışığı ritmik olarak yanıp sönmeye başlayacaktır. Uzun yanmalar onlar basamağını, kısa yanmalar birler basamağını belirtir (Örn: 2 uzun 1 kısa = Kod 21 ABS Hidrolik Valf Hatası).</div>
+                            </div>
+                            <p className="mt-2 text-[11px]">
+                              <strong className="text-rose-400">Önemli Voltaj Kuralı:</strong> XMAX motorlarına rölesiz olarak doğrudan aküden çekilen LED sis farı veya alarm gibi eklentiler marşa basıldığında anlık voltaj dalgalanması yaratarak ABS beyninde <strong className="text-white">Kod 46 (Düşük Voltaj)</strong> arıza kodunu kaydettirir.
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -923,75 +1066,82 @@ function BuyingGuideContent() {
                   <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     
                     {/* 10.000 KM */}
-                    <div className="glass-frost p-6 border-white/[0.04] bg-white/[0.005]">
-                      <div className="font-mono text-sm font-bold text-electric-cyan uppercase">10.000 KM Bakımı</div>
-                      <div className="mt-1 font-mono text-xs text-carbon-400">Küçük/Ara Periyot</div>
-                      
-                      <ul className="mt-4 space-y-2 text-xs text-carbon-300 border-b border-white/[0.05] pb-4 mb-4">
-                        <li>• Motor Yağı Değişimi</li>
-                        <li>• Hava Filtreleri Temizliği</li>
-                        <li>• Buji Kontrol / Değişim</li>
-                        <li>• Varyatör Toz Tahliyesi</li>
-                      </ul>
+                    <div className="glass-frost p-6 border-white/[0.04] bg-white/[0.005] flex flex-col justify-between">
+                      <div>
+                        <div className="font-mono text-sm font-bold text-electric-cyan uppercase">10.000 KM Bakımı</div>
+                        <div className="mt-1 font-mono text-xs text-carbon-400">Ara Periyodik Servis</div>
+                        
+                        <ul className="mt-4 space-y-2 text-xs text-carbon-300 border-b border-white/[0.05] pb-4 mb-4">
+                          <li>• Motor Yağı (1.5 L) &amp; Şanzıman Yağı</li>
+                          <li>• Orijinal Kağıt Filtre &amp; Süzgeç Temizliği</li>
+                          <li>• B74-E5407-00 (Varyatör Hava Filtresi)</li>
+                          <li>• 1S7-E3440-00 (Yamaha Yağ Filtresi)</li>
+                        </ul>
+                      </div>
                       
                       <div>
-                        <div className="font-mono text-[9px] uppercase tracking-wider text-carbon-400">Tahmini Maliyet (TL)</div>
-                        <div className="mt-1 font-mono text-lg font-bold text-white">3.500 TL - 5.000 TL</div>
+                        <div className="font-mono text-[9px] uppercase tracking-wider text-carbon-400">Sabit Servis Ücreti</div>
+                        <div className="mt-1 font-mono text-base font-bold text-white">3.500 TL</div>
                       </div>
                     </div>
 
                     {/* 20.000 KM */}
-                    <div className="glass-frost p-6 border-amber-500/10 bg-amber-500/[0.005]">
-                      <div className="font-mono text-sm font-bold text-amber-400 uppercase">20.000 KM Bakımı</div>
-                      <div className="mt-1 font-mono text-xs text-carbon-400">Orta/Ağır Periyot</div>
-                      
-                      <ul className="mt-4 space-y-2 text-xs text-carbon-300 border-b border-white/[0.05] pb-4 mb-4">
-                        <li>• Şanzıman (Final Gear) Yağı</li>
-                        <li>• Motor Yağı + Yağ Filtresi</li>
-                        <li>• Varyatör Bagaları (Slider)</li>
-                        <li>• Varyatör V-Belt Kayış Değişimi</li>
-                      </ul>
+                    <div className="glass-frost p-6 border-amber-500/10 bg-amber-500/[0.005] flex flex-col justify-between">
+                      <div>
+                        <div className="font-mono text-sm font-bold text-amber-400 uppercase">20.000 KM Bakımı</div>
+                        <div className="mt-1 font-mono text-xs text-carbon-400">Birinci Ağır Bakım</div>
+                        
+                        <ul className="mt-4 space-y-2 text-xs text-carbon-300 border-b border-white/[0.05] pb-4 mb-4">
+                          <li>• B5X-E7641-00 (V-Belt Tahrik Kayışı)</li>
+                          <li>• Varyatör Bagaları (Slider) &amp; Kızaklar</li>
+                          <li>• Standart Buji &amp; Tüm Filtre Setleri</li>
+                          <li>• KIT-YP300-SER5 (Ağır Bakım Seti)</li>
+                        </ul>
+                      </div>
                       
                       <div>
-                        <div className="font-mono text-[9px] uppercase tracking-wider text-carbon-400">Tahmini Maliyet (TL)</div>
-                        <div className="mt-1 font-mono text-lg font-bold text-white">8.500 TL - 12.000 TL</div>
+                        <div className="font-mono text-[9px] uppercase tracking-wider text-carbon-400">Sabit Servis Ücreti</div>
+                        <div className="mt-1 font-mono text-base font-bold text-white">9.500 TL</div>
                       </div>
                     </div>
 
                     {/* 40.000 KM */}
-                    <div className="glass-frost p-6 border-rose-500/10 bg-rose-500/[0.005]">
-                      <div className="font-mono text-sm font-bold text-rose-400 uppercase">40.000 KM Bakımı</div>
-                      <div className="mt-1 font-mono text-xs text-carbon-400">Tam Ağır Periyot</div>
-                      
-                      <ul className="mt-4 space-y-2 text-xs text-carbon-300 border-b border-white/[0.05] pb-4 mb-4">
-                        <li>• Süspansiyon Yağ Değişimi</li>
-                        <li>• Antifriz/Soğutucu Yenileme</li>
-                        <li>• Buji + Tüm Filtre Değişimleri</li>
-                        <li>• Komple Debriyaj Set Kontrolü</li>
-                        <li>• Supap Ayarı (Valve Clearance)</li>
-                      </ul>
+                    <div className="glass-frost p-6 border-rose-500/10 bg-rose-500/[0.005] flex flex-col justify-between">
+                      <div>
+                        <div className="font-mono text-sm font-bold text-rose-400 uppercase">40.000 KM Bakımı</div>
+                        <div className="mt-1 font-mono text-xs text-carbon-400">Tam Aktarma Revizyonu</div>
+                        
+                        <ul className="mt-4 space-y-2 text-xs text-carbon-300 border-b border-white/[0.05] pb-4 mb-4">
+                          <li>• B74-E6620-00 (Arka Debriyaj Balatası)</li>
+                          <li>• B74-F582U-00 (Orijinal Ön Fren Diski)</li>
+                          <li>• Fren Hidroliği &amp; Soğutma Antifrizi</li>
+                          <li>• Sübap Boşluğu (Clearance) Ayarı</li>
+                        </ul>
+                      </div>
                       
                       <div>
-                        <div className="font-mono text-[9px] uppercase tracking-wider text-carbon-400">Tahmini Maliyet (TL)</div>
-                        <div className="mt-1 font-mono text-lg font-bold text-white">16.000 TL - 22.000 TL</div>
+                        <div className="font-mono text-[9px] uppercase tracking-wider text-carbon-400">Sabit Servis Ücreti</div>
+                        <div className="mt-1 font-mono text-base font-bold text-white">22.000 TL</div>
                       </div>
                     </div>
 
                     {/* 60.000 KM+ */}
-                    <div className="glass-frost p-6 border-electric-violet/10 bg-electric-violet/[0.005]">
-                      <div className="font-mono text-sm font-bold text-electric-violet uppercase">60.000 KM+ Bakımı</div>
-                      <div className="mt-1 font-mono text-xs text-carbon-400">Ömürlük / Revizyon</div>
-                      
-                      <ul className="mt-4 space-y-2 text-xs text-carbon-300 border-b border-white/[0.05] pb-4 mb-4">
-                        <li>• Eksantrik Zincir Değişimi</li>
-                        <li>• Su Pompası Conta Set Değişimi</li>
-                        <li>• Fren Diskleri Ön/Arka Değişim</li>
-                        <li>• Tüm Şasi/Salıncak Burçları</li>
-                      </ul>
+                    <div className="glass-frost p-6 border-electric-violet/10 bg-electric-violet/[0.005] flex flex-col justify-between">
+                      <div>
+                        <div className="font-mono text-sm font-bold text-electric-violet uppercase">60.000 KM+ Bakımı</div>
+                        <div className="mt-1 font-mono text-xs text-carbon-400">Komple Motor Revizyonu</div>
+                        
+                        <ul className="mt-4 space-y-2 text-xs text-carbon-300 border-b border-white/[0.05] pb-4 mb-4">
+                          <li>• Eksantrik Zinciri &amp; Gergi Değişimi</li>
+                          <li>• Piston-Segman Aşınma &amp; Silindir Rektefiye</li>
+                          <li>• Su Pompası Seramik Keçe &amp; Conta Seti</li>
+                          <li>• Varyatör Şaftı Rulmanlarının Yenilenmesi</li>
+                        </ul>
+                      </div>
                       
                       <div>
-                        <div className="font-mono text-[9px] uppercase tracking-wider text-carbon-400">Tahmini Maliyet (TL)</div>
-                        <div className="mt-1 font-mono text-lg font-bold text-white">25.000 TL - 35.000 TL+</div>
+                        <div className="font-mono text-[9px] uppercase tracking-wider text-carbon-400">Sabit Servis Ücreti</div>
+                        <div className="mt-1 font-mono text-base font-bold text-white">35.000 TL</div>
                       </div>
                     </div>
 
@@ -1015,48 +1165,58 @@ function BuyingGuideContent() {
                   <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
                     
                     {/* Bayrak 1 */}
-                    <div className="rounded-2xl border border-rose-500/20 bg-rose-500/[0.02] p-5">
-                      <div className="font-mono text-xs font-bold text-rose-400">1. Şasi Isıl İşlemi</div>
-                      <h4 className="mt-2 text-sm font-semibold text-white">Doğrultulmuş Şasi</h4>
-                      <p className="mt-2 text-[11px] leading-relaxed text-carbon-300">
-                        Bükülen şasi demirinin tavlanarak ısı ile doğrultulması şasinin metal yorgunluğu direncini sıfıra indirir. Bir sonraki sert çukurda şasi aniden ikiye bölünebilir.
-                      </p>
+                    <div className="rounded-2xl border border-rose-500/20 bg-rose-500/[0.02] p-5 flex flex-col justify-between">
+                      <div>
+                        <div className="font-mono text-xs font-bold text-rose-400">1. Şasi Isıl İşlemi</div>
+                        <h4 className="mt-2 text-sm font-semibold text-white">Doğrultulmuş Şasi</h4>
+                        <p className="mt-2 text-[11px] leading-relaxed text-carbon-300">
+                          Bükülen ön furş yatağı veya şasi borularının ısıl işlemle doğrultulması metal yorgunluğunu aşırı artırır. Gidon yalpalaması (wobble) riski yaratır ve sürüş esnasında şasinin aniden ikiye bölünme riski vardır.
+                        </p>
+                      </div>
                     </div>
 
                     {/* Bayrak 2 */}
-                    <div className="rounded-2xl border border-rose-500/20 bg-rose-500/[0.02] p-5">
-                      <div className="font-mono text-xs font-bold text-rose-400">2. Ruhsatsız Motor Değişimi</div>
-                      <h4 className="mt-2 text-sm font-semibold text-white">Farklı Blok No</h4>
-                      <p className="mt-2 text-[11px] leading-relaxed text-carbon-300">
-                        Motor bloğu üzerindeki numara ile ruhsattaki numaranın uyuşmaması durumunda motor yasal olarak hurda veya çalıntı statüsündedir. Muayeneden geçmez ve noter satışı yapılamaz.
-                      </p>
+                    <div className="rounded-2xl border border-rose-500/20 bg-rose-500/[0.02] p-5 flex flex-col justify-between">
+                      <div>
+                        <div className="font-mono text-xs font-bold text-rose-400">2. Ruhsatsız Motor Değişimi</div>
+                        <h4 className="mt-2 text-sm font-semibold text-white">Blok No Uyuşmazlığı</h4>
+                        <p className="mt-2 text-[11px] leading-relaxed text-carbon-300">
+                          Motor numarası ile ruhsat numarasının eşleşmemesi durumunda motor yasal olarak çalıntı veya kayıtsız statüsündedir. Noter satışı anında bloke olur ve TÜVTÜRK muayenesinden kesinlikle geçemez.
+                        </p>
+                      </div>
                     </div>
 
                     {/* Bayrak 3 */}
-                    <div className="rounded-2xl border border-rose-500/20 bg-rose-500/[0.02] p-5">
-                      <div className="font-mono text-xs font-bold text-rose-400">3. Sürekli Mavi Duman</div>
-                      <h4 className="mt-2 text-sm font-semibold text-white">Ağır Yağ Yakma</h4>
-                      <p className="mt-2 text-[11px] leading-relaxed text-carbon-300">
-                        Egzozdan rölantide dahi kesilmeyen mavi renkli yağ dumanı ve yanık kokusu gelmesi, silindirin çizildiğini ve piston sekman grubunun tamamen bittiğini gösterir. Komple motor rektifiyesi gerektirir.
-                      </p>
+                    <div className="rounded-2xl border border-rose-500/20 bg-rose-500/[0.02] p-5 flex flex-col justify-between">
+                      <div>
+                        <div className="font-mono text-xs font-bold text-rose-400">3. Sürekli Mavi Duman</div>
+                        <h4 className="mt-2 text-sm font-semibold text-white">Ağır Yağ Yakma</h4>
+                        <p className="mt-2 text-[11px] leading-relaxed text-carbon-300">
+                          Egzozdan rölantide dahi kesilmeyen mavi/gri duman gelmesi silindir duvarlarının çizildiğini, sekmanların bittiğini veya subap keçelerinin aşındığını gösterir. Komple motor rektifiyesi gerektiren çok pahalı bir hasardır.
+                        </p>
+                      </div>
                     </div>
 
                     {/* Bayrak 4 */}
-                    <div className="rounded-2xl border border-rose-500/20 bg-rose-500/[0.02] p-5">
-                      <div className="font-mono text-xs font-bold text-rose-400">4. Kilitli Eksantrik Dişlisi</div>
-                      <h4 className="mt-2 text-sm font-semibold text-white">Kronik Cıvata Gevşemesi</h4>
-                      <p className="mt-2 text-[11px] leading-relaxed text-carbon-300">
-                        2023+ kasalarda eksantrik dişli cıvatasının gevşeyerek silindir kapağına sürtüp talaş dökmesi ve motorun kilitlenmesi. Yağ kanallarını tıkayıp yatak sardırır, blok tamir edilemez hale gelir.
-                      </p>
+                    <div className="rounded-2xl border border-rose-500/20 bg-rose-500/[0.02] p-5 flex flex-col justify-between">
+                      <div>
+                        <div className="font-mono text-xs font-bold text-rose-400">4. ABS Modül Hasarı (Kod 21)</div>
+                        <h4 className="mt-2 text-sm font-semibold text-white">ABS Beyin Arızası</h4>
+                        <p className="mt-2 text-[11px] leading-relaxed text-carbon-300">
+                          ABS uyarı lambasının 10 km/h sonrasında da yanık kalması, modülün su alması veya sis farı gibi eklentilerin rölesiz bağlanmasıyla oluşan voltaj darbeleriyle beynin yanması. Değişimi son derece pahalı bir parçadır.
+                        </p>
+                      </div>
                     </div>
 
                     {/* Bayrak 5 */}
-                    <div className="rounded-2xl border border-rose-500/20 bg-rose-500/[0.02] p-5">
-                      <div className="font-mono text-xs font-bold text-rose-400">5. Nem Almış Beyin (ECU)</div>
-                      <h4 className="mt-2 text-sm font-semibold text-white">Oksitli Kablo Grubu</h4>
-                      <p className="mt-2 text-[11px] leading-relaxed text-carbon-300">
-                        Tesisatta nem veya sel maruziyeti sonucu oluşan oksitlenme. Zamanla sensörlerin kararsız sinyal üretmesine, yolda giderken stop etmeye veya TCS&apos;nin saçmalamasına neden olur. Çözümü tesisat değişimidir.
-                      </p>
+                    <div className="rounded-2xl border border-rose-500/20 bg-rose-500/[0.02] p-5 flex flex-col justify-between">
+                      <div>
+                        <div className="font-mono text-xs font-bold text-rose-400">5. Gevşek Eksantrik Cıvatası</div>
+                        <h4 className="mt-2 text-sm font-semibold text-white">Dişli Cıvata Vuruntusu</h4>
+                        <p className="mt-2 text-[11px] leading-relaxed text-carbon-300">
+                          Özellikle 2023+ XMAX 250 modellerinde silindir kapağının sol üst kısmından gelen düzensiz metalik takırtı sesleri. Eksantrik dişli sabitleme cıvatasının gevşediğini gösterir. Zamanında sıkılmazsa motor kitlenir and parçalanır.
+                        </p>
+                      </div>
                     </div>
 
                   </div>
