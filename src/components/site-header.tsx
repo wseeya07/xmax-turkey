@@ -22,6 +22,7 @@ import {
   ShoppingCart,
   Bike,
   Sofa,
+  Instagram,
   type LucideIcon
 } from "lucide-react";
 import { NAV, type NavGroup } from "@/lib/nav";
@@ -125,48 +126,62 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        {/* Desktop Nav Bar */}
-        <nav
-          className="hidden items-center gap-0.5 md:flex"
-          onMouseLeave={scheduleClose}
-        >
-          {NAV.map((group) => {
-            const active = isGroupActive(group);
-            const isHovered = hoveredGroup === group.label && megaOpen;
-            return (
-              <Link
-                key={group.href}
-                href={group.href}
-                onMouseEnter={() => openMega(group.label)}
-                onFocus={() => openMega(group.label)}
-                className={cn(
-                  "relative rounded-full px-3.5 py-1.5 text-sm font-medium outline-none transition-colors",
-                  active || isHovered ? "text-white" : "text-carbon-300 hover:text-white"
-                )}
-                aria-expanded={isHovered}
-                aria-haspopup="true"
-              >
-                {group.label}
-                <span
+        <div className="flex items-center gap-2.5">
+          {/* Desktop Nav Bar */}
+          <nav
+            className="hidden items-center gap-0.5 md:flex mr-1"
+            onMouseLeave={scheduleClose}
+          >
+            {NAV.map((group) => {
+              const active = isGroupActive(group);
+              const isHovered = hoveredGroup === group.label && megaOpen;
+              return (
+                <Link
+                  key={group.href}
+                  href={group.href}
+                  onMouseEnter={() => openMega(group.label)}
+                  onFocus={() => openMega(group.label)}
                   className={cn(
-                    "absolute inset-x-3.5 -bottom-0.5 h-px origin-left bg-gradient-to-r from-electric-cyan to-yamaha-400 transition-transform duration-300",
-                    active || isHovered ? "scale-x-100 opacity-90" : "scale-x-0 opacity-0"
+                    "relative rounded-full px-3.5 py-1.5 text-sm font-medium outline-none transition-colors",
+                    active || isHovered ? "text-white" : "text-carbon-300 hover:text-white"
                   )}
-                />
-              </Link>
-            );
-          })}
-        </nav>
+                  aria-expanded={isHovered}
+                  aria-haspopup="true"
+                >
+                  {group.label}
+                  <span
+                    className={cn(
+                      "absolute inset-x-3.5 -bottom-0.5 h-px origin-left bg-gradient-to-r from-electric-cyan to-yamaha-400 transition-transform duration-300",
+                      active || isHovered ? "scale-x-100 opacity-90" : "scale-x-0 opacity-0"
+                    )}
+                  />
+                </Link>
+              );
+            })}
+          </nav>
 
-        <button
-          type="button"
-          aria-label={open ? "Menüyü kapat" : "Menüyü aç"}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-          className="rounded-md border border-white/[0.08] bg-white/[0.04] p-2 text-carbon-100 backdrop-blur-xl md:hidden"
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+          {/* Monochrome Instagram Icon */}
+          <a
+            href="https://www.instagram.com/turkxmax/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-md border border-white/[0.08] bg-white/[0.04] p-2 text-carbon-200 hover:text-white hover:bg-white/[0.08] hover:border-white/[0.12] transition-all backdrop-blur-xl flex items-center justify-center"
+            aria-label="Instagram"
+          >
+            <Instagram className="h-5 w-5" />
+          </a>
+
+          {/* Mobile Menu Button */}
+          <button
+            type="button"
+            aria-label={open ? "Menüyü kapat" : "Menüyü aç"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="rounded-md border border-white/[0.08] bg-white/[0.04] p-2 text-carbon-100 backdrop-blur-xl md:hidden"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       {/* Mega Panel — single Apple-style flyout with all categories */}
