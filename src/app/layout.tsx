@@ -70,7 +70,16 @@ export const metadata: Metadata = {
     images: [SITE.ogImage]
   },
   robots: { index: true, follow: true },
-  icons: { icon: "/favicon.svg" }
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon-32.png", type: "image/png", sizes: "32x32" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/icon-512.png", type: "image/png", sizes: "512x512" }
+    ],
+    apple: [{ url: "/icon-180.png", sizes: "180x180", type: "image/png" }],
+    shortcut: ["/favicon.ico"]
+  }
 };
 
 export const viewport: Viewport = {
@@ -85,6 +94,7 @@ const orgJsonLd = {
   "@type": "Organization",
   name: SITE.name,
   url: SITE.url,
+  logo: `${SITE.url}/icon-512.png`,
   sameAs: [SITE.mirrorUrl],
   description: SITE.description
 };
