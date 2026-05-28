@@ -10,7 +10,7 @@ export function Hero() {
   const fade = reduced ? { initial: false } : { initial: { opacity: 0, y: 18 } };
 
   return (
-    <section className="relative flex min-h-[640px] items-center overflow-hidden sm:min-h-[720px] lg:min-h-[780px]">
+    <section className="relative flex min-h-[calc(100svh-3.5rem)] items-center overflow-hidden">
       <div className="absolute inset-0 hidden lg:block">
         <Image
           src="/hero/xmax-hero-desktop.jpg"
@@ -99,10 +99,10 @@ export function Hero() {
 
             <a
               href="#intent-split"
-              className="mt-10 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.22em] text-carbon-200 transition hover:text-electric-cyan"
+              className="group mt-10 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.22em] text-carbon-200 transition hover:text-electric-cyan"
             >
-              <ArrowDown className="h-3 w-3" />
-              Yolunu seç
+              <ArrowDown className="h-3 w-3 animate-bounce text-electric-cyan" />
+              Aşağı kaydır · yolunu seç
             </a>
           </motion.div>
         </div>
