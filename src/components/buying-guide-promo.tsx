@@ -59,7 +59,7 @@ export function BuyingGuidePromo() {
           return (
             <Reveal key={p.slug} delay={i * 0.05}>
               <Link
-                href={`/satin-alma-rehberi?profile=${p.slug}`}
+                href="/satin-alma-rehberi"
                 className={`glass gradient-edge group flex h-full flex-col justify-between p-6 transition duration-300 hover:-translate-y-1 hover:shadow-ambient-blue ${colorClass}`}
               >
                 <div>

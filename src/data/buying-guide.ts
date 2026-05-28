@@ -45,6 +45,16 @@ export type ComparisonMatrixCol = {
   specs: Record<string, string>;
 };
 
+export type ExpertiseCheckItem = {
+  id: number;
+  text: string;
+};
+
+export type ExpertiseCategory = {
+  category: string;
+  items: ExpertiseCheckItem[];
+};
+
 export const RIDER_PROFILES: RiderProfile[] = [
   {
     slug: "sehir-ici",
@@ -404,5 +414,88 @@ export const COMPARISON_MATRIX: ComparisonMatrixCol[] = [
       "ÖTV Oranı": "%37",
       "Yıllık MTV": "2.215 TL"
     }
+  }
+];
+
+export const EXPERTISE_CHECKLIST: ExpertiseCategory[] = [
+  {
+    category: "Motor & Mekanik (10 Nokta)",
+    items: [
+      { id: 1, text: "Soğuk Blokta Marş: Motor tamamen soğukken tek marşta sorunsuz ve sarsıntısız çalışma kontrolü." },
+      { id: 2, text: "Üst Kapak Sesi: Supaplardan gelen ritmik metalik vuruntuların (tick-tick-tick) kontrolü." },
+      { id: 3, text: "Eksantrik Gergisi Sesi: Motorun sağ yanından gelen düzensiz metalik şıkırtıların tespiti." },
+      { id: 4, text: "Eksantrik Vidaları: Üst kapak sol köşesinden gelen ağır darbe/takırtı sesleri (Civata gevşeme riski)." },
+      { id: 5, text: "Arka Varyatör Rulmanı: Tekerlek elle döndürülürken varyatör kutusundan gelen uğultu/sürtünme kontrolü." },
+      { id: 6, text: "Silindir Taban Contası: Silindir bloğu ile karter birleşim hattında yağ terlemesi veya sızıntısı." },
+      { id: 7, text: "Silindir Kapağı Contası: Kapağın birleşim noktalarında kompresyon kaçağı veya antifriz/yağ kaçağı." },
+      { id: 8, text: "Yağ Süzgeci Durumu: Alt tapa üzerindeki metal telli yağ süzgecinin temizliği, yırtılma ve tıkanıklığı." },
+      { id: 9, text: "Egzoz Gazı Rengi: Motor ısındıktan sonra egzozdan mavi veya yoğun gri duman atılmaması (Yağ yakma)." },
+      { id: 10, text: "Devirdaim Pompa Sızıntısı: Su pompasının altındaki weep hole (tahliye deliği) su/yağ damlatma kontrolü." }
+    ]
+  },
+  {
+    category: "Şasi & Geometri (10 Nokta)",
+    items: [
+      { id: 11, text: "Furş Yatağı Kaynakları: Gidon boynu furş yatağı çevresindeki orijinal robotik kaynak bütünlüğü." },
+      { id: 12, text: "Şasi Alt Boruları: Grenaj altındaki çelik borularda yamulma, ezilme, pres veya kaynak tamiri kontrolü." },
+      { id: 13, text: "Motor Askı Takozları: Blok bağlantı askı takozlarında çatlama, sertleşme ve eksen kayması tespiti." },
+      { id: 14, text: "Amortisör Milleri: Ön amortisör krom bacaklarında mikro çizik, korozyon ve eksenel eğrilik taraması." },
+      { id: 15, text: "Amortisör Keçeleri: Ön amortisör keçe diplerinde yağ halkası oluşumu ve sızdırma kontrolü." },
+      { id: 16, text: "Gidon Eğriliği: Gidonun sağa ve sola tam dönüş açılarındaki milimetrik simetri kontrolü." },
+      { id: 17, text: "Arka Maşa Boşluğu: Salıncak (arka maşa) burçlarında eksenel boşluk ve oynamanın elle kontrolü." },
+      { id: 18, text: "Jant Yalpalama: Tekerlekler serbest dönerken flanş darbesi, eksenel salıntı ve yalpa kontrolü." },
+      { id: 19, text: "Arka Amortisör Milleri: Çift arka amortisörde yağ sızıntısı ve sönümleme kaybı kontrolü." },
+      { id: 20, text: "Orta Sehpa Ekseni: Sehpa kapatıldığında gövdeye tam paralel durması ve darbe emici kauçuk takozu." }
+    ]
+  },
+  {
+    category: "Fren & ABS (10 Nokta)",
+    items: [
+      { id: 21, text: "Ön Disk Kalınlığı: Ön disk kalınlığının mikrometre veya kumpasla ölçümü (Orijinal 4.5 mm, aşınma sınırı 4.0 mm)." },
+      { id: 22, text: "Arka Disk Kalınlığı: Arka disk yüzeyindeki aşınma kanalları, fatura derinliği ve dalgalanma kontrolü." },
+      { id: 23, text: "Fren Balatası Kalınlığı: Balata sürtünme malzemesi kalınlığının kontrolü (Limit minimum 2 mm)." },
+      { id: 24, text: "Fren Hidrolik Seviyesi: Rezervuar pencerelerinde hidrolik seviyesi, rengi (koyu kahve olmamalı) ve nemi." },
+      { id: 25, text: "ABS Sensör Kabloları: Ön ve arka hız sensörü kablo kılıflarında sürtünme, aşınma ve yırtık kontrolü." },
+      { id: 26, text: "ABS Okuyucu Diskleri: Tone ring (sinyal halkası) dişlerinde kırılma, eğrilik veya çamur/toz birikimi." },
+      { id: 27, text: "Fren Hortumları: Hidrolik fren hortumlarında kılcal çatlak, yırtık veya rakor diplerinde sızıntı." },
+      { id: 28, text: "Kaliper Pistonları: Kaliper pistonlarının sıkışmadan rahatça ileri-geri hareket etmesi ve balata boşluğu." },
+      { id: 29, text: "ABS Modülü Rekorları: ABS hidrolik modül girişlerindeki metal rekorların sızdırmazlığı ve oksit kontrolü." },
+      { id: 30, text: "Fren Müşürleri: Ön/arka fren kolları sıkıldığında stop lambasının yanma kararlılığı ve müşür sesi." }
+    ]
+  },
+  {
+    category: "Elektrik & Elektronik (10 Nokta)",
+    items: [
+      { id: 31, text: "Akü Boşta Voltajı: Multimetre ile kontak kapalıyken akü voltajı ölçümü (Minimum 12.5 V olmalıdır)." },
+      { id: 32, text: "Şarj Voltajı: Motor çalışırken ve devir çevirirken kutup başı şarj voltajı (13.8 V - 14.8 V aralığı)." },
+      { id: 33, text: "Marş Akımı Çekişi: Marş anında akü voltajının 9.6 V seviyesinin altına düşmemesi (akü sağlık kontrolü)." },
+      { id: 34, text: "Smart Key İletişimi: Anahtarsız çalıştırma sisteminin algılama mesafesi, topuz kilitleme ve pil uyarısı." },
+      { id: 35, text: "Sele Kilidi Motoru: Sele açma butonuna basıldığında elektro-mekanik kilit mekanizmasının açılma hızı." },
+      { id: 36, text: "Sonradan Çekilen Tesisat: Sis farı, alarm, çakmaklık eklentilerinde röle, sigorta ve izole kablo kullanımı." },
+      { id: 37, text: "Gösterge Selamlaması: Kontak ilk açıldığında tüm ikaz ışıklarının (ABS, motor arıza vb.) yanıp sönmesi." },
+      { id: 38, text: "Far ve Sinyal Grubu: Orijinal LED farlarda titreme/kırpışma ve sinyal rölesinin ritmik hızı." },
+      { id: 39, text: "Yan Sehpa Müşürü: Yan sehpa açıkken marşın engellenmesi ve motor çalışırken açıldığında stop etme." },
+      { id: 40, text: "Rad Fanı Çalışması: Motor harareti yükseldiğinde radyatör fanının ses çıkarmadan devreye girmesi." }
+    ]
+  },
+  {
+    category: "Kaporta & Kozmetik (5 Nokta)",
+    items: [
+      { id: 41, text: "Grenaj UV Analizi: UV ışık altında panellerin orijinal vernik/boya yansıma simetrisi (Boyalı parça tespiti)." },
+      { id: 42, text: "Plastik Onarımlar: Panel içlerinde havya ve kelepçe (zip tie) ile yapılmış plastik kaynak izlerinin aranması." },
+      { id: 43, text: "Panel Boşlukları: Grenaj birleşim çizgilerindeki (tüm gövdede) milimetrik simetri ve boşluk kontrolü." },
+      { id: 44, text: "Cam Kızak Mekanizması: Ayarlanabilir ön siperlik camı kızaklarının pürüzsüz çalışması ve boşluk durumu." },
+      { id: 45, text: "Sele Kilidi Menteşesi: Sele menteşesinde eksenel boşluk, kırılma, yırtılma ve sele kapanma hizası." }
+    ]
+  },
+  {
+    category: "Yasal & Evrak (5 Nokta)",
+    items: [
+      { id: 46, text: "Şasi No Doğrulaması: Gidon boynu altındaki 17 haneli şasi numarasının ruhsatla tam eşleşmesi." },
+      { id: 47, text: "Motor No Doğrulaması: Blok üzerindeki motor numarasının okunabilirliği, kazınma olmaması ve ruhsat eşleşmesi." },
+      { id: 48, text: "TRAMER Hasar Kaydı: SMS 5664 üzerinden ve şasi numarasıyla e-Devlet/SBM portallarından detaylı hasar sorgusu." },
+      { id: 49, text: "Tescil Durumu: e-Devlet üzerinden aktif rehin, haciz, hak mahrumiyeti veya çekme belgesi sorgusu." },
+      { id: 50, text: "Yedek Anahtar: Orijinal 6 haneli akıllı anahtar PIN kod kartı, yedek anahtar ve acil mekanik anahtarı." }
+    ]
   }
 ];

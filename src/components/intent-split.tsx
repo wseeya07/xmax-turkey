@@ -39,7 +39,7 @@ const BUYER_LINKS = [
     detail: "4 sürücü profili — bütçe ve ihtiyaç"
   },
   {
-    href: "/satin-alma-rehberi",
+    href: "/satin-alma-rehberi/ekspertiz",
     icon: ClipboardList,
     label: "50 maddelik kontrol listesi",
     detail: "2. el alırken bakılacak yerler"
