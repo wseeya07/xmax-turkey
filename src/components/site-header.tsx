@@ -8,6 +8,7 @@ import {
   Menu,
   X,
   ChevronDown,
+  ArrowRight,
   ArrowUpRight,
   Settings2,
   Zap,
@@ -48,12 +49,10 @@ const ICONS: Record<string, LucideIcon> = {
 
 export function SiteHeader() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [megaOpen, setMegaOpen] = useState(false);
-  const [hoveredGroup, setHoveredGroup] = useState<string | null>(null);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState<Record<string, boolean>>({});
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [activeGroup, setActiveGroup] = useState<string | null>(null);
+  const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -63,54 +62,58 @@ export function SiteHeader() {
   }, []);
 
   useEffect(() => {
-    setOpen(false);
-    setMegaOpen(false);
+    setMobileOpen(false);
+    setActiveGroup(null);
   }, [pathname]);
 
   useEffect(() => {
-    if (open) document.body.style.overflow = "hidden";
+    if (mobileOpen) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [open]);
+  }, [mobileOpen]);
 
-  const scheduleClose = () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    closeTimer.current = setTimeout(() => {
-      setMegaOpen(false);
-      setHoveredGroup(null);
-    }, 120);
-  };
+  useEffect(() => {
+    if (!activeGroup) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActiveGroup(null);
+    };
+    const onClick = (e: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setActiveGroup(null);
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("mousedown", onClick);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("mousedown", onClick);
+    };
+  }, [activeGroup]);
 
-  const cancelClose = () => {
-    if (closeTimer.current) {
-      clearTimeout(closeTimer.current);
-      closeTimer.current = null;
-    }
-  };
-
-  const openMega = (label: string) => {
-    cancelClose();
-    setMegaOpen(true);
-    setHoveredGroup(label);
+  const toggleGroup = (label: string) => {
+    setActiveGroup((curr) => (curr === label ? null : label));
   };
 
   const isGroupActive = (group: NavGroup) =>
     pathname === group.href ||
     pathname.startsWith(`${group.href}/`) ||
-    group.items.some((sub) => pathname === sub.href || pathname.startsWith(`${sub.href}/`));
+    group.items.some(
+      (sub) => pathname === sub.href || pathname.startsWith(`${sub.href}/`)
+    );
 
-  const toggleMobileSub = (label: string) => {
-    setMobileMenuOpen((prev) => ({ ...prev, [label]: !prev[label] }));
-  };
+  const active = activeGroup
+    ? NAV.find((g) => g.label === activeGroup) ?? null
+    : null;
 
   return (
     <header
+      ref={headerRef}
       className={cn(
         "sticky top-0 z-50 transition-colors duration-300",
-        scrolled || megaOpen
-          ? "border-b border-white/[0.06] bg-ink-950/80 backdrop-blur-2xl"
+        scrolled || activeGroup
+          ? "border-b border-white/[0.06] bg-ink-950/85 backdrop-blur-2xl"
           : "border-b border-transparent"
       )}
     >
@@ -127,159 +130,156 @@ export function SiteHeader() {
         </Link>
 
         <div className="flex items-center gap-2.5">
-          {/* Desktop Nav Bar */}
-          <nav
-            className="hidden items-center gap-0.5 md:flex mr-1"
-            onMouseLeave={scheduleClose}
-          >
+          <nav className="mr-1 hidden items-center gap-0.5 md:flex">
             {NAV.map((group) => {
-              const active = isGroupActive(group);
-              const isHovered = hoveredGroup === group.label && megaOpen;
+              const groupActive = isGroupActive(group);
+              const isOpen = activeGroup === group.label;
               return (
-                <Link
+                <button
                   key={group.href}
-                  href={group.href}
-                  onMouseEnter={() => openMega(group.label)}
-                  onFocus={() => openMega(group.label)}
-                  className={cn(
-                    "relative rounded-full px-3.5 py-1.5 text-sm font-medium outline-none transition-colors",
-                    active || isHovered ? "text-white" : "text-carbon-300 hover:text-white"
-                  )}
-                  aria-expanded={isHovered}
+                  type="button"
+                  onClick={() => toggleGroup(group.label)}
+                  aria-expanded={isOpen}
+                  aria-controls={`mega-panel`}
                   aria-haspopup="true"
+                  className={cn(
+                    "relative inline-flex items-center gap-1 rounded-full px-3.5 py-1.5 text-sm font-medium outline-none transition-colors",
+                    groupActive || isOpen
+                      ? "text-white"
+                      : "text-carbon-300 hover:text-white"
+                  )}
                 >
                   {group.label}
+                  <ChevronDown
+                    className={cn(
+                      "h-3.5 w-3.5 transition-transform duration-200",
+                      isOpen
+                        ? "rotate-180 text-electric-cyan"
+                        : "text-carbon-400"
+                    )}
+                  />
                   <span
                     className={cn(
                       "absolute inset-x-3.5 -bottom-0.5 h-px origin-left bg-gradient-to-r from-electric-cyan to-yamaha-400 transition-transform duration-300",
-                      active || isHovered ? "scale-x-100 opacity-90" : "scale-x-0 opacity-0"
+                      groupActive || isOpen
+                        ? "scale-x-100 opacity-90"
+                        : "scale-x-0 opacity-0"
                     )}
                   />
-                </Link>
+                </button>
               );
             })}
           </nav>
 
-          {/* Monochrome Instagram Icon */}
           <a
             href="https://www.instagram.com/turkxmax/"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-md border border-white/[0.08] bg-white/[0.04] p-2 text-carbon-200 hover:text-white hover:bg-white/[0.08] hover:border-white/[0.12] transition-all backdrop-blur-xl flex items-center justify-center"
+            className="flex items-center justify-center rounded-md border border-white/[0.08] bg-white/[0.04] p-2 text-carbon-200 backdrop-blur-xl transition-all hover:border-white/[0.12] hover:bg-white/[0.08] hover:text-white"
             aria-label="Instagram"
           >
             <Instagram className="h-5 w-5" />
           </a>
 
-          {/* Mobile Menu Button */}
           <button
             type="button"
-            aria-label={open ? "Menüyü kapat" : "Menüyü aç"}
-            aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
+            aria-label={mobileOpen ? "Menüyü kapat" : "Menüyü aç"}
+            aria-expanded={mobileOpen}
+            onClick={() => setMobileOpen((v) => !v)}
             className="rounded-md border border-white/[0.08] bg-white/[0.04] p-2 text-carbon-100 backdrop-blur-xl md:hidden"
           >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mega Panel — single Apple-style flyout with all categories */}
       <AnimatePresence>
-        {megaOpen && (
+        {active && (
           <motion.div
-            key="mega"
-            initial={{ opacity: 0, y: -8 }}
+            key={`mega-${active.label}`}
+            id="mega-panel"
+            role="region"
+            aria-label={`${active.label} alt menü`}
+            initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.18, ease: "easeOut" }}
-            onMouseEnter={cancelClose}
-            onMouseLeave={scheduleClose}
-            className="hidden md:block absolute left-0 right-0 top-full border-b border-white/[0.06] bg-ink-950/95 backdrop-blur-2xl"
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.16, ease: "easeOut" }}
+            className="absolute inset-x-0 top-full hidden border-b border-white/[0.06] bg-ink-950/95 backdrop-blur-2xl md:block"
           >
-            <div className="container-x py-8">
-              <div className="grid grid-cols-4 gap-6">
-                {NAV.map((group) => {
-                  const focused = hoveredGroup === group.label;
+            <div className="container-x py-7">
+              <div className="flex items-center justify-between gap-6 border-b border-white/[0.06] pb-5">
+                <div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-carbon-400">
+                    {active.tagline}
+                  </div>
+                  <h3 className="mt-1 h-display text-xl font-semibold text-white sm:text-2xl">
+                    {active.label}
+                  </h3>
+                </div>
+                <Link
+                  href={active.href}
+                  className="group inline-flex shrink-0 items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-yamaha-200 transition hover:border-yamaha-400/40 hover:text-white"
+                >
+                  Tümünü gör
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                </Link>
+              </div>
+
+              <div
+                className={cn(
+                  "relative mt-5 grid gap-3",
+                  active.items.length === 2 && "grid-cols-2",
+                  active.items.length === 3 && "grid-cols-3",
+                  active.items.length >= 4 && "grid-cols-4"
+                )}
+              >
+                <div
+                  className={cn(
+                    "pointer-events-none absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br opacity-40",
+                    active.accent
+                  )}
+                  aria-hidden
+                />
+                {active.items.map((sub) => {
+                  const Icon = ICONS[sub.icon] ?? CircleDot;
+                  const isActive =
+                    pathname === sub.href || pathname.startsWith(`${sub.href}/`);
                   return (
-                    <div
-                      key={group.href}
-                      onMouseEnter={() => setHoveredGroup(group.label)}
+                    <Link
+                      key={sub.href}
+                      href={sub.href}
                       className={cn(
-                        "group/col relative flex flex-col gap-2 rounded-2xl border p-4 transition-all duration-200",
-                        focused
-                          ? "border-white/[0.08] bg-white/[0.025]"
-                          : "border-transparent bg-transparent"
+                        "group/item relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.025] p-5 transition",
+                        "hover:-translate-y-0.5 hover:border-electric-cyan/30 hover:bg-white/[0.05]",
+                        isActive && "border-electric-cyan/40 bg-electric-cyan/[0.04]"
                       )}
                     >
-                      <div
-                        className={cn(
-                          "pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br opacity-0 transition-opacity duration-300",
-                          group.accent,
-                          focused && "opacity-100"
+                      <div className="flex items-center justify-between">
+                        <span
+                          className={cn(
+                            "grid size-10 place-items-center rounded-xl border border-white/[0.08] bg-black/30 text-electric-cyan transition",
+                            "group-hover/item:border-electric-cyan/40"
+                          )}
+                        >
+                          <Icon className="h-4 w-4" />
+                        </span>
+                        {sub.comingSoon ? (
+                          <span className="rounded-md border border-white/[0.08] bg-white/[0.04] px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.22em] text-carbon-400">
+                            yakında
+                          </span>
+                        ) : (
+                          <ArrowUpRight className="h-3.5 w-3.5 text-carbon-400 transition group-hover/item:-translate-y-0.5 group-hover/item:translate-x-0.5 group-hover/item:text-electric-cyan" />
                         )}
-                        aria-hidden
-                      />
-
-                      <Link
-                        href={group.href}
-                        className="relative flex items-baseline justify-between gap-2 border-b border-white/[0.06] pb-3"
-                      >
-                        <div>
-                          <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-carbon-400">
-                            {group.tagline}
-                          </div>
-                          <div className="mt-1 h-display text-lg font-semibold text-white">
-                            {group.label}
-                          </div>
-                        </div>
-                        <ArrowUpRight className="h-3.5 w-3.5 shrink-0 text-carbon-400 transition group-hover/col:-translate-y-0.5 group-hover/col:translate-x-0.5 group-hover/col:text-electric-cyan" />
-                      </Link>
-
-                      <div className="relative flex flex-col gap-0.5">
-                        {group.items.map((sub) => {
-                          const Icon = ICONS[sub.icon] ?? CircleDot;
-                          const isActive =
-                            pathname === sub.href || pathname.startsWith(`${sub.href}/`);
-                          return (
-                            <Link
-                              key={sub.href}
-                              href={sub.href}
-                              className={cn(
-                                "group/item flex items-start gap-3 rounded-xl px-3 py-2.5 transition",
-                                "hover:bg-white/[0.04]",
-                                isActive && "bg-white/[0.03]"
-                              )}
-                            >
-                              <span
-                                className={cn(
-                                  "mt-0.5 grid size-8 shrink-0 place-items-center rounded-lg border border-white/[0.06] bg-white/[0.03] transition",
-                                  "group-hover/item:border-electric-cyan/30 group-hover/item:text-electric-cyan",
-                                  isActive ? "text-electric-cyan" : "text-carbon-200"
-                                )}
-                              >
-                                <Icon className="h-3.5 w-3.5" />
-                              </span>
-                              <div className="min-w-0 flex-1">
-                                <div className="flex items-center gap-1.5">
-                                  <span className="text-[13px] font-semibold text-white">
-                                    {sub.label}
-                                  </span>
-                                  {sub.comingSoon && (
-                                    <span className="rounded-md border border-white/[0.08] bg-white/[0.04] px-1.5 py-0 font-mono text-[8px] uppercase tracking-[0.2em] text-carbon-400">
-                                      yakında
-                                    </span>
-                                  )}
-                                </div>
-                                <div className="mt-0.5 text-[11px] leading-snug text-carbon-300">
-                                  {sub.description}
-                                </div>
-                              </div>
-                            </Link>
-                          );
-                        })}
                       </div>
-                    </div>
+                      <div>
+                        <div className="text-sm font-semibold text-white">
+                          {sub.label}
+                        </div>
+                        <div className="mt-1 text-[11px] leading-snug text-carbon-300">
+                          {sub.description}
+                        </div>
+                      </div>
+                    </Link>
                   );
                 })}
               </div>
@@ -288,9 +288,8 @@ export function SiteHeader() {
         )}
       </AnimatePresence>
 
-      {/* Mobile drawer */}
       <AnimatePresence>
-        {open && (
+        {mobileOpen && (
           <motion.div
             key="mobile-drawer"
             initial={{ opacity: 0 }}
@@ -299,96 +298,72 @@ export function SiteHeader() {
             transition={{ duration: 0.18 }}
             className="fixed inset-x-0 top-14 z-40 h-[calc(100dvh-3.5rem)] overflow-y-auto bg-ink-950/95 backdrop-blur-2xl md:hidden"
           >
-            <nav className="container-x flex flex-col gap-2.5 pt-6 pb-12">
-              {NAV.map((group, i) => {
-                const active = isGroupActive(group);
-                const subOpen = mobileMenuOpen[group.label];
-                return (
-                  <motion.div
-                    key={group.href}
-                    initial={{ opacity: 0, y: 6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.25, delay: 0.05 + i * 0.04 }}
-                    className="flex flex-col gap-1.5"
+            <nav className="container-x flex flex-col gap-8 pt-6 pb-16">
+              {NAV.map((group, i) => (
+                <motion.section
+                  key={group.href}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.25, delay: 0.04 + i * 0.04 }}
+                  className="flex flex-col gap-3"
+                >
+                  <Link
+                    href={group.href}
+                    className="group flex items-baseline justify-between border-b border-white/[0.06] pb-2"
                   >
-                    <button
-                      type="button"
-                      onClick={() => toggleMobileSub(group.label)}
-                      className={cn(
-                        "flex w-full items-center justify-between rounded-2xl border px-5 py-4 text-left transition",
-                        active
-                          ? "border-yamaha-400/30 bg-gradient-to-r from-yamaha-500/15 to-transparent"
-                          : "border-white/[0.06] bg-white/[0.015]"
-                      )}
-                    >
-                      <div>
-                        <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-carbon-400">
-                          {group.tagline}
-                        </div>
-                        <div className="mt-0.5 h-display text-lg font-semibold text-white">
-                          {group.label}
-                        </div>
+                    <div>
+                      <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-carbon-400">
+                        {group.tagline}
                       </div>
-                      <ChevronDown
-                        className={cn(
-                          "h-5 w-5 text-carbon-400 transition-transform duration-200",
-                          subOpen && "rotate-180 text-electric-cyan"
-                        )}
-                      />
-                    </button>
-
-                    <AnimatePresence initial={false}>
-                      {subOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="flex flex-col gap-1.5 overflow-hidden pl-3"
-                        >
+                      <div className="mt-0.5 h-display text-xl font-semibold text-white">
+                        {group.label}
+                      </div>
+                    </div>
+                    <ArrowUpRight className="h-4 w-4 shrink-0 text-electric-cyan transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </Link>
+                  <ul className="flex flex-col gap-1.5">
+                    {group.items.map((sub) => {
+                      const Icon = ICONS[sub.icon] ?? CircleDot;
+                      const isActive =
+                        pathname === sub.href ||
+                        pathname.startsWith(`${sub.href}/`);
+                      return (
+                        <li key={sub.href}>
                           <Link
-                            href={group.href}
-                            className="flex items-center justify-between rounded-xl border border-electric-cyan/20 bg-electric-cyan/[0.05] px-4 py-3"
+                            href={sub.href}
+                            className={cn(
+                              "flex items-center gap-3 rounded-xl border border-white/[0.04] bg-white/[0.015] px-4 py-3 transition",
+                              "hover:border-electric-cyan/25 hover:bg-white/[0.04]",
+                              isActive &&
+                                "border-electric-cyan/30 bg-electric-cyan/[0.05]"
+                            )}
                           >
-                            <div>
-                              <div className="text-sm font-semibold text-white">
-                                Genel bakış
+                            <span className="grid size-9 shrink-0 place-items-center rounded-lg border border-white/[0.06] bg-black/30 text-electric-cyan">
+                              <Icon className="h-4 w-4" />
+                            </span>
+                            <div className="min-w-0 flex-1">
+                              <div className="flex items-center gap-1.5">
+                                <span className="text-sm font-semibold text-white">
+                                  {sub.label}
+                                </span>
+                                {sub.comingSoon && (
+                                  <span className="rounded-md border border-white/[0.08] bg-white/[0.04] px-1.5 py-0 font-mono text-[8px] uppercase tracking-[0.2em] text-carbon-400">
+                                    yakında
+                                  </span>
+                                )}
                               </div>
-                              <div className="mt-0.5 text-[10px] text-carbon-300">
-                                {group.label} ana sayfası
+                              <div className="mt-0.5 text-[11px] leading-snug text-carbon-300">
+                                {sub.description}
                               </div>
                             </div>
-                            <ArrowUpRight className="h-3.5 w-3.5 text-electric-cyan" />
+                            <ArrowRight className="h-3.5 w-3.5 shrink-0 text-electric-cyan" />
                           </Link>
-                          {group.items.map((sub) => {
-                            const Icon = ICONS[sub.icon] ?? CircleDot;
-                            return (
-                              <Link
-                                key={sub.href}
-                                href={sub.href}
-                                className="flex items-center gap-3 rounded-xl border border-white/[0.04] bg-white/[0.01] px-4 py-3"
-                              >
-                                <span className="grid size-9 shrink-0 place-items-center rounded-lg border border-white/[0.06] bg-white/[0.03] text-electric-cyan">
-                                  <Icon className="h-4 w-4" />
-                                </span>
-                                <div className="min-w-0 flex-1">
-                                  <div className="text-sm font-semibold text-white">
-                                    {sub.label}
-                                  </div>
-                                  <div className="mt-0.5 text-[10px] text-carbon-300">
-                                    {sub.description}
-                                  </div>
-                                </div>
-                                <span className="text-xs text-electric-cyan">→</span>
-                              </Link>
-                            );
-                          })}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                );
-              })}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </motion.section>
+              ))}
             </nav>
           </motion.div>
         )}

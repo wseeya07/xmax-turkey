@@ -107,8 +107,8 @@ export const NAV: NavGroup[] = [
   },
   {
     href: "/teknik-ozellikler",
-    label: "Modeller",
-    tagline: "Teknik veri ve aksesuar",
+    label: "XMAX Modelleri",
+    tagline: "250 · 300 · 400 jenerasyonları",
     accent: "from-electric-ember/25 via-yamaha-700/10 to-transparent",
     items: [
       {
