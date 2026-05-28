@@ -1,11 +1,9 @@
 import { Hero } from "@/components/hero";
+import { IntentSplit } from "@/components/intent-split";
 import { ContentPillars } from "@/components/content-pillars";
 import { ModelSelector } from "@/components/model-selector";
 import { BuyingGuidePromo } from "@/components/buying-guide-promo";
-import { VariatorTable } from "@/components/variator-table";
 import { MaintenanceTimeline } from "@/components/maintenance-timeline";
-import { QuickReference } from "@/components/quick-reference";
-import { HowToStrip } from "@/components/howto-strip";
 import { FinalCTA } from "@/components/final-cta";
 import { SITE } from "@/lib/site";
 
@@ -60,13 +58,11 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <Hero />
-      <ContentPillars />
+      <IntentSplit />
       <ModelSelector />
-      <BuyingGuidePromo />
-      <VariatorTable />
       <MaintenanceTimeline />
-      <QuickReference />
-      <HowToStrip />
+      <BuyingGuidePromo />
+      <ContentPillars />
       <FinalCTA />
     </>
   );

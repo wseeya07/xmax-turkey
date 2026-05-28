@@ -1,76 +1,53 @@
 import Link from "next/link";
 import {
   ArrowUpRight,
-  Gauge,
   Wrench,
-  BookOpen,
   Bike,
-  CircleDot,
-  Sofa
+  ShoppingBag,
+  Flame
 } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 
 const PILLARS = [
   {
-    href: "/varyator",
-    title: "Performans",
-    summary: "CVT, egzoz, hava akışı, ECU.",
-    detail:
-      "Varyatör marka karakterleri, baga ağırlığı seçim mantığı, slip-on egzoz karşılaştırması, ECU remap notları.",
-    icon: Gauge,
-    tags: ["Malossi", "Polini", "J.Costa", "TDR"],
-    accent: "from-yamaha-500/40 via-yamaha-700/15",
-    span: "lg:col-span-7 lg:row-span-2"
-  },
-  {
     href: "/periyodik-bakim",
     title: "Bakım",
     summary: "Kilometre bazlı servis planı.",
-    detail: "1.000 → 40.000 km, sıvılar ve filtreler.",
+    detail: "1.000 → 40.000 km, sıvılar, filtreler, kontrol noktaları.",
     icon: Wrench,
-    tags: ["1K", "5K", "10K", "20K", "40K"],
+    tags: ["1K", "10K", "20K", "40K"],
     accent: "from-electric-cyan/30 via-yamaha-700/10",
-    span: "lg:col-span-5"
+    span: "lg:col-span-6"
   },
   {
-    href: "/nasil-yapilir",
-    title: "Mekanik",
-    summary: "Adım adım rehberler.",
-    detail: "Varyatör temizliği, antifriz, kayış, fren balata.",
-    icon: BookOpen,
-    tags: ["Varyatör", "Antifriz", "Kayış", "Buji"],
+    href: "/satin-alma-rehberi",
+    title: "Satın Alma",
+    summary: "Hangi XMAX, hangi yıl, hangi bütçe.",
+    detail: "4 sürücü profili, 50 maddelik kontrol, vergi tabloları, jenerasyon farkları.",
+    icon: ShoppingBag,
+    tags: ["250", "300", "400", "2.El"],
+    accent: "from-yamaha-500/40 via-yamaha-700/15",
+    span: "lg:col-span-6"
+  },
+  {
+    href: "/motor-modifikasyon",
+    title: "Modifikasyon",
+    summary: "Varyatör, motor, egzoz, ECU.",
+    detail: "Stage 1/2/3 reçeteleri, marka mühendislikleri, AFR ve kam millerinin dili.",
+    icon: Flame,
+    tags: ["Varyatör", "Bore-up", "ECU", "Egzoz"],
     accent: "from-electric-violet/30 via-yamaha-700/10",
-    span: "lg:col-span-5"
+    span: "lg:col-span-6"
   },
   {
     href: "/teknik-ozellikler",
-    title: "Modeller",
+    title: "Teknik Özellikler",
     summary: "Dokuz jenerasyon karşılaştırması.",
-    detail: "XMAX 250, 300 ve 400 — eski / ara / yeni kasalar yan yana.",
+    detail: "XMAX 250, 300 ve 400 — eski/ara/yeni kasalar yan yana, parça kodları.",
     icon: Bike,
-    tags: ["250", "300", "400"],
+    tags: ["Gen 3", "Gen 4", "Gen 5", "Gen 6"],
     accent: "from-yamaha-400/25 via-electric-cyan/10",
-    span: "lg:col-span-4"
-  },
-  {
-    href: "/bilgi/lastik-basinci",
-    title: "Bilgi",
-    summary: "Hızlı referanslar.",
-    detail: "Lastik basıncı, hata kodları, sıvı kapasiteleri, tork tablosu.",
-    icon: CircleDot,
-    tags: ["Basınç", "Hata", "Kapasite"],
-    accent: "from-electric-cyan/25 via-electric-violet/10",
-    span: "lg:col-span-3"
-  },
-  {
-    href: "/aksesuar",
-    title: "Aksesuar",
-    summary: "Uyumlu donanım.",
-    detail: "Cam, çanta, sele, LED far, USB tutucu.",
-    icon: Sofa,
-    tags: ["Cam", "Çanta", "Sele", "LED"],
-    accent: "from-electric-ember/20 via-yamaha-700/10",
-    span: "lg:col-span-5"
+    span: "lg:col-span-6"
   }
 ];
 
@@ -80,10 +57,9 @@ export function ContentPillars() {
       <Reveal>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
-            <div className="eyebrow">Altı dikey</div>
+            <div className="eyebrow">Dört dikey</div>
             <h2 className="mt-3 h-display text-balance text-[clamp(2rem,4.4vw,3.4rem)] font-semibold leading-tighter-display tracking-tightest text-white">
-              Bir XMAX sahibinin arayacağı{" "}
-              <span className="text-electric">her şey</span> tek katmanda.
+              Konuya göre <span className="text-electric">tek tıkla</span> dal.
             </h2>
           </div>
           <p className="max-w-md text-pretty text-sm leading-relaxed text-carbon-300">
