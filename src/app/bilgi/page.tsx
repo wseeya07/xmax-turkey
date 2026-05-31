@@ -58,8 +58,8 @@ const ITEMS = [
     href: "/bilgi/rakipler",
     icon: Bike,
     title: "Rakip karşılaştırması",
-    description: "Forza 350 · Beverly · NMAX · Burgman.",
-    ready: false
+    description: "XMAX vs Forza 250 · Burgman 400 · Beverly · Vespa GTS · NMAX · PCX · Zontes — interaktif eşleyici + 34 kaynak.",
+    ready: true
   }
 ];
 

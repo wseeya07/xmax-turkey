@@ -102,6 +102,12 @@ export const NAV: NavGroup[] = [
         label: "Satın Alma Rehberi",
         description: "Jenerasyon karşılaştırmaları",
         icon: "ShoppingCart"
+      },
+      {
+        href: "/bilgi/rakipler",
+        label: "Rakip Karşılaştırma",
+        description: "XMAX vs Forza · Burgman · Vespa · NMAX",
+        icon: "Bike"
       }
     ]
   },
